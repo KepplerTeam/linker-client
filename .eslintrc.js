@@ -1,18 +1,8 @@
 module.exports = {
-  env: {
-    es2021: true
-  },
-  extends: [
-    'standard'
-  ],
-  parser: '@typescript-eslint/parser',
-  parserOptions: {
-    ecmaVersion: 12,
-    sourceType: 'module'
-  },
-  plugins: [
-    '@typescript-eslint'
-  ],
+  extends: ['avilatek-typescript', 'plugin:@next/next/recommended'],
   rules: {
-  }
-}
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
+    'react/jsx-props-no-spreading': 'off',
+    'no-use-before-define': 'off',
+  },
+};
