@@ -106,12 +106,12 @@ a.nav-link:hover {
 }
 
 .card-home {
-  min-height: 80vh;
-  @apply w-screen h-full rounded-t-3xl bg-gray-100 bottom-0 px-4 py-5;
+  min-height: 70vh;
+  @apply w-screen h-full rounded-t-3xl bg-gray-100 pl-4 pr-0 py-5;
 }
 
 .footer {
-  @apply w-full fixed bg-primary-100 flex flex-col items-center bottom-0 px-4 pb-4 pt-10 ;
+  @apply w-full bg-primary-100 flex flex-col items-center px-4 pb-4 pt-10 ;
 }
 
 .scroll-x {
