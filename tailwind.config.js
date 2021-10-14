@@ -21,7 +21,7 @@ module.exports = {
     extend: {
       colors: {
         primary: {
-          100: '#787878',
+          100: '#0ACF83',
           200: '#5E5E5E',
           300: '#454545',
           400: '#2B2B2B',
@@ -44,5 +44,6 @@ module.exports = {
     require('@tailwindcss/forms'),
     require('@tailwindcss/typography'),
     require('@tailwindcss/aspect-ratio'),
+    require('tailwind-scrollbar-hide'),
   ],
 };
