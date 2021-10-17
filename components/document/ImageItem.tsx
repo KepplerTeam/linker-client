@@ -114,7 +114,6 @@ function Image({
         }
       } catch (err) {
         console.log('catch: ', err);
-        notify(`Error cargando el archivo ${name}`, 'error');
         setError(true);
       } finally {
         setUploading(false);
@@ -138,14 +137,6 @@ function Image({
       (item as any).index = hoverIndex;
     },
   });
-  /* const [{ isDragging }, drag] = useDrag({
-    type,
-    item: () => ({ type, id, index }),
-    collect: (monitor) => ({
-      isDragging: monitor.isDragging(),
-    }),
-  });
-  drag(drop(ref)); */
   return error ? null : (
     <div
       className={`bg-gray-100 overflow-hidden shadow-md break-words my-1 flex flex-row w-full h-14 items-center rounded py-2 ${
