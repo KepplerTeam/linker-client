@@ -1,12 +1,12 @@
 import React from 'react';
 import NProgress from 'nprogress';
 import Router from 'next/router';
-import '../styles.css';
+import '../styles/main.css';
 import { AppProps } from 'next/app';
 import { ApolloProvider } from '@apollo/client';
 import { useApollo } from '../hooks/useApollo';
 
-function MyApp({ Component, pageProps, err }: AppProps) {
+function MyApp({ Component, pageProps }: AppProps) {
   const apolloClient = useApollo(pageProps.initialApolloState);
   React.useEffect(() => {
     Router.events.on('routeChangeStart', () => {
