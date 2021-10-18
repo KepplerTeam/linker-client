@@ -9,3 +9,20 @@ export const SIGN_S3 = gql`
     }
   }
 `;
+
+export const CREATE_PRODUCT = gql`
+  mutation CREATE_PRODUCT($data: CreateProductInput) {
+    createProduct(data: $data) {
+      name
+      description
+      serial
+      category
+      price
+      quantity
+      units
+      images {
+        url
+      }
+    }
+  }
+`;

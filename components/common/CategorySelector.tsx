@@ -1,18 +1,15 @@
-import { useQuery } from '@apollo/client';
 import { motion } from 'framer-motion';
 import React from 'react';
 
-export default function CategorySelector() {
-  const [active, setActive] = React.useState(false);
+interface CategorySelectorProps {
+  category?: number;
+  setCategory?: React.Dispatch<React.SetStateAction<number>>;
+}
 
-  //   function changeSelected() {}
-
-  //   const { data, loading, error } = useQuery<{
-  //     categories: Category[];
-  //   }>(GET_CATEGORIES, {
-  //     fetchPolicy: 'network-only',
-  //   });
-
+export default function CategorySelector({
+  category = null,
+  setCategory,
+}: CategorySelectorProps) {
   return (
     <div className="flex flex-row justify-between overflow-x-scroll scrollbar-hide space-x-5 mt-4">
       <motion.button
@@ -22,9 +19,13 @@ export default function CategorySelector() {
         }}
         value=""
         type="button"
-        // onClick={}
+        onClick={(e) => setCategory(0)}
       >
-        <span className="bg-gray-200 hover:bg-primary-100 rounded-full w-auto px-3 h-auto">
+        <span
+          className={`bg-gray-200 hover:bg-primary-100 rounded-full w-auto px-3 h-auto ${
+            category === 0 ? 'bg-primary-100' : ''
+          }`}
+        >
           Construccion
         </span>
       </motion.button>
@@ -35,9 +36,13 @@ export default function CategorySelector() {
         }}
         value=""
         type="button"
-        // onClick={}
+        onClick={(e) => setCategory(1)}
       >
-        <span className="bg-gray-200 hover:bg-primary-100 rounded-full w-auto px-3 h-auto">
+        <span
+          className={`bg-gray-200 hover:bg-primary-100 rounded-full w-auto px-3 h-auto ${
+            category === 1 ? 'bg-primary-100' : ''
+          }`}
+        >
           Alimentos
         </span>
       </motion.button>
@@ -48,10 +53,14 @@ export default function CategorySelector() {
         }}
         value=""
         type="button"
-        // onClick={}
+        onClick={(e) => setCategory(2)}
       >
-        <span className="bg-gray-200 hover:bg-primary-100 rounded-full w-auto px-3 h-auto">
-          Tecnologia
+        <span
+          className={`bg-gray-200 hover:bg-primary-100 rounded-full w-auto px-3 h-auto ${
+            category === 2 ? 'bg-primary-100' : ''
+          }`}
+        >
+          Campo
         </span>
       </motion.button>
       <motion.button
@@ -61,10 +70,14 @@ export default function CategorySelector() {
         }}
         value=""
         type="button"
-        // onClick={}
+        onClick={(e) => setCategory(3)}
       >
-        <span className="bg-gray-200 hover:bg-primary-100 rounded-full w-auto px-3 h-auto">
-          Educacion
+        <span
+          className={`bg-gray-200 hover:bg-primary-100 rounded-full w-auto px-3 h-auto ${
+            category === 3 ? 'bg-primary-100' : ''
+          }`}
+        >
+          Plastico
         </span>
       </motion.button>
 
@@ -75,16 +88,33 @@ export default function CategorySelector() {
         }}
         value=""
         type="button"
-        // onClick={}
+        onClick={(e) => setCategory(4)}
       >
-        <span className="bg-gray-200 hover:bg-primary-100 rounded-full w-auto px-3 h-auto">
+        <span
+          className={`bg-gray-200 hover:bg-primary-100 rounded-full w-auto px-3 h-auto ${
+            category === 4 ? 'bg-primary-100' : ''
+          }`}
+        >
           Plasticos
         </span>
       </motion.button>
-
-      {/* {data.categories.map((category) => (
-        <span className="bg-gray-50 hover:bg-primary-100">{category.name}</span>
-      ))} */}
+      <motion.button
+        whileHover={{
+          scale: 1.005,
+          boxShadow: '0px 0px 4px rgb(51,51,51, 0.5)',
+        }}
+        value=""
+        type="button"
+        onClick={(e) => setCategory(5)}
+      >
+        <span
+          className={`bg-gray-200 hover:bg-primary-100 rounded-full w-auto px-3 h-auto ${
+            category === 5 ? 'bg-primary-100' : ''
+          }`}
+        >
+          Tecnologia
+        </span>
+      </motion.button>
     </div>
   );
 }
