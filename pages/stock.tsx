@@ -7,6 +7,7 @@ export default function Stock() {
 	return (
 		<React.Fragment>
 			<TitleBar />
+			<h1 className="text-3xl font-bold p-6">Mis Productos</h1>
 			<CardHome />
 			<Footer />
 		</React.Fragment>
