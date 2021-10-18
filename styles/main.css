@@ -1,7 +1,6 @@
-   
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /* purgecss start ignore */
 html,
@@ -89,3 +88,61 @@ body {
   }
 }
 /* purgecss end ignore */
+
+
+/* ------------------------------------- */
+
+a.nav-link {
+  @apply flex items-center text-primary-100 font-bold bg-transparent;
+}
+
+a.nav-link:hover {
+  transform: scale(1.02);
+  @apply text-primary-600;
+}
+
+.card {
+  @apply rounded-xl bg-white p-5;
+}
+
+.card-home {
+  min-height: 70vh;
+  @apply w-screen h-full rounded-t-3xl bg-gray-100 pl-4 pr-0 py-5;
+}
+
+.footer {
+  @apply w-full bg-primary-100 flex flex-col items-center px-4 pb-4 pt-10 ;
+}
+
+.scroll-x {
+  overflow: auto !important;
+  white-space: nowrap !important;
+}
+
+.input-text {
+  @apply mx-auto w-full rounded-md border border-gray-300 mt-5 p-3;
+}
+
+.input-text::placeholder {
+  @apply font-light;
+}
+
+.nav {
+  @apply w-full flex flex-row py-3 px-2;
+}
+
+button.nav-item {
+  @apply text-gray-500 font-light rounded-full border-0 mr-2 px-4 py-1;
+}
+
+button.nav-item.active {
+  @apply bg-primary-100 text-white;
+}
+
+button.nav-item.active:hover {
+  @apply bg-primary-600;
+}
+
+button.nav-item:not(.active):hover {
+  @apply bg-gray-200;
+}
