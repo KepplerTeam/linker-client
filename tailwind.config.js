@@ -21,11 +21,16 @@ module.exports = {
     extend: {
       colors: {
         primary: {
+          // VERDE PRINCIPAL
           100: '#0ACF83',
+
+          // GRISES
           200: '#5E5E5E',
           300: '#454545',
           400: '#2B2B2B',
           500: '#121212',
+
+          // VERDES
           600: '#07b572',
           700: '#08a367'
         },
