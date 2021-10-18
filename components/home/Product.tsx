@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Search() {
+export default function Product() {
 	return(
 		<React.Fragment>
 			<div className="card flex items-center justify-between w-96 min-w-max mr-4">
