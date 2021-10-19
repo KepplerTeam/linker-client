@@ -1,6 +1,7 @@
 import React from 'react';
 import { DocumentModel } from '../../models';
 import CategorySelector from '../common/CategorySelector';
+import UnitsDropdown from '../common/UnitsDropdown';
 import DocumentForm from '../document/DocumentForm';
 import { Input } from '../inputs';
 
@@ -19,8 +20,9 @@ interface CreateProductFormProps {
   setImages?: React.Dispatch<React.SetStateAction<DocumentModel[]>>;
   serial?: string;
   setSerial?: React.Dispatch<React.SetStateAction<string>>;
-  units?: number;
-  setUnits?: React.Dispatch<React.SetStateAction<number>>;
+  units?;
+  setUnits?: React.Dispatch<React.SetStateAction<any>>;
+  unitsList;
 }
 
 export default function CreateProductForm({
@@ -38,8 +40,9 @@ export default function CreateProductForm({
   setImages,
   serial = '',
   setSerial,
-  units = null,
+  units,
   setUnits,
+  unitsList,
 }: CreateProductFormProps) {
   return (
     <div>
@@ -108,15 +111,11 @@ export default function CreateProductForm({
         />
       </div>
       <div className="mt-8">
-        <Input
-          type="text"
-          id="units"
-          name="units"
-          placeholder=""
-          className="w-3/4 h-8 my-1 text-sm "
-          value={units}
-          setValue={setUnits}
-          label="Unidad del producto"
+        <h2 className="mb-1 font-bold">Presentacion del producto</h2>
+        <UnitsDropdown
+          units={units}
+          setUnits={setUnits}
+          unitsList={unitsList}
         />
       </div>
       <div className="mt-8">

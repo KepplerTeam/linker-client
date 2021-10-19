@@ -15,6 +15,12 @@ interface CreateProps {
   // product?: Product;
 }
 
+const unitsList = [
+  { id: 0, name: 'Unidades', unavailable: false },
+  { id: 1, name: 'Kilogramos', unavailable: false },
+  { id: 2, name: 'Litros', unavailable: false },
+];
+
 export default function Create({ isUpdate = false }: CreateProps) {
   const [name, setName] = React.useState('');
   const [category, setCategory] = React.useState<number>();
@@ -24,7 +30,7 @@ export default function Create({ isUpdate = false }: CreateProps) {
   const [images, setImages] = React.useState<DocumentModel[]>([]);
   const [disabled, setDisabled] = React.useState(false);
   const [serial, setSerial] = React.useState('');
-  const [units, setUnits] = React.useState<number>();
+  const [units, setUnits] = React.useState(unitsList[0]);
 
   const [createProduct] = useMutation(CREATE_PRODUCT);
 
@@ -105,9 +111,10 @@ export default function Create({ isUpdate = false }: CreateProps) {
           setSerial={setSerial}
           units={units}
           setUnits={setUnits}
+          unitsList={unitsList}
         />
       </div>
-      <div className="text-center mt-8">
+      <div className="text-center my-8">
         <motion.button
           whileHover={{
             scale: 1.005,
@@ -115,7 +122,7 @@ export default function Create({ isUpdate = false }: CreateProps) {
           }}
           value=""
           type="button"
-          className="w-3/4 rounded-xl h-auto px-3 py-2 bg-primary-100 text-white"
+          className="w-3/4 rounded-xl h-auto px-3 py-2 bg-primary-100 text-white mb-5"
           disabled={disabled}
           onClick={onSubmit}
         >
