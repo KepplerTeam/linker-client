@@ -35,7 +35,9 @@ export default function CardHome() {
         </div>
       )) || (
         <div>
-          <CategorySelector category={category} setCategory={setCategory} />
+          <div className="my-3">
+            <CategorySelector category={category} setCategory={setCategory} />
+          </div>
           <ProductFeed products={data.products} />
           <div className="flex justify-between mt-8 mb-2 pr-4">
             <h3 className="text-lg font-normal pb-2">Productos Destacados</h3>
