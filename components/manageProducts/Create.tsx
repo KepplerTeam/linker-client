@@ -1,11 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { validateString } from 'avilatek-utils';
-import { useMutation } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import router from 'next/router';
-import { DocumentModel } from '../../models';
+import { DocumentModel, Enterprise } from '../../models';
 import TitleBar from '../common/TitleBar';
-import { Input } from '../inputs/Input';
 import CreateProductForm from './CreateProductForm';
 import useNotify from '../../hooks/useNotify';
 import { CREATE_PRODUCT } from '../../graphql/mutations';
@@ -14,12 +13,6 @@ interface CreateProps {
   isUpdate?: boolean;
   // product?: Product;
 }
-
-const unitsList = [
-  { id: 0, name: 'Unidades', unavailable: false },
-  { id: 1, name: 'Kilogramos', unavailable: false },
-  { id: 2, name: 'Litros', unavailable: false },
-];
 
 export default function Create({ isUpdate = false }: CreateProps) {
   const [name, setName] = React.useState('');
@@ -30,7 +23,7 @@ export default function Create({ isUpdate = false }: CreateProps) {
   const [images, setImages] = React.useState<DocumentModel[]>([]);
   const [disabled, setDisabled] = React.useState(false);
   const [serial, setSerial] = React.useState('');
-  const [units, setUnits] = React.useState(unitsList[0]);
+  const [units, setUnits] = React.useState('');
 
   const [createProduct] = useMutation(CREATE_PRODUCT);
 
@@ -57,27 +50,34 @@ export default function Create({ isUpdate = false }: CreateProps) {
       const { data: dataCreate } = await createProduct({
         variables: {
           data: {
-            name,
-            description,
-            serial,
-            category,
-            price,
-            quantity: stock,
-            units,
-            images: images.length !== 0 ? images?.map((conf) => conf.src) : '',
+            createProductInfo: {
+              name,
+              description,
+              serial,
+              category,
+              price: Number(price),
+              quantity: Number(stock),
+              units: Number(units),
+              enterprise: '616638244a03ed67ceab6c37',
+            },
+            createProductImages:
+              images.length !== 0 ? images?.map((conf) => conf.src) : '',
           },
         },
       });
 
       if (dataCreate?.createProduct) {
-        notify('El producto se ha creado exitosamente!', 'success');
+        // notify('El producto se ha creado exitosamente!', 'success');
+        console.log('se ha creado exitosamente');
         // Aca deberia mandar a preview de articulo o a perful de todos sus productos
         await router.push('/');
       } else {
-        notify('Ha ocurrido un error al crear el producto', 'error');
+        // notify('Ha ocurrido un error al crear el producto', 'error');
+        console.log('error al crear el producto');
       }
     } catch (err) {
-      notify(err.message, 'error', err);
+      // notify(err.message, 'error', err);
+      console.log(err);
     } finally {
       setDisabled(false);
     }
@@ -111,7 +111,6 @@ export default function Create({ isUpdate = false }: CreateProps) {
           setSerial={setSerial}
           units={units}
           setUnits={setUnits}
-          unitsList={unitsList}
         />
       </div>
       <div className="text-center my-8">

@@ -46,7 +46,7 @@ export interface Product extends GraphQLModel {
   quantity?: number;
   units?: number;
   // review?: Array<BuyerReview>;
-  enterprise?: Enterprise;
+  // enterprise?: Enterprise;
   uploadedDate?: Date;
   visibility?: number;
   // questions?: Array<Question>;

@@ -8,3 +8,16 @@ export const GET_USERS = gql`
     }
   }
 `;
+
+// Products
+export const GET_PRODUCTS = gql`
+  query GET_PRODUCTS($filter: FilterFindManyProductInput) {
+    products(filter: $filter) {
+      name
+      description
+      category
+      price
+      images
+    }
+  }
+`;

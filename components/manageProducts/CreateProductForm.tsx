@@ -22,7 +22,6 @@ interface CreateProductFormProps {
   setSerial?: React.Dispatch<React.SetStateAction<string>>;
   units?;
   setUnits?: React.Dispatch<React.SetStateAction<any>>;
-  unitsList;
 }
 
 export default function CreateProductForm({
@@ -42,7 +41,6 @@ export default function CreateProductForm({
   setSerial,
   units,
   setUnits,
-  unitsList,
 }: CreateProductFormProps) {
   return (
     <div>
@@ -112,11 +110,7 @@ export default function CreateProductForm({
       </div>
       <div className="mt-8">
         <h2 className="mb-1 font-bold">Presentacion del producto</h2>
-        <UnitsDropdown
-          units={units}
-          setUnits={setUnits}
-          unitsList={unitsList}
-        />
+        <UnitsDropdown units={units} setUnits={setUnits} />
       </div>
       <div className="mt-8">
         <h2 className="mb-1 font-bold">Imagenes del Producto</h2>

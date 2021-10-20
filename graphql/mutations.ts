@@ -14,14 +14,15 @@ export const CREATE_PRODUCT = gql`
   mutation CREATE_PRODUCT($data: CreateProductInput) {
     createProduct(data: $data) {
       name
-      description
       serial
+      description
       category
       price
       quantity
       units
-      images {
-        url
+      images
+      enterprise {
+        _id
       }
     }
   }

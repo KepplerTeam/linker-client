@@ -1,12 +1,21 @@
 import React from 'react';
+import { Product } from '../../models';
 import FeaturedProduct from './FeaturedProduct';
 
-export default function FeaturedProductFeed() {
-	return(
-		<div className="flex scroll-x mb-4">
-          <FeaturedProduct />
-		  <FeaturedProduct />
-		  <FeaturedProduct />
-        </div>
-	);
+interface FeaturedProductFeedProps {
+  products?: Product[];
+}
+
+export default function FeaturedProductFeed({ products }) {
+  return (
+    <div className="flex scroll-x mb-4">
+      {products.map((product) => (
+        <FeaturedProduct
+          name={product?.name}
+          image={product?.image}
+          price={product?.price}
+        />
+      ))}
+    </div>
+  );
 }

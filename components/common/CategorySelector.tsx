@@ -11,7 +11,7 @@ export default function CategorySelector({
   setCategory,
 }: CategorySelectorProps) {
   return (
-    <div className="flex flex-row justify-between overflow-x-scroll scrollbar-hide space-x-5 mt-4">
+    <div className="flex flex-row justify-between overflow-x-scroll scrollbar-hide space-x-5 my-4">
       <motion.button
         whileHover={{
           scale: 1.005,
