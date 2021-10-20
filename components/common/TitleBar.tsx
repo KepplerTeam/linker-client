@@ -1,4 +1,5 @@
 import React from 'react';
+import { useRouter } from 'next/router';
 import { BackIcon, CheckIcon, EditIcon, TrashIcon } from '../icons';
 import ShoppingCartIcon from '../icons/ShoppingCartIcon';
 
@@ -17,10 +18,20 @@ export default function TitleBar({
   hasTrashIcon = false,
   title = '',
 }: TitleBarProps) {
+  const router = useRouter();
+
   return (
     <div className="w-full h-auto flex flex-row justify-evenly mt-4 px-2 border-b-2 pb-2">
       <div className="w-1/3">
-        <BackIcon className="w-6 h-6" />
+        <button
+          type="button"
+          onClick={(e) => {
+            e.preventDefault();
+            router.push('/');
+          }}
+        >
+          <BackIcon className="w-6 h-6" />
+        </button>
       </div>
       <div className="w-1/3">
         <h2 className="text-center text-lg font-bold">{title}</h2>
