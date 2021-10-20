@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import React, { Fragment } from 'react';
+import StarIcon from '../icons/StarIcon';
 
 interface FeaturedProductProps {
   images: string;
@@ -16,7 +17,7 @@ export default function FeaturedProduct({
 }: FeaturedProductProps) {
   const router = useRouter();
   return (
-    <>
+    <div className="">
       <button
         type="button"
         onClick={(e) => {
@@ -28,8 +29,17 @@ export default function FeaturedProduct({
           <img className="h-48" src={images} alt={name} />
           <h2 className="text-lg text-left font-normal mb-auto">{name}</h2>
           <h3 className="text-lg text-left font-bold mb-auto">USD {price}</h3>
+          <div className="flex flex-row mt-2">
+            <div className="flex">
+              <StarIcon className="w-4 h-4 text-yellow-300 fill-current mr-2" />
+              <div className="text-sm mr-11">4.2</div>
+            </div>
+            <div className="">
+              <p className="text-sm">86 Reviews</p>
+            </div>
+          </div>
         </div>
       </button>
-    </>
+    </div>
   );
 }

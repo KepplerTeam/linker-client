@@ -19,7 +19,10 @@ export default function CategorySelector({
         }}
         value=""
         type="button"
-        onClick={(e) => setCategory(0)}
+        onClick={(e) => {
+          e.preventDefault();
+          setCategory(0);
+        }}
       >
         <span
           className={`bg-gray-200 hover:bg-primary-100 rounded-full w-auto px-3 py-1 h-auto ${
@@ -77,7 +80,7 @@ export default function CategorySelector({
             category === 3 ? 'bg-primary-100' : ''
           }`}
         >
-          Plastico
+          Plásticos
         </span>
       </motion.button>
 
@@ -95,7 +98,7 @@ export default function CategorySelector({
             category === 4 ? 'bg-primary-100' : ''
           }`}
         >
-          Plasticos
+          Cartón
         </span>
       </motion.button>
       <motion.button
@@ -112,7 +115,7 @@ export default function CategorySelector({
             category === 5 ? 'bg-primary-100' : ''
           }`}
         >
-          Tecnologia
+          Tecnología
         </span>
       </motion.button>
     </div>
