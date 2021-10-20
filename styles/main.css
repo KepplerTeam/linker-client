@@ -146,3 +146,19 @@ button.nav-item.active:hover {
 button.nav-item:not(.active):hover {
   @apply bg-gray-200;
 }
+
+button.checkout {
+  @apply bg-primary-100 text-white font-bold rounded-lg py-4 px-32 m-5;
+}
+
+button.checkout:hover {
+  @apply bg-primary-600;
+}
+
+button.cart {
+  @apply bg-white rounded-lg border-black border px-2 border-opacity-60;
+}
+
+button.cart:hover {
+  @apply bg-gray-100;
+}
