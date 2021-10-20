@@ -7,13 +7,6 @@ import { GET_PRODUCTS } from '../graphql/queries';
 import { Product } from '../models';
 
 export default function Home() {
-  const { data, loading } = useQuery<{
-    products: Product[];
-  }>(GET_PRODUCTS, {
-    variables: {},
-    fetchPolicy: 'network-only',
-  });
-
   return (
     <div className="w-screen h-full p-0">
       <div>

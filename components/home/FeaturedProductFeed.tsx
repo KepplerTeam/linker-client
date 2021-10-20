@@ -12,7 +12,7 @@ export default function FeaturedProductFeed({ products }) {
       {products.map((product) => (
         <FeaturedProduct
           name={product?.name}
-          image={product?.image}
+          image={product?.images[0]}
           price={product?.price}
         />
       ))}
