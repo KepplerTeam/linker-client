@@ -1,5 +1,4 @@
 import React from 'react';
-import { Tab } from '@headlessui/react';
 import { motion } from 'framer-motion';
 import { Product } from '../../models';
 import TitleBar from '../common/TitleBar';
@@ -7,13 +6,28 @@ import ReviewCard from '../review/ReviewCard';
 
 interface ProductOverviewProps {
   product: Product;
+  hasEdit?: boolean;
+  hasShoppingCart?: boolean;
+  title?: string;
+  isUpdate?: boolean;
 }
 
-export default function ProductOverview({ product }: ProductOverviewProps) {
+export default function ProductOverview({
+  product,
+  hasEdit = false,
+  hasShoppingCart = false,
+  title = '',
+  isUpdate = false,
+}: ProductOverviewProps) {
   const [active, setActive] = React.useState(0);
   return (
     <div className="w-full min-h-screen">
-      <TitleBar hasShoppingCart />
+      <TitleBar
+        hasShoppingCart={hasShoppingCart}
+        hasEdit={hasEdit}
+        title={title}
+        _id={product._id}
+      />
       <div className="p-6">
         <div>
           <h2 className="mb-1 font-semibold text-primary-100">
@@ -110,20 +124,22 @@ export default function ProductOverview({ product }: ProductOverviewProps) {
           </div>
         )}
         <div>
-          <motion.button
-            whileHover={{
-              scale: 1.005,
-              boxShadow: '0px 0px 4px rgb(51,51,51, 0.5)',
-            }}
-            value=""
-            type="button"
-            className="w-full h-11 bg-primary-100 text-white rounded-2xl px-4 py-2 my-12"
-            onClick={(e) => {
-              e.preventDefault();
-            }}
-          >
-            <span>Add To Cart</span>
-          </motion.button>
+          {!isUpdate ? (
+            <motion.button
+              whileHover={{
+                scale: 1.005,
+                boxShadow: '0px 0px 4px rgb(51,51,51, 0.5)',
+              }}
+              value=""
+              type="button"
+              className="w-full h-11 bg-primary-100 text-white rounded-2xl px-4 py-2 my-12"
+              onClick={(e) => {
+                e.preventDefault();
+              }}
+            >
+              <span>Add To Cart</span>
+            </motion.button>
+          ) : null}
           <div>
             <h2 className="my-3">Review(#)</h2>
           </div>

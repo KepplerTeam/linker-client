@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { validateString } from 'avilatek-utils';
 import { useMutation, useQuery } from '@apollo/client';
 import router from 'next/router';
-import { DocumentModel, Enterprise } from '../../models';
+import { DocumentModel, Enterprise, Product } from '../../models';
 import TitleBar from '../common/TitleBar';
 import CreateProductForm from './CreateProductForm';
 import useNotify from '../../hooks/useNotify';
@@ -11,19 +11,23 @@ import { CREATE_PRODUCT } from '../../graphql/mutations';
 
 interface CreateProps {
   isUpdate?: boolean;
-  // product?: Product;
+  product?: Product;
 }
 
-export default function Create({ isUpdate = false }: CreateProps) {
-  const [name, setName] = React.useState('');
-  const [category, setCategory] = React.useState<number>();
-  const [description, setDescription] = React.useState('');
-  const [stock, setStock] = React.useState(0);
-  const [price, setPrice] = React.useState(0);
+export default function Create({ isUpdate = false, product }: CreateProps) {
+  const [name, setName] = React.useState(product?.name || '');
+  const [category, setCategory] = React.useState<number>(
+    product?.category || null
+  );
+  const [description, setDescription] = React.useState(
+    product?.description || ''
+  );
+  const [stock, setStock] = React.useState(product?.quantity || null);
+  const [price, setPrice] = React.useState(product?.price || 0);
   const [images, setImages] = React.useState<DocumentModel[]>([]);
   const [disabled, setDisabled] = React.useState(false);
-  const [serial, setSerial] = React.useState('');
-  const [units, setUnits] = React.useState('');
+  const [serial, setSerial] = React.useState(product?.serial || '');
+  const [units, setUnits] = React.useState(product?.units || '');
 
   const [createProduct] = useMutation(CREATE_PRODUCT);
 
@@ -58,7 +62,7 @@ export default function Create({ isUpdate = false }: CreateProps) {
               price: Number(price),
               quantity: Number(stock),
               units: Number(units),
-              enterprise: '616638244a03ed67ceab6c37',
+              enterprise: '616f7e542f597f6abcaaa177',
             },
             createProductImages:
               images.length !== 0 ? images?.map((conf) => conf.src) : '',
@@ -119,7 +123,6 @@ export default function Create({ isUpdate = false }: CreateProps) {
             scale: 1.005,
             boxShadow: '0px 0px 4px rgb(51,51,51, 0.5)',
           }}
-          value=""
           type="button"
           className="w-3/4 rounded-xl h-auto px-3 py-2 bg-primary-100 text-white mb-5"
           disabled={disabled}

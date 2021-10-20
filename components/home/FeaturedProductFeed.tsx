@@ -8,7 +8,7 @@ interface FeaturedProductFeedProps {
 
 export default function FeaturedProductFeed({ products }) {
   return (
-    <div className="flex scroll-x mb-4">
+    <div className="flex scroll-x mb-4 scrollbar-hide">
       {products.map((product) => (
         <FeaturedProduct
           name={product?.name}
