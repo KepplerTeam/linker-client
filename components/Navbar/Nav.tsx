@@ -12,6 +12,6 @@ export default function Nav() {
         	<a className="flex items-center" href="#">
           		<img className="h-7" src="./profile-pic.png" alt="Perfil" />
        		</a>
-      </div>
+      	</div>
 	);
 }
