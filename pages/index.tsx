@@ -41,10 +41,10 @@ export default function Home() {
           <div className="w-screen h-full p-0">
             <div>
               <Nav />
-              <Search />
+              <Search data={data?.products} />
               <CardHome
-                allProducts={data.products}
-                featuredProducts={featuredProducts.products}
+                allProducts={data?.products}
+                featuredProducts={featuredProducts?.products}
                 category={category}
                 setCategory={setCategory}
               />
