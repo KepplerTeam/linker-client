@@ -1,4 +1,5 @@
 import React from 'react';
+import { useRouter } from 'next/router';
 import { motion } from 'framer-motion';
 import { Product } from '../../models';
 import TitleBar from '../common/TitleBar';
@@ -20,6 +21,7 @@ export default function ProductOverview({
   isUpdate = false,
 }: ProductOverviewProps) {
   const [active, setActive] = React.useState(0);
+  const [shoppingItem, setShoppingItem] = React.useState<Product[]>([]);
   return (
     <div className="w-full min-h-screen">
       <TitleBar
@@ -135,6 +137,7 @@ export default function ProductOverview({
               className="w-full h-11 bg-primary-100 text-white rounded-2xl px-4 py-2 my-12"
               onClick={(e) => {
                 e.preventDefault();
+                setShoppingItem((prevState) => ({ ...prevState, product }));
               }}
             >
               <span>Add To Cart</span>

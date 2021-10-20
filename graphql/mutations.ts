@@ -27,3 +27,16 @@ export const CREATE_PRODUCT = gql`
     }
   }
 `;
+
+export const UPDATE_PRODUCT = gql`
+  mutation UPDATE_PRODUCT(
+    $filter: FilterUpdateOneProductInput
+    $record: UpdateOneProductInput!
+  ) {
+    updateProduct(filter: $filter, record: $record) {
+      record {
+        _id
+      }
+    }
+  }
+`;
