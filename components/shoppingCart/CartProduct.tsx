@@ -10,9 +10,9 @@ export default function CartProduct() {
 					<h5 className="text-sm font-bold mb-3">USD 270</h5>
 					<div className="flex flex-row items-center justify-between w-full">
 						<div className="flex mr-auto">
-							<button className="cart w-7 mr-2"> - </button>
+							<button type="button" className="cart w-7 mr-2"> - </button>
 							<p>1</p>
-							<button className="cart w-7 ml-2"> + </button>
+							<button type="button" className="cart w-7 ml-2"> + </button>
 						</div>
 						<a className="">
 						<TrashIcon className="w-5 h-5 opacity-50"/>
