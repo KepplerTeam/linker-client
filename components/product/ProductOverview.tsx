@@ -120,6 +120,7 @@ export default function ProductOverview({
                   src={image}
                   alt={product.name}
                   className="w-full object-contain"
+                  key={product?._id}
                 />
               ))}
             </div>
