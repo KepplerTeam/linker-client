@@ -32,7 +32,7 @@ module.exports = {
 
           // VERDES
           600: '#07b572',
-          700: '#08a367'
+          700: '#08a367',
         },
         secondary: {
           100: '#DCFEEA',

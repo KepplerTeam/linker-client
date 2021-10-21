@@ -27,7 +27,7 @@ export default function ShoppingCartPage() {
           <TitleBar hasTrashIcon title="Carrito" />
 
           {data?.shoppingCart?.products.map((e) => (
-            <CartProduct product={e} />
+            <CartProduct product={e} key={e._id} />
           ))}
 
           <div className="fixed bottom-0 w-full flex-col justify-center">

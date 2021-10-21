@@ -13,7 +13,7 @@ export default function ProductCard({ products }: ProductCardProps) {
     <div className="px-1 min-h-screen">
       <div className="bg-gray-100 p-3 pb-5 w-full grid grid-cols-2 rounded-2xl gap-4">
         {products.map((product) => (
-          <div className="bg-white rounded-2xl p-3">
+          <div className="bg-white rounded-2xl p-3" key={product?._id}>
             <div className="flex flex-col">
               <motion.button
                 className="text-left"
