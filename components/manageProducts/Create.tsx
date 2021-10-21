@@ -7,7 +7,7 @@ import { DocumentModel, Enterprise, Product } from '../../models';
 import TitleBar from '../common/TitleBar';
 import CreateProductForm from './CreateProductForm';
 import useNotify from '../../hooks/useNotify';
-import { CREATE_PRODUCT } from '../../graphql/mutations';
+import { CREATE_PRODUCT, UPDATE_PRODUCT } from '../../graphql/mutations';
 
 interface CreateProps {
   isUpdate?: boolean;
@@ -25,11 +25,13 @@ export default function Create({ isUpdate = false, product }: CreateProps) {
   const [stock, setStock] = React.useState(product?.quantity || null);
   const [price, setPrice] = React.useState(product?.price || 0);
   const [images, setImages] = React.useState<DocumentModel[]>([]);
+  const [currentImage] = React.useState(product?.images[0] || '');
   const [disabled, setDisabled] = React.useState(false);
   const [serial, setSerial] = React.useState(product?.serial || '');
   const [units, setUnits] = React.useState(product?.units || '');
 
   const [createProduct] = useMutation(CREATE_PRODUCT);
+  const [updateProduct] = useMutation(UPDATE_PRODUCT);
 
   const notify = useNotify();
 
@@ -51,33 +53,57 @@ export default function Create({ isUpdate = false, product }: CreateProps) {
           'warning'
         );
       }
-      const { data: dataCreate } = await createProduct({
-        variables: {
-          data: {
-            createProductInfo: {
+      if (!isUpdate) {
+        const { data: dataCreate } = await createProduct({
+          variables: {
+            data: {
+              createProductInfo: {
+                name,
+                description,
+                serial,
+                category,
+                price: Number(price),
+                quantity: Number(stock),
+                units: Number(units),
+                enterprise: '616f7e542f597f6abcaaa177',
+              },
+              createProductImages:
+                images.length !== 0 ? images?.map((conf) => conf.src) : '',
+            },
+          },
+        });
+        if (dataCreate?.createProduct) {
+          // notify('El producto se ha creado exitosamente!', 'success');
+          console.log('se ha creado exitosamente');
+          // Aca deberia mandar a preview de articulo o a perful de todos sus productos
+          await router.push('/');
+        } else {
+          // notify('Ha ocurrido un error al crear el producto', 'error');
+          console.log('error al crear el producto');
+        }
+      } else {
+        const { data: dataUpdate } = await updateProduct({
+          variables: {
+            filter: { _id: product._id },
+            record: {
               name,
               description,
-              serial,
               category,
-              price: Number(price),
               quantity: Number(stock),
               units: Number(units),
-              enterprise: '616f7e542f597f6abcaaa177',
+              serial,
+              price: Number(price),
+              images:
+                images.length === 0
+                  ? currentImage
+                  : images?.map((conf) => conf.src),
             },
-            createProductImages:
-              images.length !== 0 ? images?.map((conf) => conf.src) : '',
           },
-        },
-      });
-
-      if (dataCreate?.createProduct) {
-        // notify('El producto se ha creado exitosamente!', 'success');
-        console.log('se ha creado exitosamente');
-        // Aca deberia mandar a preview de articulo o a perful de todos sus productos
-        await router.push('/');
-      } else {
-        // notify('Ha ocurrido un error al crear el producto', 'error');
-        console.log('error al crear el producto');
+        });
+        if (dataUpdate?.updateProduct) {
+          console.log('Actualizado exitosamente');
+          await router.push(`/stock/${product._id}`);
+        }
       }
     } catch (err) {
       // notify(err.message, 'error', err);

@@ -19,7 +19,7 @@ export interface User extends GraphQLModel {
   category?: number;
   buyerRating?: number;
   // summaryShop?: Bill;
-  // shoppingCart?: ShoppingCart;
+  shoppingCart?: [string];
   enterprise?: Enterprise;
   // reviewsMade?: BuyerReview;
   // questionsMade?: QuestionsMade;
@@ -63,4 +63,8 @@ export interface Enterprise extends GraphQLModel {
   products?: Array<Product>;
   // salesSummary?: Types.ObjectId; //BillDocument[]
   // commentsMadeIt?: Types.ObjectId; //SellerComment[]
+}
+
+export interface ShoppingCart extends GraphQLModel {
+  products: [Product];
 }

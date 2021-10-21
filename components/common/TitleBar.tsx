@@ -54,9 +54,20 @@ export default function TitleBar({
           {hasCheckMark ? <CheckIcon className="w-6 h-6 ml-auto" /> : null}
         </div>
         <div>
-          {hasShoppingCart ? (
-            <ShoppingCartIcon className="w-6 h-6 ml-auto" />
-          ) : null}
+          <motion.button
+            type="button"
+            className=""
+            onClick={(e) => {
+              e.preventDefault();
+              router.push(`/shopping-cart`);
+            }}
+          >
+            <div>
+              {hasShoppingCart ? (
+                <ShoppingCartIcon className="w-6 h-6 ml-auto" />
+              ) : null}
+            </div>
+          </motion.button>
         </div>
         <div>
           {hasTrashIcon ? <TrashIcon className="w-6 h-6 ml-auto" /> : null}
