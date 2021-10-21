@@ -1,4 +1,4 @@
-//enviroment
+// enviroment
 const DEV_ENDPOINT = 'http://localhost:5555/graphql';
 const PROD_ENDPOINT = 'https://dev-linker-client.vercel.app/';
 
