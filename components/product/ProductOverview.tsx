@@ -1,9 +1,11 @@
 import React from 'react';
+import { useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
 import { motion } from 'framer-motion';
 import { Product } from '../../models';
 import TitleBar from '../common/TitleBar';
 import ReviewCard from '../review/ReviewCard';
+import { UPDATE_SHOPPING_CART } from '../../graphql/mutations';
 
 interface ProductOverviewProps {
   product: Product;
@@ -21,7 +23,36 @@ export default function ProductOverview({
   isUpdate = false,
 }: ProductOverviewProps) {
   const [active, setActive] = React.useState(0);
-  const [shoppingItem, setShoppingItem] = React.useState<Product[]>([]);
+  const router = useRouter();
+
+  const [updateShoppingCart] = useMutation(UPDATE_SHOPPING_CART);
+
+  const onSubmit = async (e) => {
+    try {
+      e.persist();
+      e.preventDefault();
+
+      const { data: dataUpdate } = await updateShoppingCart({
+        variables: {
+          filter: { _id: '6170ab2a74344308a8a7f57e' },
+          record: {
+            products: [product._id],
+          },
+        },
+      });
+      if (dataUpdate?.updateShoppingCart) {
+        console.log('Producto anadido al shopping cart exitosamente');
+        await router.push(`/shopping-cart`);
+      }
+    } catch (err) {
+      // notify(err.message, 'error', err);
+      console.log('no se pudo agregar');
+      console.log(err);
+    } finally {
+      console.log('done');
+    }
+  };
+
   return (
     <div className="w-full min-h-screen">
       <TitleBar
@@ -135,10 +166,7 @@ export default function ProductOverview({
               value=""
               type="button"
               className="w-full h-11 bg-primary-100 text-white rounded-2xl px-4 py-2 my-12"
-              onClick={(e) => {
-                e.preventDefault();
-                setShoppingItem((prevState) => ({ ...prevState, product }));
-              }}
+              onClick={onSubmit}
             >
               <span>Add To Cart</span>
             </motion.button>

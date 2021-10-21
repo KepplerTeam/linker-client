@@ -9,6 +9,24 @@ export const GET_USERS = gql`
   }
 `;
 
+export const GET_USER = gql`
+  query GET_USER($filter: FilterFindOneUserInput) {
+    user(filter: $filter) {
+      username
+      dni
+      firstName
+      lastName
+      enterprise {
+        name
+        _id
+      }
+      shoppingCart {
+        products
+      }
+    }
+  }
+`;
+
 // Products
 export const GET_PRODUCTS = gql`
   query GET_PRODUCTS($filter: FilterFindManyProductInput) {
@@ -36,6 +54,17 @@ export const GET_PRODUCT = gql`
       quantity
       units
       images
+    }
+  }
+`;
+
+export const GET_SHOPPING_CART = gql`
+  query GET_SHOPPING_CART($filter: FilterFindOneShoppingCartInput) {
+    shoppingCart(filter: $filter) {
+      _id
+      products {
+        _id
+      }
     }
   }
 `;

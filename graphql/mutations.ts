@@ -40,3 +40,31 @@ export const UPDATE_PRODUCT = gql`
     }
   }
 `;
+
+export const UPDATE_USER = gql`
+  mutation UPDATE_USER(
+    $record: UpdateOneUserInput!
+    $filter: FilterUpdateOneUserInput
+  ) {
+    updateUser(record: $record, filter: $filter) {
+      record {
+        _id
+      }
+    }
+  }
+`;
+
+export const UPDATE_SHOPPING_CART = gql`
+  mutation UPDATE_SHOPPING_CART(
+    $record: UpdateOneShoppingCartInput!
+    $filter: FilterUpdateOneShoppingCartInput
+  ) {
+    updateShoppingCart(filter: $filter, record: $record) {
+      record {
+        products {
+          _id
+        }
+      }
+    }
+  }
+`;

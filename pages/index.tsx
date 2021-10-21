@@ -26,10 +26,6 @@ export default function Home() {
       fetchPolicy: 'network-only',
     });
 
-  // React.useEffect(() => {
-
-  // })
-
   return (
     <>
       {loading ||
@@ -41,7 +37,7 @@ export default function Home() {
           <div className="w-screen h-full p-0">
             <div>
               <Nav />
-              <Search data={data?.products} />
+              <Search data={featuredProducts?.products} />
               <CardHome
                 allProducts={data?.products}
                 featuredProducts={featuredProducts?.products}

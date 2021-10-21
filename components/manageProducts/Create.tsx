@@ -25,7 +25,7 @@ export default function Create({ isUpdate = false, product }: CreateProps) {
   const [stock, setStock] = React.useState(product?.quantity || null);
   const [price, setPrice] = React.useState(product?.price || 0);
   const [images, setImages] = React.useState<DocumentModel[]>([]);
-  const [currentImage] = React.useState(product.images[0]);
+  const [currentImage] = React.useState(product?.images[0] || '');
   const [disabled, setDisabled] = React.useState(false);
   const [serial, setSerial] = React.useState(product?.serial || '');
   const [units, setUnits] = React.useState(product?.units || '');
@@ -100,6 +100,10 @@ export default function Create({ isUpdate = false, product }: CreateProps) {
             },
           },
         });
+        if (dataUpdate?.updateProduct) {
+          console.log('Actualizado exitosamente');
+          await router.push(`/stock/${product._id}`);
+        }
       }
     } catch (err) {
       // notify(err.message, 'error', err);
