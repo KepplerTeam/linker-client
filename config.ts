@@ -1,6 +1,6 @@
 // enviroment
-const DEV_ENDPOINT = 'https://dev-linker-api.herokuapp.com/';
-const PROD_ENDPOINT = 'http://localhost:5555/graphql';
+const DEV_ENDPOINT = 'http://localhost:5555/graphql';
+const PROD_ENDPOINT = 'https://dev-linker-api.herokuapp.com/';
 
 
 
