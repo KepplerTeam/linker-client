@@ -6,9 +6,9 @@ interface UnitsDropdownProps {
 }
 
 const unitsList = [
-  { _id: 0, name: 'V' },
-  { _id: 1, name: 'E' },
-  { _id: 2, name: 'J' },
+  { _id: 'V', name: 'V' },
+  { _id: 'E', name: 'E' },
+  { _id: 'J', name: 'J' },
 ];
 
 export default function SSNDropdown({ unit, setUnit }: UnitsDropdownProps) {

@@ -68,3 +68,15 @@ export const GET_SHOPPING_CART = gql`
     }
   }
 `;
+
+// auth
+export const ME = gql`
+  query ME {
+    username
+    firstName
+    lastName
+    email
+    photo
+    role
+  }
+`;

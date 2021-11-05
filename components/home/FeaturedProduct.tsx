@@ -28,7 +28,7 @@ export default function FeaturedProduct({
         <div className="card flex flex-col items-start w-56 min-w-max mr-4">
           <img className="h-48" src={images} alt={name} />
           <h2 className="text-lg text-left font-normal mb-auto">{name}</h2>
-          <h3 className="text-lg text-left font-bold mb-auto">USD {price}</h3>
+          <h3 className="text-lg text-left font-bold mb-auto">${price}</h3>
           <div className="flex flex-row mt-2">
             <div className="flex">
               <StarIcon className="w-4 h-4 text-yellow-300 fill-current mr-2" />

@@ -11,6 +11,7 @@ interface TitleBarProps {
   hasTrashIcon?: boolean;
   title?: string;
   _id?: string;
+  cartSize?: number;
 }
 
 export default function TitleBar({
@@ -20,6 +21,7 @@ export default function TitleBar({
   hasTrashIcon = false,
   title = '',
   _id = '',
+  cartSize = 0,
 }: TitleBarProps) {
   const router = useRouter();
 
@@ -64,7 +66,10 @@ export default function TitleBar({
           >
             <div>
               {hasShoppingCart ? (
-                <ShoppingCartIcon className="w-6 h-6 ml-auto" />
+                <div className="flex">
+                  <ShoppingCartIcon className="w-6 h-6 ml-auto" />
+                  <span className="text-xs mt-3 ml-1">{cartSize}</span>
+                </div>
               ) : null}
             </div>
           </motion.button>

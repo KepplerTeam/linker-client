@@ -4,7 +4,7 @@ interface ToastProps {
   type: string;
   content: React.ReactChild;
   id: string;
-  onClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  onClick: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 
 function Toast({ type, content, id, onClick }: ToastProps) {
@@ -12,11 +12,12 @@ function Toast({ type, content, id, onClick }: ToastProps) {
     case 'success':
       return (
         <div
-          className="bg-green-200 border-l-4 border-green-700 text-green-700 px-4 py-2 max-w-xs z-20 mb-3"
+          className="bg-green-200 border-l-4 border-green-700 text-green-700 px-4 py-2 max-w-xs mb-3"
           role="alert"
+          style={{ zIndex: 100 }}
         >
           <span className="w-full flex flex-row flex-wrap">
-            <p className="font-semibold">¡Éxito!</p>
+            <p className="font-semibold">Éxito!</p>
             <button
               type="button"
               className="ml-auto p-0 bg-transparent focus:outline-none outline-none"
@@ -46,7 +47,7 @@ function Toast({ type, content, id, onClick }: ToastProps) {
           role="alert"
         >
           <span className="w-full flex flex-row flex-wrap">
-            <p className="font-semibold">¡Error!</p>
+            <p className="font-semibold">Error!</p>
             <button
               type="button"
               className="ml-auto p-0 bg-transparent focus:outline-none outline-none"
@@ -76,7 +77,7 @@ function Toast({ type, content, id, onClick }: ToastProps) {
           role="alert"
         >
           <span className="w-full flex flex-row flex-wrap">
-            <p className="font-semibold">¡Cuidado!</p>
+            <p className="font-semibold">Cuidado!</p>
             <button
               type="button"
               className="ml-auto p-0 bg-transparent focus:outline-none outline-none"
@@ -106,7 +107,7 @@ function Toast({ type, content, id, onClick }: ToastProps) {
           className="bg-gray-200 border-l-4 border-blue-700 text-gray-700 px-4 py-2 max-w-xs z-20 mb-3"
           role="alert"
         >
-          <p className="font-semibold">¡Información!</p>
+          <p className="font-semibold">Info!</p>
           {typeof content === 'string' ? (
             <p className="text-sm">{content}</p>
           ) : (

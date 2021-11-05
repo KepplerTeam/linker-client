@@ -1,7 +1,8 @@
 import React from 'react';
+// import * as Sentry from '@sentry/nextjs';
 import { v4 as uuid } from 'uuid';
 import { AnimatePresence, motion } from 'framer-motion';
-import Toast from '../components/Toast';
+import Toast from '../components/common/Toast';
 
 type TToastContext = {
   alerts?: Array<{ type: string; content: React.ReactChild }>;
