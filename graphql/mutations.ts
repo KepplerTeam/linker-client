@@ -68,3 +68,27 @@ export const UPDATE_SHOPPING_CART = gql`
     }
   }
 `;
+
+// auth
+
+export const CREATE_USER = gql`
+  mutation CREATE_USER($data: CreateUserInput) {
+    signUp(data: $data) {
+      username
+      dni
+      firstName
+      lastName
+      email
+      password
+    }
+  }
+`;
+
+export const SIGN_IN = gql`
+  mutation SIGN_IN($data: SignInInput) {
+    signIn(data: $data) {
+      email
+      password
+    }
+  }
+`;

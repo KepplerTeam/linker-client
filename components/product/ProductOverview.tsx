@@ -5,7 +5,6 @@ import { motion } from 'framer-motion';
 import { Product } from '../../models';
 import TitleBar from '../common/TitleBar';
 import ReviewCard from '../review/ReviewCard';
-import { UPDATE_SHOPPING_CART } from '../../graphql/mutations';
 
 interface ProductOverviewProps {
   product: Product;
@@ -22,36 +21,21 @@ export default function ProductOverview({
   title = '',
   isUpdate = false,
 }: ProductOverviewProps) {
+  const cartFromLocalStorage = JSON.parse(localStorage.getItem('cart') || '[]');
   const [active, setActive] = React.useState(0);
   const router = useRouter();
 
-  const [updateShoppingCart] = useMutation(UPDATE_SHOPPING_CART);
+  const [cart, setCart] = React.useState(cartFromLocalStorage);
 
-  const onSubmit = async (e) => {
-    try {
-      e.persist();
-      e.preventDefault();
-
-      const { data: dataUpdate } = await updateShoppingCart({
-        variables: {
-          filter: { _id: '6170ab2a74344308a8a7f57e' },
-          record: {
-            products: [product._id],
-          },
-        },
-      });
-      if (dataUpdate?.updateShoppingCart) {
-        console.log('Producto anadido al shopping cart exitosamente');
-        await router.push(`/shopping-cart`);
-      }
-    } catch (err) {
-      // notify(err.message, 'error', err);
-      console.log('no se pudo agregar');
-      console.log(err);
-    } finally {
-      console.log('done');
-    }
+  const addToCart = (producto: Product) => {
+    console.log('llamando el set');
+    setCart([...cart, producto]);
+    console.log('tamano del carro: ', cart.length);
   };
+
+  React.useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }, [cart]);
 
   return (
     <div className="w-full min-h-screen">
@@ -60,6 +44,7 @@ export default function ProductOverview({
         hasEdit={hasEdit}
         title={title}
         _id={product._id}
+        cartSize={cart.length}
       />
       <div className="p-6">
         <div>
@@ -115,13 +100,15 @@ export default function ProductOverview({
         {active === 0 ? (
           <div className="">
             <div className="w-full pb-12 flex flex-row overflow-scroll scrollbar-hide rounded-xl bg-gray-100 space-x-7">
-              {product.images.map((image) => (
-                <img
-                  src={image}
-                  alt={product.name}
-                  className="w-full object-contain"
-                  key={product?._id}
-                />
+              {product.images.map((image, idx) => (
+                <div key={idx}>
+                  <img
+                    src={image}
+                    alt={product.name}
+                    className="w-full object-contain"
+                    key={product?._id}
+                  />
+                </div>
               ))}
             </div>
           </div>
@@ -167,7 +154,11 @@ export default function ProductOverview({
               value=""
               type="button"
               className="w-full h-11 bg-primary-100 text-white rounded-2xl px-4 py-2 my-12"
-              onClick={onSubmit}
+              onClick={(e) => {
+                e.persist();
+                e.preventDefault();
+                addToCart(product);
+              }}
             >
               <span>Add To Cart</span>
             </motion.button>
