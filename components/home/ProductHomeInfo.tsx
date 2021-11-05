@@ -17,14 +17,14 @@ export default function ProductHomeInfo({
 
   return (
     <>
-      <div className="card items-center justify-between min-w-full mr-4">
-        <button
-          type="button"
-          onClick={(e) => {
-            e.preventDefault();
-            router.push(`/product/${_id}`);
-          }}
-        >
+      <button
+        type="button"
+        onClick={(e) => {
+          e.preventDefault();
+          router.push(`/product/${_id}`);
+        }}
+      >
+        <div className="card items-center justify-between min-w-full mr-4">
           <div className="w-full h-full">
             <div className="flex flex-row w-full">
               <div className="w-1/2 z-20">
@@ -43,8 +43,8 @@ export default function ProductHomeInfo({
               </div>
             </div>
           </div>
-        </button>
-      </div>
+        </div>
+      </button>
     </>
   );
 }
