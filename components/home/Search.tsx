@@ -1,4 +1,5 @@
 import React from 'react';
+import { useUser } from '../../hooks/useUser';
 import { Product } from '../../models/index';
 
 interface SearchProps {
@@ -7,6 +8,7 @@ interface SearchProps {
 
 export default function Search({ data }: SearchProps) {
   const [searchTerm, setSearchTerm] = React.useState([]);
+  const [user] = useUser();
 
   const handleFilter = (event) => {
     const searchWord = event.target.value;
@@ -19,7 +21,7 @@ export default function Search({ data }: SearchProps) {
   };
   return (
     <div className="w-full mt-3 p-6">
-      <h4 className="text-lg font-light pb-2">Bienvenido, “username”</h4>
+      <h4 className="text-lg font-light pb-2">Bienvenido, {user?.firstName}</h4>
       <h1 className="text-3xl font-bold">¿Qué desea comprar hoy?</h1>
       <input
         className="input-text"

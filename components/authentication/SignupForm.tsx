@@ -31,7 +31,7 @@ export default function SignupForm() {
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     try {
       e.preventDefault();
-
+      e.persist();
       if (
         email !== '' &&
         password !== '' &&
@@ -62,6 +62,8 @@ export default function SignupForm() {
                     password,
                     email: email.toLowerCase(),
                     role: Number(role),
+                    image:
+                      'https://linker-files.sfo3.digitaloceanspaces.com/User-Profile-PNG-Clipart.png',
                   },
                 },
               },
@@ -100,36 +102,25 @@ export default function SignupForm() {
               });
               if (dataCreateUser?.createUser) {
                 console.log('Usuario creado exitosamente');
+                notify('Cuenta creada con exito', 'success');
                 router.push('/');
               } else {
-                console.log('No se ha podido crear el usuario');
+                notify('No se ha podido crear el usuario', 'warning');
               }
             } else {
-              console.log('Informacion de la empresa incompleta');
+              notify('Informacion de la empresa incompleta', 'warning');
             }
           } else {
-            console.log('Rol invalido');
+            notify('Rol invalido', 'warning');
           }
         } else {
-          console.log('Contrasena invalida');
+          notify('Contrasena invalida', 'warning');
         }
       } else {
-        console.log('Informacion incompleta');
+        notify('Informacion incompleta', 'warning');
       }
     } catch (error) {
-      // return notify('Ha ocurrido un error', 'warning');
-      console.log('Ha ocurrido un error');
-    } finally {
-      setName('');
-      setLastname('');
-      setCategory(null);
-      setDob('');
-      setPassword('');
-      setSsn('');
-      setEnterpriseName('');
-      setEmail('');
-      setConfirmPassword('');
-      setRif('');
+      return notify('Ha ocurrido un error', 'warning');
     }
   };
   return (
