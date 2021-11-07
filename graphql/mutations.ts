@@ -80,6 +80,7 @@ export const CREATE_USER = gql`
       lastName
       email
       password
+      image
     }
   }
 `;
@@ -89,6 +90,14 @@ export const SIGN_IN = gql`
     signIn(data: $data) {
       email
       password
+    }
+  }
+`;
+
+export const SIGN_OUT = gql`
+  mutation SIGN_OUT {
+    signOut {
+      success
     }
   }
 `;

@@ -8,6 +8,7 @@ import { GET_PRODUCTS } from '../../graphql/queries';
 import { Product } from '../../models';
 import ProductCard from '../../components/product/ProductCard';
 import CategorySelector from '../../components/common/CategorySelector';
+import Nav from '../../components/Navbar/Nav';
 
 export default function StockPage() {
   const { data, loading } = useQuery<{
@@ -20,6 +21,7 @@ export default function StockPage() {
   const router = useRouter();
 
   const [category, setCategory] = React.useState<number>(0);
+  const [open, setOpen] = React.useState(false);
 
   return (
     <>
@@ -29,6 +31,7 @@ export default function StockPage() {
         </div>
       )) || (
         <div className="">
+          <Nav open={open} setOpen={setOpen} />
           <TitleBar />
           <div className="px-5">
             <h2 className="font-bold text-2xl mt-6">Mis Productos</h2>

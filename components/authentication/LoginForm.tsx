@@ -1,15 +1,18 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
-import { useLazyQuery, useMutation, useQuery } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { SIGN_IN } from '../../graphql/mutations';
 import { User } from '../../models';
-import { ME } from '../../graphql/queries';
+import { useUser } from '../../hooks/useUser';
+import useNotify from '../../hooks/useNotify';
 
 export default function LoginForm() {
   const router = useRouter();
+  const [user, setUser] = useUser();
+  const notify = useNotify();
 
-  const [signIn] = useMutation(SIGN_IN);
+  const [signIn] = useMutation<{ signIn: User }>(SIGN_IN);
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
 
@@ -25,15 +28,14 @@ export default function LoginForm() {
         },
       });
       if (data.signIn) {
-        // setUser(data?.signIn);
-
+        setUser(data?.signIn);
+        notify('Inicio de sesion correcto', 'success');
         await router.push('/');
+        console.log(user);
       }
     } catch (err) {
+      notify('Ha ocurrido un error', 'warning');
       console.log(err);
-    } finally {
-      setEmail('');
-      setPassword('');
     }
   };
 

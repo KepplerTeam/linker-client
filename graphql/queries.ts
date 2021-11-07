@@ -16,12 +16,10 @@ export const GET_USER = gql`
       dni
       firstName
       lastName
+      image
       enterprise {
         name
         _id
-      }
-      shoppingCart {
-        products
       }
     }
   }
@@ -70,13 +68,16 @@ export const GET_SHOPPING_CART = gql`
 `;
 
 // auth
-export const ME = gql`
-  query ME {
-    username
-    firstName
-    lastName
-    email
-    photo
-    role
+export const CURRENT_USER = gql`
+  query CURRENT_USER {
+    currentUser {
+      _id
+      username
+      firstName
+      lastName
+      image
+      email
+      role
+    }
   }
 `;

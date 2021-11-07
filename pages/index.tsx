@@ -6,9 +6,13 @@ import CardHome from '../components/home/CardHome';
 import Footer from '../components/common/Footer';
 import { GET_PRODUCTS } from '../graphql/queries';
 import { Product } from '../models';
+import { useUser } from '../hooks/useUser';
+import SidebarMenu from '../components/common/SidebarMenu';
 
 export default function Home() {
   const [category, setCategory] = React.useState<number>(0);
+  const [user] = useUser();
+  const [open, setOpen] = React.useState(false);
 
   const { data, loading } = useQuery<{
     products: Product[];
@@ -26,6 +30,10 @@ export default function Home() {
       fetchPolicy: 'network-only',
     });
 
+  React.useEffect(() => {
+    console.log(user);
+  }, [user]);
+
   return (
     <>
       {loading ||
@@ -36,7 +44,7 @@ export default function Home() {
         )) || (
           <div className="w-screen h-full p-0">
             <div>
-              <Nav />
+              <Nav open={open} setOpen={setOpen} />
               <Search data={featuredProducts?.products} />
               <CardHome
                 allProducts={data?.products}

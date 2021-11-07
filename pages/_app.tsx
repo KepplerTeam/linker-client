@@ -4,7 +4,10 @@ import Router from 'next/router';
 import '../styles/main.css';
 import { AppProps } from 'next/app';
 import { ApolloProvider } from '@apollo/client';
+import Head from 'next/head';
 import { useApollo } from '../hooks/useApollo';
+import { UserContextProvider } from '../context';
+import ToastContextProvider from '../context/ToastContext';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const apolloClient = useApollo(pageProps.initialApolloState);
@@ -23,7 +26,16 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, []);
   return (
     <ApolloProvider client={apolloClient}>
-      <Component {...pageProps} />
+      <>
+        <Head>
+          <title>Linker</title>
+        </Head>
+        <UserContextProvider>
+          <ToastContextProvider>
+            <Component {...pageProps} />
+          </ToastContextProvider>
+        </UserContextProvider>
+      </>
     </ApolloProvider>
   );
 }
