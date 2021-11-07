@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
-import { rewriteURIForGET, useMutation } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { validateString } from 'avilatek-utils';
 import SSNDropdown from '../common/SSNDropdown';
 import useNotify from '../../hooks/useNotify';
@@ -50,7 +50,7 @@ export default function SignupForm() {
           //   hacer el mutation, funcion asincrona
           // Ahora verificar si es emprendedor o proveedor para hacer el mutation correspondiente
           if (role === '1') {
-            const { data: dataCreateUser } = await createUser({
+            const { data } = await createUser({
               variables: {
                 data: {
                   createUserInfo: {
@@ -68,12 +68,11 @@ export default function SignupForm() {
                 },
               },
             });
-            if (dataCreateUser?.createUser) {
-              console.log('Usuario creado exitosamente');
-              router.push('/');
-            } else {
-              console.log('No se ha podido crear el usuario');
+            if (data?.signUp) {
+              notify('Usuario creado exitosamente', 'success');
+              await router.push('/');
             }
+            return notify('No se ha podido crear el usuario', 'warning');
           }
           if (role === '2') {
             if (enterpriseName !== '' && category !== '' && rif !== '') {
@@ -91,6 +90,8 @@ export default function SignupForm() {
                       password,
                       email: email.toLowerCase(),
                       role: Number(role),
+                      image:
+                        'https://linker-files.sfo3.digitaloceanspaces.com/User-Profile-PNG-Clipart.png',
                     },
                     createEnterprise: {
                       name: enterpriseName,
@@ -100,25 +101,20 @@ export default function SignupForm() {
                   },
                 },
               });
-              if (dataCreateUser?.createUser) {
+              if (dataCreateUser?.signUp) {
                 console.log('Usuario creado exitosamente');
-                notify('Cuenta creada con exito', 'success');
-                router.push('/');
-              } else {
-                notify('No se ha podido crear el usuario', 'warning');
+                await router.push('/');
+                return notify('Cuenta creada con exito', 'success');
               }
-            } else {
-              notify('Informacion de la empresa incompleta', 'warning');
+              return notify('No se ha podido crear el usuario', 'warning');
             }
-          } else {
-            notify('Rol invalido', 'warning');
+            return notify('Informacion de la empresa incompleta', 'warning');
           }
-        } else {
-          notify('Contrasena invalida', 'warning');
+          return notify('Rol invalido', 'warning');
         }
-      } else {
-        notify('Informacion incompleta', 'warning');
+        return notify('Contrasena invalida', 'warning');
       }
+      return notify('Informacion incompleta', 'warning');
     } catch (error) {
       return notify('Ha ocurrido un error', 'warning');
     }
