@@ -24,7 +24,6 @@ export default function SignupForm() {
   const [enterpriseName, setEnterpriseName] = React.useState('');
   const [rif, setRif] = React.useState('');
   const [category, setCategory] = React.useState();
-  //   const [] = React.useState('');
   const [createUser] = useMutation(CREATE_USER);
   const notify = useNotify();
 
@@ -44,11 +43,8 @@ export default function SignupForm() {
       ) {
         if (password === confirmPassword && password.length > 6) {
           if (!validateString(name) || !validateString(lastname)) {
-            // return notify('Por favor, verifique sus datos', 'warning');
-            console.log('verifique sus datos');
+            return notify('Por favor, verifique sus datos', 'warning');
           }
-          //   hacer el mutation, funcion asincrona
-          // Ahora verificar si es emprendedor o proveedor para hacer el mutation correspondiente
           if (role === '1') {
             const { data } = await createUser({
               variables: {
