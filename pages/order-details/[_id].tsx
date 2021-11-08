@@ -17,23 +17,23 @@ export default function OrderDetailsPage() {
   });
   const [open, setOpen] = React.useState(false);
   return (
-    // <div>
-    //   {!loadingOrderData && orderData ? (
-    //     <>
-    //       <Nav open={open} setOpen={setOpen} />
-    //       <OrderDetails bill={orderData.bill} />
-    //       <Footer />
-    //     </>
-    //   ) : (
-    //     <div>
-    //       <h2>loading...</h2>
-    //     </div>
-    //   )}
-    // </div>
     <div>
-      <Nav open={open} setOpen={setOpen} />
-      <OrderDetails bill={orderData?.bill} />
-      <Footer />
+      {!loadingOrderData && orderData ? (
+        <>
+          <Nav open={open} setOpen={setOpen} />
+          <OrderDetails bill={orderData.bill} />
+          <Footer />
+        </>
+      ) : (
+        <div>
+          <h2>loading...</h2>
+        </div>
+      )}
     </div>
+    // <div>
+    //   <Nav open={open} setOpen={setOpen} />
+    //   <OrderDetails bill={orderData?.bill} />
+    //   <Footer />
+    // </div>
   );
 }

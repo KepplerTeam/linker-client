@@ -2,11 +2,11 @@ import React from 'react';
 import { Bill } from '../../models';
 
 interface OrderDetailsProps {
-  //   bill: Bill;
-  bill;
+  bill: Bill;
+  // bill;
 }
 
-export default function OrderDetails() {
+export default function OrderDetails({ bill }: OrderDetailsProps) {
   const billPrueba = [
     {
       product: [
@@ -44,7 +44,6 @@ export default function OrderDetails() {
             {m.product.map((prod) => (
               <div>
                 <h2>{prod.name}</h2>
-                
               </div>
             ))}
           </div>
