@@ -66,7 +66,7 @@ export default function SignupForm() {
             });
             if (data?.signUp) {
               notify('Usuario creado exitosamente', 'success');
-              await router.push('/');
+              await router.push('/feed');
             }
             return notify('No se ha podido crear el usuario', 'warning');
           }
@@ -99,7 +99,7 @@ export default function SignupForm() {
               });
               if (dataCreateUser?.signUp) {
                 console.log('Usuario creado exitosamente');
-                await router.push('/');
+                await router.push('/feed');
                 return notify('Cuenta creada con exito', 'success');
               }
               return notify('No se ha podido crear el usuario', 'warning');

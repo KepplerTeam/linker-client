@@ -30,13 +30,10 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
       if (router.pathname === '/reset-password/[token]') {
         return;
       }
-      if (router.pathname === '/confirm-user/[_id]') {
-        return;
-      }
-      router.push('/login');
+      router.push('/');
     }
     if (!loading && !data?.currentUser) {
-      router.push('/login');
+      router.push('/');
     }
   }, [data, loading, error]);
   return (

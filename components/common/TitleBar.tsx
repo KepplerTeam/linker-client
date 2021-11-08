@@ -32,7 +32,7 @@ export default function TitleBar({
           type="button"
           onClick={(e) => {
             e.preventDefault();
-            router.push('/');
+            router.push('/feed');
           }}
         >
           <BackIcon className="w-6 h-6" />

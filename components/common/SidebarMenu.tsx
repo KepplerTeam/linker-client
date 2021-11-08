@@ -39,7 +39,7 @@ export default function SidebarMenu({
       if (dataSignOut?.signOut?.success) {
         notify('Se ha cerrado sesión con éxito', 'success');
         setUser(null);
-        router.push('/');
+        router.push('/feed');
         setActive(false);
       } else {
         notify(

@@ -83,7 +83,7 @@ export default function NewEnterpriseForm({
             }
           } else {
             notify('No tiene permiso para registrar una empresa.', 'warning');
-            router.push('/');
+            router.push('/feed');
           }
         } else {
           notify('Verifique la informacion', 'warning');

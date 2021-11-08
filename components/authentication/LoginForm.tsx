@@ -30,7 +30,7 @@ export default function LoginForm() {
       if (data.signIn) {
         setUser(data?.signIn);
         notify('Inicio de sesion correcto', 'success');
-        await router.push('/');
+        await router.push('/feed');
         console.log(user);
       }
     } catch (err) {
