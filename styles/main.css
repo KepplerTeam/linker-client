@@ -162,3 +162,11 @@ button.cart {
 button.cart:hover {
   @apply bg-gray-100;
 }
+
+button.signup {
+  @apply bg-primary-100 text-white font-medium text-xs rounded-xl border-0 px-2 py-1
+}
+
+button.signup:hover {
+  @apply bg-primary-600
+}
