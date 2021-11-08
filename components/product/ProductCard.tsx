@@ -11,7 +11,7 @@ export default function ProductCard({ products }: ProductCardProps) {
   const router = useRouter();
   return (
     <div className="px-1 min-h-screen">
-      <div className="bg-gray-100 p-3 pb-5 w-full grid grid-cols-2 rounded-2xl gap-4">
+      <div className="bg-gray-100 p-3 pb-5 w-full rounded-2xl gap-4">
         {products.map((product) => (
           <div className="bg-white rounded-2xl p-3" key={product?._id}>
             <div className="flex flex-col">
@@ -19,7 +19,7 @@ export default function ProductCard({ products }: ProductCardProps) {
                 className="text-left"
                 onClick={(e) => {
                   e.preventDefault();
-                  router.push(`/stock/${product._id}`);
+                  router.push(`/stock/${product?._id}`);
                 }}
               >
                 <div className="mb-1">

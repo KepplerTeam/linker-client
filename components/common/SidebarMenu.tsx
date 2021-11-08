@@ -10,6 +10,8 @@ import {
   LogOutIcon,
   ShoppingCartIcon,
   StarIcon,
+  TagIcon,
+  TruckIcon,
 } from '../icons';
 import Menu from '../icons/Menu';
 
@@ -59,25 +61,55 @@ export default function SidebarMenu({
               <CloseIcon className="w-4 ml-1 mt-1 text-primary-100" />
             </button>
             <div className="flex flex-col py-2 px-1 text-lg">
-              <button type="button" className="text-left">
-                <div className="flex flex-row space-x-1">
-                  <StarIcon className="w-6" />
-                  <span>Favoritos</span>
+              {user?.role === 1 ? (
+                <div>
+                  <button type="button" className="text-left">
+                    <div className="flex flex-row space-x-1">
+                      <StarIcon className="w-6" />
+                      <span>Favoritos</span>
+                    </div>
+                  </button>
+                  <button
+                    type="button"
+                    className="text-left mt-4"
+                    onClick={() => {
+                      router.push('/shopping-cart');
+                      setOpen(false);
+                    }}
+                  >
+                    <div className="flex flex-row space-x-1">
+                      <ShoppingCartIcon className="w-6" />
+                      <span>Mis Empresas</span>
+                    </div>
+                  </button>
                 </div>
-              </button>
-              <button
-                type="button"
-                className="text-left mt-4"
-                onClick={() => {
-                  router.push('/shopping-cart');
-                  setOpen(false);
-                }}
-              >
-                <div className="flex flex-row space-x-1">
-                  <ShoppingCartIcon className="w-6" />
-                  <span>Carrito</span>
+              ) : (
+                <div className="flex flex-col text-lg">
+                  <button
+                    type="button"
+                    className="text-left"
+                    onClick={() => router.push('/profile')}
+                  >
+                    <div className="flex flex-row space-x-1">
+                      <TruckIcon className="w-6" />
+                      <span>Mis Empresas</span>
+                    </div>
+                  </button>
+                  <button
+                    type="button"
+                    className="text-left mt-4"
+                    onClick={() => {
+                      router.push('/shopping-cart');
+                      setOpen(false);
+                    }}
+                  >
+                    <div className="flex flex-row space-x-1">
+                      <TagIcon className="w-6" />
+                      <span>Mis Productos</span>
+                    </div>
+                  </button>
                 </div>
-              </button>
+              )}
               {user ? (
                 <button
                   className="text-left mt-4"
@@ -96,7 +128,7 @@ export default function SidebarMenu({
                 <button
                   className="text-left mt-4"
                   type="button"
-                  onClick={(e) => {
+                  onClick={() => {
                     router.push('/login');
                     setOpen(false);
                   }}

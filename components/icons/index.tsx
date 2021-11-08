@@ -10,6 +10,8 @@ import ShoppingCartIcon from './ShoppingCartIcon';
 import StarIcon from './StarIcon';
 import LogOutIcon from './LogOutIcon';
 import LoginIcon from './LoginIcon';
+import TruckIcon from './TruckIcon';
+import TagIcon from './TagIcon';
 
 export {
   EditIcon,
@@ -24,4 +26,6 @@ export {
   StarIcon,
   LogOutIcon,
   LoginIcon,
+  TruckIcon,
+  TagIcon,
 };

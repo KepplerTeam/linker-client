@@ -101,3 +101,22 @@ export const SIGN_OUT = gql`
     }
   }
 `;
+
+export const CREATE_ENTERPRISE = gql`
+  mutation CREATE_ENTERPRISE($record: CreateOneEnterpriseInput!) {
+    createEnterprise(record: $record) {
+      record {
+        name
+        status
+        rating
+        banner
+        category
+        owner {
+          _id
+        }
+        rif
+        _id
+      }
+    }
+  }
+`;

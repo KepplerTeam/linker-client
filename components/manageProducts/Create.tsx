@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { validateString } from 'avilatek-utils';
 import { useMutation, useQuery } from '@apollo/client';
 import router from 'next/router';
-import { DocumentModel, Enterprise, Product } from '../../models';
+import { DocumentModel, Enterprise, Product, User } from '../../models';
 import TitleBar from '../common/TitleBar';
 import CreateProductForm from './CreateProductForm';
 import useNotify from '../../hooks/useNotify';
@@ -12,9 +12,16 @@ import { CREATE_PRODUCT, UPDATE_PRODUCT } from '../../graphql/mutations';
 interface CreateProps {
   isUpdate?: boolean;
   product?: Product;
+  enterpriseId?: string | string[];
+  user?: User;
 }
 
-export default function Create({ isUpdate = false, product }: CreateProps) {
+export default function Create({
+  isUpdate = false,
+  product,
+  enterpriseId,
+  user,
+}: CreateProps) {
   const [name, setName] = React.useState(product?.name || '');
   const [category, setCategory] = React.useState<number>(
     product?.category || null
@@ -65,7 +72,7 @@ export default function Create({ isUpdate = false, product }: CreateProps) {
                 price: Number(price),
                 quantity: Number(stock),
                 units: Number(units),
-                enterprise: '616f7e542f597f6abcaaa177',
+                enterprise: enterpriseId,
               },
               createProductImages:
                 images.length !== 0 ? images?.map((conf) => conf.src) : '',
@@ -73,12 +80,12 @@ export default function Create({ isUpdate = false, product }: CreateProps) {
           },
         });
         if (dataCreate?.createProduct) {
-          // notify('El producto se ha creado exitosamente!', 'success');
+          notify('El producto se ha creado exitosamente!', 'success');
           console.log('se ha creado exitosamente');
           // Aca deberia mandar a preview de articulo o a perful de todos sus productos
           await router.push('/');
         } else {
-          // notify('Ha ocurrido un error al crear el producto', 'error');
+          notify('Ha ocurrido un error al crear el producto', 'error');
           console.log('error al crear el producto');
         }
       } else {
@@ -106,7 +113,7 @@ export default function Create({ isUpdate = false, product }: CreateProps) {
         }
       }
     } catch (err) {
-      // notify(err.message, 'error', err);
+      notify(err.message, 'error', err);
       console.log(err);
     } finally {
       setDisabled(false);
@@ -116,11 +123,11 @@ export default function Create({ isUpdate = false, product }: CreateProps) {
   return (
     <div>
       <div>
-        {!isUpdate ? (
+        {/* {!isUpdate ? (
           <TitleBar title="Crear" />
         ) : (
           <TitleBar title="Actualizar" hasCheckMark />
-        )}
+        )} */}
       </div>
 
       <div className="px-4 mt-8">

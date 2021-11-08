@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
 import React from 'react';
 import Footer from '../../components/common/Footer';
+import Nav from '../../components/Navbar/Nav';
 import ProductOverview from '../../components/product/ProductOverview';
 import { GET_PRODUCT } from '../../graphql/queries';
 import { Product } from '../../models';
@@ -12,7 +13,7 @@ export default function StockProductDetailsPage() {
     variables: { filter: { _id: router.query._id } },
     fetchPolicy: 'network-only',
   });
-
+  const [open, setOpen] = React.useState(false);
   return (
     <>
       {(loading && (
@@ -21,6 +22,7 @@ export default function StockProductDetailsPage() {
         </div>
       )) || (
         <div>
+          <Nav open={open} setOpen={setOpen} />
           <ProductOverview
             product={data.product}
             hasEdit

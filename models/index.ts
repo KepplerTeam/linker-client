@@ -18,13 +18,19 @@ export interface User extends GraphQLModel {
   status?: number;
   category?: number;
   buyerRating?: number;
-  // summaryShop?: Bill;
+  summaryShop?: Bill;
   shoppingCart?: [string];
-  enterprise?: Enterprise;
+  enterprise?: [Enterprise];
   // reviewsMade?: BuyerReview;
   // questionsMade?: QuestionsMade;
   createdAt?: Date;
   updatedAt?: Date;
+}
+
+export interface Bill extends GraphQLModel {
+  owner?: User;
+  products?: [Product];
+  price?: number;
 }
 
 export interface DocumentModel {
@@ -46,7 +52,7 @@ export interface Product extends GraphQLModel {
   quantity?: number;
   units?: number;
   // review?: Array<BuyerReview>;
-  // enterprise?: Enterprise;
+  enterprise?: Enterprise;
   uploadedDate?: Date;
   visibility?: number;
   // questions?: Array<Question>;
@@ -61,6 +67,7 @@ export interface Enterprise extends GraphQLModel {
   rating?: number;
   category?: number;
   products?: Array<Product>;
+  banner?: string;
   // salesSummary?: Types.ObjectId; //BillDocument[]
   // commentsMadeIt?: Types.ObjectId; //SellerComment[]
 }

@@ -21,6 +21,7 @@ export const GET_USER = gql`
         name
         _id
       }
+      summaryShop
     }
   }
 `;
@@ -52,6 +53,13 @@ export const GET_PRODUCT = gql`
       quantity
       units
       images
+      enterprise {
+        _id
+        name
+        owner {
+          _id
+        }
+      }
     }
   }
 `;
@@ -78,6 +86,73 @@ export const CURRENT_USER = gql`
       image
       email
       role
+    }
+  }
+`;
+
+export const GET_BILL = gql`
+  query GET_BILL($filter: FilterFindOneBillInput) {
+    bill(filter: $filter) {
+      _id
+      owner
+      products {
+        _id
+        name
+        serial
+        description
+        category
+        price
+        images
+        rating
+      }
+    }
+  }
+`;
+
+export const GET_ENTERPRISE = gql`
+  query GET_ENTERPRISE($filter: FilterFindOneEnterpriseInput) {
+    enterprise(filter: $filter) {
+      _id
+      banner
+      name
+      rating
+      category
+      owner {
+        _id
+      }
+      rif
+      products {
+        _id
+        name
+        serial
+        description
+        price
+        images
+      }
+    }
+  }
+`;
+
+export const GET_ENTERPRISES = gql`
+  query GET_ENTERPRISES($filter: FilterFindManyEnterpriseInput) {
+    enterprises(filter: $filter) {
+      name
+      rating
+      category
+      banner
+      owner {
+        _id
+        dni
+      }
+      rif
+      products {
+        name
+        serial
+        price
+        description
+      }
+      salesSummary
+      _id
     }
   }
 `;
