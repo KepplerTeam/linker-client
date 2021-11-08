@@ -71,46 +71,59 @@ export default function Home() {
                   className="signup flex items-center"
                   onClick={() => router.push('/login')}
                 >
-                  Log In
+                  LOGIN
                 </button>
               </div>
 
               <div className="w-full mb-10 p-6 py-32 justify-center bg-landing-background bg-cover bg-white shadow-2xl">
                 <h2 className="text-3xl font-bold text-center text-white opacity-100 mx-10">
-                  La forma más sencilla de comprar y vender
+                  Lleva tu negocio al siguiente nivel 
                 </h2>
                 <div className="flex justify-center">
                   <button
                     type="button"
-                    className="flex items-center bg-primary-100 text-white font-bold text-xl rounded-xl border-0 px-5 py-3 my-8 opacity-100 shadow-xl hover:bg-primary-600"
+                    className="animate-bounce flex items-center bg-primary-100 text-white font-bold text-xl rounded-xl border-0 px-5 py-3 my-8 opacity-100 shadow-xl hover:bg-primary-600"
                     onClick={() => router.push('/login')}
                   >
-                    Launch Linker
+                    Empezar Linker
                   </button>
                 </div>
               </div>
 
               <div className="w-full p-6 bg-white rounded-2xl">
-                <h2 className="flex justify-center font-bold text-xl my-10">
-                  ¿Quiénes somos?
+                <h2 className="flex justify-center font-bold text-3xl my-7 text-primary-100">
+                  ¿Tienes tiempo en el mercado?
                 </h2>
                 <p className="flex justify-center my-2 mx-6 text-justify text-lg font-medium">
-                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                  Aenean commodo ligula eget dolor. Aenean massa. Cum sociis
-                  natoque penatibus et magnis dis parturient montes, nascetur
-                  ridiculus mus. Donec quam felis,
+                  <div className="flex flex-col">
+                    <div>
+                      Es momento de aumentar tus ventas! Registrate
+                      Ahora.
+                    </div>
+                    <div className="text-left font-extrabold text-2xl text-primary-100 mt-4">
+                      <a href="/signup"> Quiero ser Proveedor</a>
+
+                    </div>
+                  </div>
                 </p>
               </div>
 
-              <div className="w-full p-6 bg-primary-100">
-                <h2 className="flex justify-center font-bold text-xl my-4">
-                  Main Features
+              <div className="w-full p-6 bg-primary-100 ">
+                <h2 className="flex justify-center font-bold text-3xl my-7 text-white">
+                  ¿Empezando un nuevo negocio?
                 </h2>
                 <p className="flex justify-center my-2 mx-6 text-justify text-lg font-medium">
-                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                  Aenean commodo ligula eget dolor. Aenean massa. Cum sociis
-                  natoque penatibus et magnis dis parturient montes, nascetur
-                  ridiculus mus. Donec quam felis,
+                  <div className="flex flex-col">
+                    <div>
+                      Encuentra tus productos en un solo
+                      lugar! Registrate ahora
+                    </div>
+                    <div className="w-full text-left font-extrabold text-2xl mt-4 text-white">
+                      <a href="/signup">
+                        Quiero ser Empresario
+                        </a>
+                    </div>
+                  </div>
                 </p>
               </div>
 
