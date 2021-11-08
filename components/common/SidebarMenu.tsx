@@ -62,7 +62,7 @@ export default function SidebarMenu({
             </button>
             <div className="flex flex-col py-2 px-1 text-lg">
               {user?.role === 1 ? (
-                <div>
+                <div className="flex flex-col">
                   <button type="button" className="text-left">
                     <div className="flex flex-row space-x-1">
                       <StarIcon className="w-6" />
@@ -79,7 +79,7 @@ export default function SidebarMenu({
                   >
                     <div className="flex flex-row space-x-1">
                       <ShoppingCartIcon className="w-6" />
-                      <span>Mis Empresas</span>
+                      <span>Mi Carrito</span>
                     </div>
                   </button>
                 </div>
