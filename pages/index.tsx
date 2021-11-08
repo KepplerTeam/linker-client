@@ -51,7 +51,7 @@ export default function Home() {
                 category={category}
                 setCategory={setCategory}
               /> */}
-              <div className="w-full flex flex-row px-3 pt-3 pb-4 rounded-br-xl rounded-bl-xl bg-gray-200 shadow-2xl">
+              <div className="w-full flex flex-row px-3 pt-3 pb-4 rounded-br-xl rounded-bl-xl bg-gray-200 shadow-2xl sticky">
                 <button
                   type="button"
                   className="flex items-center"
@@ -75,9 +75,9 @@ export default function Home() {
                 </button>
               </div>
 
-              <div className="w-full mb-10 p-6 py-32 justify-center bg-landing-background bg-cover bg-white shadow-2xl">
+              <div className="w-full mb-8 p-6 py-32 justify-center bg-landing-background bg-cover bg-white shadow-2xl">
                 <h2 className="text-3xl font-bold text-center text-white opacity-100 mx-10">
-                  La forma más sencilla de comprar y vender
+                  La manera más sencilla de emprender
                 </h2>
                 <div className="flex justify-center">
                   <button
@@ -90,30 +90,29 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="w-full p-6 bg-white rounded-2xl">
-                <h2 className="flex justify-center font-bold text-xl my-10">
-                  ¿Quiénes somos?
+              <div className="w-full p-6 rounded-2xl">
+                <h2 className="flex justify-center font-bold text-2xl mb-8">
+                  ¿Quienes somos?
                 </h2>
-                <p className="flex justify-center my-2 mx-6 text-justify text-lg font-medium">
-                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                  Aenean commodo ligula eget dolor. Aenean massa. Cum sociis
-                  natoque penatibus et magnis dis parturient montes, nascetur
-                  ridiculus mus. Donec quam felis,
+                <p className="flex justify-center my-2 mx-6 text-justify text-lg font-medium pb-4">
+                  Permitimos que las empresas transformen la forma en que venden
+                  y operan, para así mejorar su eficiencia. Brindamos la infraestructura
+                  tecnológica y el alcance de marketing para ayudar a los comerciantes, marcas, 
+                  minoristas y otras empresas a aprovechar el poder de la nueva tecnología para 
+                  interactuar con sus usuarios y clientes y operar de una manera más eficiente.
                 </p>
               </div>
-
-              <div className="w-full p-6 bg-primary-100">
-                <h2 className="flex justify-center font-bold text-xl my-4">
+              <div className="w-full p-6 bg-gray-700 text-white">
+                <h2 className="flex justify-center font-bold text-2xl my-8">
                   Main Features
                 </h2>
-                <p className="flex justify-center my-2 mx-6 text-justify text-lg font-medium">
+                <p className="flex justify-center my-2 mx-6 text-justify text-lg font-medium pb-4">
                   Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
                   Aenean commodo ligula eget dolor. Aenean massa. Cum sociis
                   natoque penatibus et magnis dis parturient montes, nascetur
                   ridiculus mus. Donec quam felis,
                 </p>
               </div>
-
               <Footer />
             </div>
           </div>
