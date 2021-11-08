@@ -18,6 +18,9 @@ module.exports = {
       lg: '1024px',
       xl: '1280px',
     },
+    backgroundImage: theme => ({
+     'landing-background': "url('../public/landing-background.png')",
+      }),
     extend: {
       colors: {
         primary: {
