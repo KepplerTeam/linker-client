@@ -113,6 +113,7 @@ export const GET_ENTERPRISE = gql`
   query GET_ENTERPRISE($filter: FilterFindOneEnterpriseInput) {
     enterprise(filter: $filter) {
       _id
+      status
       banner
       name
       rating

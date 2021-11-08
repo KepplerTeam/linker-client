@@ -120,3 +120,16 @@ export const CREATE_ENTERPRISE = gql`
     }
   }
 `;
+
+export const UPDATE_ENTERPRISE = gql`
+  mutation UPDATE_ENTERPRISE(
+    $record: UpdateOneEnterpriseInput!
+    $filter: FilterUpdateOneEnterpriseInput
+  ) {
+    updateEnterprise(record: $record, filter: $filter) {
+      record {
+        _id
+      }
+    }
+  }
+`;

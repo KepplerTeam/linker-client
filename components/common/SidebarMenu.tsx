@@ -99,7 +99,7 @@ export default function SidebarMenu({
                     type="button"
                     className="text-left mt-4"
                     onClick={() => {
-                      router.push('/shopping-cart');
+                      router.push('/profile');
                       setOpen(false);
                     }}
                   >

@@ -108,7 +108,7 @@ export default function Create({
           },
         });
         if (dataUpdate?.updateProduct) {
-          console.log('Actualizado exitosamente');
+          notify('Actualizado exitosamente', 'success');
           await router.push(`/stock/${product._id}`);
         }
       }

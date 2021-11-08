@@ -18,6 +18,27 @@ export default function EnterpriseProfile({
   const [active, setActive] = React.useState(0);
   return (
     <div className="min-h-screen p-4">
+      {user?._id === enterprise?.owner._id ? (
+        <div className="w-full mb-4 text-right">
+          <motion.button
+            whileHover={{
+              scale: 1.005,
+              boxShadow: '0px 0px 4px rgb(51,51,51, 0.5)',
+            }}
+            value=""
+            type="button"
+            onClick={(e) => {
+              router.push(`/enterprise/update/${enterprise?._id}`);
+            }}
+          >
+            <span className="bg-primary-100 w-full px-3 py-2 rounded-lg text-white">
+              Actualizar
+            </span>
+          </motion.button>
+        </div>
+      ) : (
+        ''
+      )}
       <div>
         <img
           src={enterprise?.banner}
