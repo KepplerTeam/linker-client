@@ -1,0 +1,4 @@
+/node_modules/
+_next.config.js
+_sentry.client.config.js
+_sentry.server.config.js
