@@ -108,6 +108,19 @@ export default function SidebarMenu({
                       <span>Mis Productos</span>
                     </div>
                   </button>
+                  <button
+                    type="button"
+                    className="text-left mt-4"
+                    onClick={() => {
+                      router.push('/shopping-cart');
+                      setOpen(false);
+                    }}
+                  >
+                    <div className="flex flex-row space-x-1">
+                      <ShoppingCartIcon className="w-6" />
+                      <span>Mi Carrito</span>
+                    </div>
+                  </button>
                 </div>
               )}
               {user ? (
