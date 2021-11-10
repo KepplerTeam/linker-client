@@ -106,37 +106,28 @@ export default function EnterpriseProfile({
         </div>
       ) : (
         <>
-          {enterprise?.products?.map((product, idx) => (
-            <div key={idx}>
-              {/* {product?.images?.map((image, index) => (
-                <div key={index}>
-                  <img
-                    src={image}
-                    alt={product?.name}
-                    className="w-full object-contain"
-                  />
-                </div>
-              ))} */}
-              <ProductCard products={enterprise?.products} />
+          <ProductCard products={enterprise?.products} />
+          {user?.role === 2 ? (
+            <div className="">
+              <motion.button
+                whileHover={{
+                  scale: 1.005,
+                  boxShadow: '0px 0px 4px rgb(51,51,51, 0.5)',
+                }}
+                value=""
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  router.push(`/create/${enterprise?._id}`);
+                }}
+                className="px-4 w-full py-1 my-2  bg-primary-100 text-white rounded-md"
+              >
+                Nuevo Producto
+              </motion.button>
             </div>
-          ))}
-          <div className="">
-            <motion.button
-              whileHover={{
-                scale: 1.005,
-                boxShadow: '0px 0px 4px rgb(51,51,51, 0.5)',
-              }}
-              value=""
-              type="button"
-              onClick={(e) => {
-                e.preventDefault();
-                router.push(`/create/${enterprise?._id}`);
-              }}
-              className="px-4 w-full py-1 my-2  bg-primary-100 text-white rounded-md"
-            >
-              Nuevo Producto
-            </motion.button>
-          </div>
+          ) : (
+            ''
+          )}
         </>
       )}
     </div>
