@@ -74,7 +74,7 @@ export default function ProductOverview({
                   active === 0 ? 'border-b-2 border-primary-100' : ''
                 }`}
               >
-                Overview
+                Resumen
               </span>
             </motion.button>
             <motion.button
@@ -94,7 +94,7 @@ export default function ProductOverview({
                   active === 1 ? 'border-b-2 border-primary-100' : ''
                 }`}
               >
-                Specification
+                Especificaciones
               </span>
             </motion.button>
           </div>
@@ -128,7 +128,7 @@ export default function ProductOverview({
               </button>
             </div>
             <div className="py-2">
-              <h2 className="text-xl font-bold my-2">Description</h2>
+              <h2 className="text-xl font-bold my-2">Descripcion</h2>
               <h2>{product.description}</h2>
             </div>
             <div className="py-2">
@@ -173,7 +173,7 @@ export default function ProductOverview({
                 addToCart(product);
               }}
             >
-              <span>Add To Cart</span>
+              <span>Anadir al Carrito</span>
             </motion.button>
           ) : (
             <motion.button
