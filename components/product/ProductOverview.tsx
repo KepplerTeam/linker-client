@@ -3,9 +3,10 @@ import { useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
 import { motion } from 'framer-motion';
 import { Product } from '../../models';
-import TitleBar from '../common/TitleBar';
 import ReviewCard from '../review/ReviewCard';
 import { useUser } from '../../hooks/useUser';
+import { UPDATE_SHOPPING_CART } from '../../graphql/mutations';
+import useNotify from '../../hooks/useNotify';
 
 interface ProductOverviewProps {
   product?: Product;
@@ -22,22 +23,37 @@ export default function ProductOverview({
   title = '',
   isUpdate = false,
 }: ProductOverviewProps) {
-  const cartFromLocalStorage = JSON.parse(localStorage.getItem('cart') || '[]');
+  // const cartFromLocalStorage = JSON.parse(localStorage.getItem('cart') || '[]');
   const [active, setActive] = React.useState(0);
   const router = useRouter();
   const [user] = useUser();
+  const notify = useNotify();
+  const [updateShoppingCart] = useMutation(UPDATE_SHOPPING_CART);
 
-  const [cart, setCart] = React.useState(cartFromLocalStorage);
-
-  const addToCart = (producto: Product) => {
-    console.log('llamando el set');
-    setCart([...cart, producto]);
-    console.log('tamano del carro: ', cart.length);
+  const addToCart = async () => {
+    try {
+      const shoppingCartData = user?.shoppingCart?.products.map((a) => a._id);
+      shoppingCartData.push(product?._id);
+      const { data: updateData } = await updateShoppingCart({
+        variables: {
+          filter: { _id: user?.shoppingCart._id },
+          record: {
+            products: shoppingCartData,
+          },
+        },
+      });
+      if (updateData?.updateShoppingCart) {
+        notify('Producto anadido al carrito exitosamente', 'success');
+      } else {
+        notify(
+          'Ha ocurrido un error al anadir el producto al carrito',
+          'error'
+        );
+      }
+    } catch (err) {
+      notify(err.message, 'error', err);
+    }
   };
-
-  React.useEffect(() => {
-    localStorage.setItem('cart', JSON.stringify(cart));
-  }, [cart]);
 
   return (
     <div className="w-full min-h-screen">
@@ -170,7 +186,7 @@ export default function ProductOverview({
               onClick={(e) => {
                 e.persist();
                 e.preventDefault();
-                addToCart(product);
+                addToCart();
               }}
             >
               <span>Anadir al Carrito</span>

@@ -1,53 +1,42 @@
 import React from 'react';
-import { useQuery } from '@apollo/client';
-import CartTitleBar from '../components/shoppingCart/CartTitleBar';
 import CartProduct from '../components/shoppingCart/CartProduct';
 import TitleBar from '../components/common/TitleBar';
-import { GET_SHOPPING_CART } from '../graphql/queries';
-import { Product, ShoppingCart } from '../models';
+import { useUser } from '../hooks/useUser';
 
 export default function ShoppingCartPage() {
-  const [cart, setCart] = React.useState([]);
+  const [user] = useUser();
 
-  React.useEffect(() => {
-    const cartFromLocalStorage = JSON.parse(
-      localStorage.getItem('cart') || '[]'
-    );
-    setCart(cartFromLocalStorage);
-  }, []);
+  const totalPrice = user?.shoppingCart?.products?.reduce(
+    (sum, { price }) => sum + price,
+    0
+  );
 
-  const addToCart = (producto: Product) => {
-    console.log('llamando el set');
-    setCart([...cart, producto]);
-    console.log('tamano del carro: ', cart.length);
-  };
-
-  const totalPrice = cart.reduce((sum, { price }) => sum + price, 0);
-
-  // const totalPrice =
   return (
     <>
       <div>
-        <TitleBar hasTrashIcon title="Carrito" />
-
-        {cart.map((e, idx) => (
-          <CartProduct
-            product={e}
-            key={idx}
-            cart={cart}
-            setCart={setCart}
-            addToCart={addToCart}
-          />
-        ))}
-
-        <div className="fixed bottom-0 w-full flex-col justify-center">
+        <TitleBar title="Carrito" />
+        <div className="mb-24">
+          {user?.shoppingCart?.products.map((e, idx) => (
+            <CartProduct product={e} key={idx} />
+          ))}
+        </div>
+        <div className="fixed bottom-0 w-full flex-col">
           <div className="flex flex-row px-8 items-center justify-between">
-            <h6 className="text-gray-500 mr">Productos: {cart.length}</h6>
-            <h4 className="text-lg font-bold">Precio: $ {totalPrice} </h4>
+            <h6 className="text-gray-500 mr">
+              Productos: {user?.shoppingCart?.products.length}
+            </h6>
+            <h4 className="text-lg font-bold">
+              Precio: ${Math.round(totalPrice * 100) / 100}
+            </h4>
           </div>
-          <button className="flex checkout" type="button">
-            Proceed to checkout
-          </button>
+          <div className="px-16 my-6">
+            <button
+              className="bg-primary-100 py-3 px-4 rounded-full text-white mx-auto w-full"
+              type="button"
+            >
+              Proceed to checkout
+            </button>
+          </div>
         </div>
       </div>
     </>

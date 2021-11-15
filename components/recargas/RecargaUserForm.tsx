@@ -4,15 +4,15 @@ import DocumentForm from '../document/DocumentForm';
 import { Input } from '../inputs';
 
 interface RecargaUserFormProps {
-  ammount: number;
-  setAmmount: React.Dispatch<React.SetStateAction<number>>;
+  amount: number;
+  setAmount: React.Dispatch<React.SetStateAction<number>>;
   documents: DocumentModel[];
   setDocuments: React.Dispatch<React.SetStateAction<DocumentModel[]>>;
 }
 
 export default function RecargaUserForm({
-  ammount,
-  setAmmount,
+  amount,
+  setAmount,
   documents,
   setDocuments,
 }: RecargaUserFormProps) {
@@ -25,8 +25,8 @@ export default function RecargaUserForm({
           name="ammount"
           placeholder=""
           className="w-3/4 h-8 mt-4 text-sm "
-          value={ammount}
-          setValue={setAmmount}
+          value={amount}
+          setValue={setAmount}
           label="Monto a recargar"
         />
       </div>

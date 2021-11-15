@@ -81,8 +81,7 @@ export default function Create({
         });
         if (dataCreate?.createProduct) {
           notify('El producto se ha creado exitosamente!', 'success');
-          console.log('se ha creado exitosamente');
-          // Aca deberia mandar a preview de articulo o a perful de todos sus productos
+          // TODO Aca deberia mandar a preview de articulo o a perful de todos sus productos
           await router.push('/feed');
         } else {
           notify('Ha ocurrido un error al crear el producto', 'error');
@@ -114,7 +113,6 @@ export default function Create({
       }
     } catch (err) {
       notify(err.message, 'error', err);
-      console.log(err);
     } finally {
       setDisabled(false);
     }

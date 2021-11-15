@@ -2,11 +2,14 @@ import { useQuery } from '@apollo/client';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { GET_ENTERPRISES, GET_USER } from '../../graphql/queries';
-import { Enterprise, User } from '../../models';
+import { GET_ENTERPRISES, GET_TRANSACTIONS } from '../../graphql/queries';
+import { Enterprise, Transaction, User } from '../../models';
 import EnterpriseCard from '../enterprise/EnterpriseCard';
 import { EditIcon } from '../icons';
 import CashIcon from '../icons/CashIcon';
+import ChevronDownIcon from '../icons/ChevronDownIcon';
+import ChevronUpIcon from '../icons/ChevronUpIcon';
+import RecargasPreview from '../recargas/RecargasPreview';
 import OrdersResume from './OrdersResume';
 
 interface ProfilePageComponentProps {
@@ -23,7 +26,19 @@ export default function ProfilePageComponent({
       fetchPolicy: 'network-only',
     }
   );
+  const { data: transactionsData, loading: loadingTransactionsData } =
+    useQuery<{ transactions: Transaction[] }>(GET_TRANSACTIONS, {
+      variables: { filter: { status: 0 }, sort: '_ID_ASC' },
+      fetchPolicy: 'network-only',
+    });
+
+  const { data: allTransactionsData, loading: loadingAllTransactionsData } =
+    useQuery<{ transactions: Transaction[] }>(GET_TRANSACTIONS, {
+      variables: { filter: { clientId: user?._id }, sort: '_ID_ASC' },
+      fetchPolicy: 'network-only',
+    });
   const router = useRouter();
+  const [showRecord, setShowRecord] = React.useState(false);
 
   const summaryPrueba = [
     {
@@ -133,7 +148,6 @@ export default function ProfilePageComponent({
                 <EditIcon
                   className="w-4"
                   onClick={() => {
-                    console.log('clicked');
                     router.push('/profile/edit');
                   }}
                 />
@@ -143,8 +157,10 @@ export default function ProfilePageComponent({
           </div>
         </div>
         <div className="border-b-2  pb-4 flex flex-row border rounded-xl">
-          <div className="px-2 py-4 mt-2">
-            <h2 className="font-bold text-2xl text-primary-100">USD 400</h2>
+          <div className="px-2 py-4 mt-4">
+            <h2 className="font-bold text-xl text-primary-100">
+              USD {user?.balance}
+            </h2>
           </div>
           <div className="px-5 ml-auto mt-6 flex flex-row">
             <div className="bg-primary-100 rounded-lg text-white flex flex-row">
@@ -160,6 +176,48 @@ export default function ProfilePageComponent({
             </div>
           </div>
         </div>
+        {user?.role === 1 ? (
+          <>
+            {loadingAllTransactionsData ? (
+              <div>
+                <h2>Loading...</h2>
+              </div>
+            ) : (
+              <>
+                <div className="mt-4">
+                  <motion.button
+                    className="px-3 py-1 text-primary-100"
+                    onClick={() => setShowRecord(!showRecord)}
+                  >
+                    {showRecord ? (
+                      <div className="flex flex-row space-x-2">
+                        <h2>Ocultar historial de recargas</h2>
+                        <ChevronUpIcon className="w-4" />
+                      </div>
+                    ) : (
+                      <div className="flex flex-row space-x-2">
+                        <h2>Mostrar historial de recargas</h2>
+                        <ChevronDownIcon className="w-4" />
+                      </div>
+                    )}
+                  </motion.button>
+                  {showRecord ? (
+                    <>
+                      {allTransactionsData?.transactions.map((transaction) => (
+                        <RecargasPreview
+                          key={transaction?._id}
+                          transaction={transaction}
+                          dontShow
+                        />
+                      ))}
+                    </>
+                  ) : null}
+                </div>
+              </>
+            )}
+          </>
+        ) : null}
+
         {user?.role === 1 ? (
           <div>
             <h2 className="p-4 font-bold text-lg">Mis Compras</h2>
@@ -214,11 +272,28 @@ export default function ProfilePageComponent({
           </>
         ) : null}
         {user?.role === 0 ? (
-          <div className="p-4">
-            <div>
-              <h2 className="font-bold bg text-lg">Solicitudes de Recarga</h2>
+          <>
+            <div className="p-4">
+              <div>
+                <h2 className="font-bold bg text-lg">Solicitudes de Recarga</h2>
+              </div>
             </div>
-          </div>
+
+            {loadingTransactionsData ? (
+              <div>
+                <h2>loading...</h2>
+              </div>
+            ) : (
+              <div className="p-4">
+                {transactionsData.transactions.map((transaction) => (
+                  <RecargasPreview
+                    key={transaction?._id}
+                    transaction={transaction}
+                  />
+                ))}
+              </div>
+            )}
+          </>
         ) : null}
       </div>
     </>

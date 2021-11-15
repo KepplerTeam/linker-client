@@ -1,15 +1,20 @@
+import { useMutation } from '@apollo/client';
 import { motion } from 'framer-motion';
+import { useRouter } from 'next/router';
 import React from 'react';
+import { CREATE_TRANSACTION } from '../../graphql/mutations';
 import useNotify from '../../hooks/useNotify';
 import { useUser } from '../../hooks/useUser';
 import { DocumentModel } from '../../models';
 import RecargaUserForm from './RecargaUserForm';
 
 export default function RecargaPageComponent() {
+  const [createTransaction] = useMutation(CREATE_TRANSACTION);
   const [user] = useUser();
   const notify = useNotify();
+  const router = useRouter();
   const [_id] = React.useState(user?._id);
-  const [ammount, setAmmount] = React.useState(0);
+  const [amount, setAmount] = React.useState(0);
   const [documents, setDocuments] = React.useState<DocumentModel[]>([]);
 
   const onSubmit = async (
@@ -18,8 +23,20 @@ export default function RecargaPageComponent() {
     try {
       e.preventDefault();
       e.persist();
-      if (ammount > 0 && documents.length > 0) {
-        notify('Solicitud de recarga exitosa!', 'success');
+      if (amount > 0 && documents.length > 0) {
+        const { data: dataCreate } = await createTransaction({
+          variables: {
+            record: {
+              clientId: user?._id,
+              amount: Number(amount),
+              transactionId: documents[0].src,
+            },
+          },
+        });
+        if (dataCreate?.createTransaction) {
+          notify('Solicitud de recarga exitosa!', 'success');
+          router.push('/profile');
+        }
       } else {
         notify('Datos incompletos, verifique la informacion', 'warning');
       }
@@ -33,8 +50,8 @@ export default function RecargaPageComponent() {
       <div>
         <h2 className="font-bold text-lg">Formulario de Recarga de Wallet</h2>
         <RecargaUserForm
-          ammount={ammount}
-          setAmmount={setAmmount}
+          amount={amount}
+          setAmount={setAmount}
           documents={documents}
           setDocuments={setDocuments}
         />

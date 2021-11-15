@@ -52,7 +52,6 @@ function Image({
       try {
         setUploading(true);
         nProgress.start();
-        console.log(file.type);
         if (
           file?.type !== 'image/jpg' &&
           file?.type !== 'image/jpeg' &&
@@ -108,12 +107,11 @@ function Image({
           updateSrc(id, data?.signS3?.url, name, file);
           notify('Archivo agregado exitosamente', 'success');
         } else {
-          console.log('response error: ', response);
           notify(`Error cargando el archivo ${name}`, 'error');
           setError(true);
         }
       } catch (err) {
-        console.log('catch: ', err);
+        notify(err.message, 'error', err);
         setError(true);
       } finally {
         setUploading(false);

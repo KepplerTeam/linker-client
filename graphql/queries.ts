@@ -17,6 +17,7 @@ export const GET_USER = gql`
       firstName
       lastName
       image
+      balance
       enterprise {
         name
         _id
@@ -86,6 +87,16 @@ export const CURRENT_USER = gql`
       image
       email
       role
+      balance
+      shoppingCart {
+        _id
+        products {
+          _id
+          name
+          price
+          images
+        }
+      }
     }
   }
 `;
@@ -154,6 +165,46 @@ export const GET_ENTERPRISES = gql`
       }
       salesSummary
       _id
+    }
+  }
+`;
+
+export const GET_TRANSACTIONS = gql`
+  query GET_TRANSACTIONS(
+    $filter: FilterFindManyTransactionInput
+    $sort: SortFindManyTransactionInput
+  ) {
+    transactions(filter: $filter, sort: $sort) {
+      _id
+      amount
+      transactionId
+      status
+      _id
+      clientId {
+        _id
+        username
+        balance
+      }
+      createdAt
+    }
+  }
+`;
+
+export const GET_TRANSACTION = gql`
+  query GET_TRANSACTION(
+    $filter: FilterFindOneTransactionInput!
+    $sort: SortFindOneTransactionInput
+  ) {
+    transaction(filter: $filter, sort: $sort) {
+      _id
+      clientId {
+        username
+        _id
+        balance
+      }
+      transactionId
+      amount
+      status
     }
   }
 `;

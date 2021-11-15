@@ -19,8 +19,9 @@ export interface User extends GraphQLModel {
   category?: number;
   buyerRating?: number;
   summaryShop?: Bill;
-  shoppingCart?: [string];
+  shoppingCart?: ShoppingCart;
   enterprise?: [Enterprise];
+  balance?: number;
   // reviewsMade?: BuyerReview;
   // questionsMade?: QuestionsMade;
   createdAt?: Date;
@@ -74,4 +75,11 @@ export interface Enterprise extends GraphQLModel {
 
 export interface ShoppingCart extends GraphQLModel {
   products: [Product];
+}
+
+export interface Transaction extends GraphQLModel {
+  amount?: number;
+  clientId: User;
+  transactionId: string;
+  status: number;
 }

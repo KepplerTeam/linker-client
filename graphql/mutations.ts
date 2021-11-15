@@ -54,21 +54,6 @@ export const UPDATE_USER = gql`
   }
 `;
 
-export const UPDATE_SHOPPING_CART = gql`
-  mutation UPDATE_SHOPPING_CART(
-    $record: UpdateOneShoppingCartInput!
-    $filter: FilterUpdateOneShoppingCartInput
-  ) {
-    updateShoppingCart(filter: $filter, record: $record) {
-      record {
-        products {
-          _id
-        }
-      }
-    }
-  }
-`;
-
 // auth
 
 export const CREATE_USER = gql`
@@ -127,6 +112,76 @@ export const UPDATE_ENTERPRISE = gql`
     $filter: FilterUpdateOneEnterpriseInput
   ) {
     updateEnterprise(record: $record, filter: $filter) {
+      record {
+        _id
+      }
+    }
+  }
+`;
+
+export const CREATE_TRANSACTION = gql`
+  mutation CREATE_TRANSACTION($record: CreateOneTransactionInput!) {
+    createTransaction(record: $record) {
+      record {
+        status
+        clientId {
+          _id
+        }
+        amount
+        transactionId
+      }
+    }
+  }
+`;
+
+export const UPDATE_TRANSACTION = gql`
+  mutation UPDATE_TRANSACTION(
+    $record: UpdateOneTransactionInput!
+    $filter: FilterUpdateOneTransactionInput
+  ) {
+    updateTransaction(record: $record, filter: $filter) {
+      record {
+        status
+      }
+    }
+  }
+`;
+
+export const CREATE_SHOPPING_CART = gql`
+  mutation CREATE_SHOPPING_CART($record: CreateOneShoppingCartInput!) {
+    createShoppingCart(record: $record) {
+      record {
+        products {
+          _id
+          price
+          name
+        }
+      }
+    }
+  }
+`;
+
+export const UPDATE_SHOPPING_CART = gql`
+  mutation UPDATE_SHOPPING_CART(
+    $record: UpdateOneShoppingCartInput!
+    $filter: FilterUpdateOneShoppingCartInput
+  ) {
+    updateShoppingCart(record: $record, filter: $filter) {
+      record {
+        _id
+        products {
+          _id
+          name
+          price
+        }
+      }
+    }
+  }
+`;
+
+export const REMOVE_SHOPPING_CART = gql`
+  mutation REMOVE_SHOPPING_CART($filter: FilterRemoveOneShoppingCartInput) {
+    removeShoppingCart(filter: $filter) {
       record {
         _id
       }

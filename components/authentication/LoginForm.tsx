@@ -31,11 +31,9 @@ export default function LoginForm() {
         setUser(data?.signIn);
         notify('Inicio de sesion correcto', 'success');
         await router.push('/feed');
-        console.log(user);
       }
     } catch (err) {
       notify('Ha ocurrido un error', 'warning');
-      console.log(err);
     }
   };
 
