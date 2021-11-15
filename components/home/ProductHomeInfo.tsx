@@ -1,6 +1,7 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 import RightArrowIcon from '../icons/RightArrowIcon';
+import HeartIcon from '../icons/HeartIcon';
 
 interface ProductHomeInfoProps {
   name: string;
@@ -17,14 +18,14 @@ export default function ProductHomeInfo({
 
   return (
     <>
-      <button
-        type="button"
-        onClick={(e) => {
-          e.preventDefault();
-          router.push(`/product/${_id}`);
-        }}
-      >
-        <div className="card items-center justify-between min-w-full mr-4">
+      <div className="card items-center justify-between min-w-full mr-4">
+        <button
+          type="button"
+          onClick={(e) => {
+            e.preventDefault();
+            router.push(`/product/${_id}`);
+          }}
+        >
           <div className="w-full h-full">
             <div className="flex flex-row w-full">
               <div className="w-1/2 z-20">
@@ -43,8 +44,11 @@ export default function ProductHomeInfo({
               </div>
             </div>
           </div>
-        </div>
-      </button>
+        </button>
+        <button>
+            <HeartIcon className="w-4 h-4 text-gray-300 hover:text-gray-500 active:text-red-500"/>
+        </button>
+      </div>
     </>
   );
 }
