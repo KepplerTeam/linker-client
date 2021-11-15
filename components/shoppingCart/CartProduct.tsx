@@ -14,10 +14,19 @@ export default function CartProduct({ product }: CartProductProps) {
   const [user] = useUser();
   const notify = useNotify();
   const [updateShoppingCart] = useMutation(UPDATE_SHOPPING_CART);
+
+  // Estado para validar en el useEffect cuando cambia la data y recargar el componente
   const [cart] = React.useState(user.shoppingCart.products);
+
+  /** removeProduct
+   * @abstract Permite al usuario eliminar productos de su carrito de compras
+   * @param productId id del producto que desea eliminar del carrito de compras
+   */
   const removeProduct = async (productId) => {
     try {
+      // currentCart es un arreglo que contiene el id de los productos existentes en el carrito
       const currentCart = user?.shoppingCart?.products.map((p) => p._id);
+      // newCart es el carrito actualizado, contiene el id de los productos anteriores pero sin el producto eliminado
       const newCart = findAndRemove(currentCart, productId);
       const { data: updateData } = await updateShoppingCart({
         variables: {
@@ -39,6 +48,12 @@ export default function CartProduct({ product }: CartProductProps) {
 
   React.useEffect(() => {}, [cart]);
 
+  /**
+   * findAndRemove
+   * @param arr arreglo en el que se desea buscar
+   * @param value valor que desea buscarse en el arreglo
+   * @returns array sin el elemento eliminado
+   */
   const findAndRemove = (arr, value) => {
     const index = arr.indexOf(value);
     if (index > -1) {

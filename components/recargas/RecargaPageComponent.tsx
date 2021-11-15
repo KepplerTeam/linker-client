@@ -9,14 +9,17 @@ import { DocumentModel } from '../../models';
 import RecargaUserForm from './RecargaUserForm';
 
 export default function RecargaPageComponent() {
-  const [createTransaction] = useMutation(CREATE_TRANSACTION);
   const [user] = useUser();
   const notify = useNotify();
   const router = useRouter();
-  const [_id] = React.useState(user?._id);
+  const [createTransaction] = useMutation(CREATE_TRANSACTION);
   const [amount, setAmount] = React.useState(0);
   const [documents, setDocuments] = React.useState<DocumentModel[]>([]);
 
+  /**
+   * @abstract envia el formulario de solicitud recarga de wallet que sera aprobado o rechazado por el administrador
+   * @param e
+   */
   const onSubmit = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {

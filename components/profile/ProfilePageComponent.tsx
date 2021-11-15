@@ -19,6 +19,8 @@ interface ProfilePageComponentProps {
 export default function ProfilePageComponent({
   user,
 }: ProfilePageComponentProps) {
+  const router = useRouter();
+  // Busca todas las empresas que pertenezcan al usuario (solo para empresarios)
   const { data, loading } = useQuery<{ enterprises: Enterprise[] }>(
     GET_ENTERPRISES,
     {
@@ -26,18 +28,18 @@ export default function ProfilePageComponent({
       fetchPolicy: 'network-only',
     }
   );
+  // Busca todas las solicitudes de recarga de wallet que sigan pendientes. (solo para el admin)
   const { data: transactionsData, loading: loadingTransactionsData } =
     useQuery<{ transactions: Transaction[] }>(GET_TRANSACTIONS, {
       variables: { filter: { status: 0 }, sort: '_ID_ASC' },
       fetchPolicy: 'network-only',
     });
-
+  // Busca las solicitudes de recarga realizadas por el usuario loggeado (solo para emprendedores)
   const { data: allTransactionsData, loading: loadingAllTransactionsData } =
     useQuery<{ transactions: Transaction[] }>(GET_TRANSACTIONS, {
       variables: { filter: { clientId: user?._id }, sort: '_ID_ASC' },
       fetchPolicy: 'network-only',
     });
-  const router = useRouter();
   const [showRecord, setShowRecord] = React.useState(false);
 
   const summaryPrueba = [

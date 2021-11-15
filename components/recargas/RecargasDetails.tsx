@@ -12,17 +12,15 @@ interface RecargasDetailsProps {
   transaction: Transaction;
 }
 export default function RecargasDetails({ transaction }: RecargasDetailsProps) {
-  const [currentBalance] = React.useState(transaction?.clientId?.balance);
-  const [newBalance] = React.useState(transaction?.amount + currentBalance);
   const [updateUser] = useMutation(UPDATE_USER);
   const [updateTransaction] = useMutation(UPDATE_TRANSACTION);
   const [user] = useUser();
   const notify = useNotify();
   const router = useRouter();
-  const { data, loading } = useQuery<{ user: User }>(GET_USER, {
-    variables: { filter: { _id: transaction.clientId._id } },
-    fetchPolicy: 'network-only',
-  });
+
+  /** onApprove
+   * @abstract el administrador aprueba la solicitud de recarga, cambia el estado de la orden y aumenta el balance del usuario que realizo la solicitud
+   */
   const onApprove = async () => {
     try {
       const { data: updateData } = await updateUser({
@@ -56,6 +54,9 @@ export default function RecargasDetails({ transaction }: RecargasDetailsProps) {
     }
   };
 
+  /** onReject
+   * @abstract el administrador rechaza la solicitud de recarga debido a alguna incongruencia en los datos de la solicitud o la transaccion no pudo ser comprobada
+   */
   const onReject = async () => {
     try {
       const { data: updateData } = await updateTransaction({

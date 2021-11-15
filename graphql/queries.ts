@@ -1,5 +1,6 @@
 import { gql } from '@apollo/client';
 
+// Usuarios
 export const GET_USERS = gql`
   query GET_USERS($filter: FilterFindManyUserInput) {
     users(filter: $filter) {
@@ -65,6 +66,7 @@ export const GET_PRODUCT = gql`
   }
 `;
 
+// Shopping Cart del usuario
 export const GET_SHOPPING_CART = gql`
   query GET_SHOPPING_CART($filter: FilterFindOneShoppingCartInput) {
     shoppingCart(filter: $filter) {
@@ -76,7 +78,7 @@ export const GET_SHOPPING_CART = gql`
   }
 `;
 
-// auth
+// authentication
 export const CURRENT_USER = gql`
   query CURRENT_USER {
     currentUser {
@@ -101,6 +103,7 @@ export const CURRENT_USER = gql`
   }
 `;
 
+// Factura
 export const GET_BILL = gql`
   query GET_BILL($filter: FilterFindOneBillInput) {
     bill(filter: $filter) {
@@ -120,6 +123,7 @@ export const GET_BILL = gql`
   }
 `;
 
+// Empresas
 export const GET_ENTERPRISE = gql`
   query GET_ENTERPRISE($filter: FilterFindOneEnterpriseInput) {
     enterprise(filter: $filter) {
@@ -169,6 +173,7 @@ export const GET_ENTERPRISES = gql`
   }
 `;
 
+// Solicitudes de recarga
 export const GET_TRANSACTIONS = gql`
   query GET_TRANSACTIONS(
     $filter: FilterFindManyTransactionInput

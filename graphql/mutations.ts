@@ -10,6 +10,7 @@ export const SIGN_S3 = gql`
   }
 `;
 
+// Create y Update de productos
 export const CREATE_PRODUCT = gql`
   mutation CREATE_PRODUCT($data: CreateProductInput) {
     createProduct(data: $data) {
@@ -41,6 +42,7 @@ export const UPDATE_PRODUCT = gql`
   }
 `;
 
+// Update de usuario
 export const UPDATE_USER = gql`
   mutation UPDATE_USER(
     $record: UpdateOneUserInput!
@@ -54,8 +56,7 @@ export const UPDATE_USER = gql`
   }
 `;
 
-// auth
-
+// auth - creacion de cuenta
 export const CREATE_USER = gql`
   mutation CREATE_USER($data: CreateUserInput) {
     signUp(data: $data) {
@@ -69,7 +70,7 @@ export const CREATE_USER = gql`
     }
   }
 `;
-
+// auth - inicio de sesion
 export const SIGN_IN = gql`
   mutation SIGN_IN($data: SignInInput) {
     signIn(data: $data) {
@@ -79,6 +80,7 @@ export const SIGN_IN = gql`
   }
 `;
 
+// auth - cierre de sesion
 export const SIGN_OUT = gql`
   mutation SIGN_OUT {
     signOut {
@@ -87,6 +89,7 @@ export const SIGN_OUT = gql`
   }
 `;
 
+// Registrar y actualizar empresa
 export const CREATE_ENTERPRISE = gql`
   mutation CREATE_ENTERPRISE($record: CreateOneEnterpriseInput!) {
     createEnterprise(record: $record) {
@@ -119,6 +122,7 @@ export const UPDATE_ENTERPRISE = gql`
   }
 `;
 
+// Crear y Actualizar solicitudes de recarga de wallet
 export const CREATE_TRANSACTION = gql`
   mutation CREATE_TRANSACTION($record: CreateOneTransactionInput!) {
     createTransaction(record: $record) {
@@ -147,6 +151,7 @@ export const UPDATE_TRANSACTION = gql`
   }
 `;
 
+// Create Update y Delete de shopping Cart
 export const CREATE_SHOPPING_CART = gql`
   mutation CREATE_SHOPPING_CART($record: CreateOneShoppingCartInput!) {
     createShoppingCart(record: $record) {

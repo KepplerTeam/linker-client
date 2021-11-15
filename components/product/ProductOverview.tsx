@@ -10,19 +10,9 @@ import useNotify from '../../hooks/useNotify';
 
 interface ProductOverviewProps {
   product?: Product;
-  hasEdit?: boolean;
-  hasShoppingCart?: boolean;
-  title?: string;
-  isUpdate?: boolean;
 }
 
-export default function ProductOverview({
-  product,
-  hasEdit = false,
-  hasShoppingCart = false,
-  title = '',
-  isUpdate = false,
-}: ProductOverviewProps) {
+export default function ProductOverview({ product }: ProductOverviewProps) {
   // const cartFromLocalStorage = JSON.parse(localStorage.getItem('cart') || '[]');
   const [active, setActive] = React.useState(0);
   const router = useRouter();
@@ -30,9 +20,15 @@ export default function ProductOverview({
   const notify = useNotify();
   const [updateShoppingCart] = useMutation(UPDATE_SHOPPING_CART);
 
+  /** addToCart
+   * @abstract Permite al usuario anadir productos a su carrito de compras
+   * @returns lista de productos en el shoppingCart actualizada
+   */
   const addToCart = async () => {
     try {
+      // Extrae la informacion del shoppingCart del usuario y agrega en un array los id de cada producto
       const shoppingCartData = user?.shoppingCart?.products.map((a) => a._id);
+      // Agrega a la lista creada anteriormente el id del producto que se desea anadir al carrito.
       shoppingCartData.push(product?._id);
       const { data: updateData } = await updateShoppingCart({
         variables: {
@@ -57,13 +53,6 @@ export default function ProductOverview({
 
   return (
     <div className="w-full min-h-screen">
-      {/* <TitleBar
-        hasShoppingCart={hasShoppingCart}
-        hasEdit={hasEdit}
-        title={title}
-        _id={product._id}
-        cartSize={cart.length}
-      /> */}
       <div className="p-6">
         <div>
           <h2 className="mb-1 font-semibold text-primary-100">

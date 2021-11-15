@@ -16,6 +16,13 @@ export default function LoginForm() {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
 
+  /**
+   * @abstract Se encarga de manejar el inicio de sesion. Envia el email y la contrasena y el controlador se encarga de hacer la verificacion de que el usuario exista y la contrasena sea correcta
+   * @param e: Evento de tipo FormEvent<HTMLFormElement>
+   * @returns: settea al context el usuario en caso de que el login sea valido.
+   *
+   */
+
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     try {
       e.preventDefault();
