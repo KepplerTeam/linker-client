@@ -10,6 +10,7 @@ export const SIGN_S3 = gql`
   }
 `;
 
+// Create y Update de productos
 export const CREATE_PRODUCT = gql`
   mutation CREATE_PRODUCT($data: CreateProductInput) {
     createProduct(data: $data) {
@@ -41,6 +42,7 @@ export const UPDATE_PRODUCT = gql`
   }
 `;
 
+// Update de usuario
 export const UPDATE_USER = gql`
   mutation UPDATE_USER(
     $record: UpdateOneUserInput!
@@ -54,23 +56,7 @@ export const UPDATE_USER = gql`
   }
 `;
 
-export const UPDATE_SHOPPING_CART = gql`
-  mutation UPDATE_SHOPPING_CART(
-    $record: UpdateOneShoppingCartInput!
-    $filter: FilterUpdateOneShoppingCartInput
-  ) {
-    updateShoppingCart(filter: $filter, record: $record) {
-      record {
-        products {
-          _id
-        }
-      }
-    }
-  }
-`;
-
-// auth
-
+// auth - creacion de cuenta
 export const CREATE_USER = gql`
   mutation CREATE_USER($data: CreateUserInput) {
     signUp(data: $data) {
@@ -84,7 +70,7 @@ export const CREATE_USER = gql`
     }
   }
 `;
-
+// auth - inicio de sesion
 export const SIGN_IN = gql`
   mutation SIGN_IN($data: SignInInput) {
     signIn(data: $data) {
@@ -94,6 +80,7 @@ export const SIGN_IN = gql`
   }
 `;
 
+// auth - cierre de sesion
 export const SIGN_OUT = gql`
   mutation SIGN_OUT {
     signOut {
@@ -102,6 +89,7 @@ export const SIGN_OUT = gql`
   }
 `;
 
+// Registrar y actualizar empresa
 export const CREATE_ENTERPRISE = gql`
   mutation CREATE_ENTERPRISE($record: CreateOneEnterpriseInput!) {
     createEnterprise(record: $record) {
@@ -127,6 +115,78 @@ export const UPDATE_ENTERPRISE = gql`
     $filter: FilterUpdateOneEnterpriseInput
   ) {
     updateEnterprise(record: $record, filter: $filter) {
+      record {
+        _id
+      }
+    }
+  }
+`;
+
+// Crear y Actualizar solicitudes de recarga de wallet
+export const CREATE_TRANSACTION = gql`
+  mutation CREATE_TRANSACTION($record: CreateOneTransactionInput!) {
+    createTransaction(record: $record) {
+      record {
+        status
+        clientId {
+          _id
+        }
+        amount
+        transactionId
+      }
+    }
+  }
+`;
+
+export const UPDATE_TRANSACTION = gql`
+  mutation UPDATE_TRANSACTION(
+    $record: UpdateOneTransactionInput!
+    $filter: FilterUpdateOneTransactionInput
+  ) {
+    updateTransaction(record: $record, filter: $filter) {
+      record {
+        status
+      }
+    }
+  }
+`;
+
+// Create Update y Delete de shopping Cart
+export const CREATE_SHOPPING_CART = gql`
+  mutation CREATE_SHOPPING_CART($record: CreateOneShoppingCartInput!) {
+    createShoppingCart(record: $record) {
+      record {
+        products {
+          _id
+          price
+          name
+        }
+      }
+    }
+  }
+`;
+
+export const UPDATE_SHOPPING_CART = gql`
+  mutation UPDATE_SHOPPING_CART(
+    $record: UpdateOneShoppingCartInput!
+    $filter: FilterUpdateOneShoppingCartInput
+  ) {
+    updateShoppingCart(record: $record, filter: $filter) {
+      record {
+        _id
+        products {
+          _id
+          name
+          price
+        }
+      }
+    }
+  }
+`;
+
+export const REMOVE_SHOPPING_CART = gql`
+  mutation REMOVE_SHOPPING_CART($filter: FilterRemoveOneShoppingCartInput) {
+    removeShoppingCart(filter: $filter) {
       record {
         _id
       }

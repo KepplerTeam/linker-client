@@ -6,7 +6,9 @@ interface FeaturedProductFeedProps {
   products?: Product[];
 }
 
-export default function FeaturedProductFeed({ products }) {
+export default function FeaturedProductFeed({
+  products,
+}: FeaturedProductFeedProps) {
   return (
     <div className="flex scroll-x mb-4 scrollbar-hide">
       {products.map((product) => (

@@ -1,5 +1,4 @@
 import React from 'react';
-// import * as Sentry from '@sentry/nextjs';
 import { v4 as uuid } from 'uuid';
 import { AnimatePresence, motion } from 'framer-motion';
 import Toast from '../components/common/Toast';
@@ -21,9 +20,6 @@ const ToastContextProvider = ({ children }: ToastContextProvider) => {
   const [alerts, setAlerts] = React.useState([]);
   const notify = (content = '', type = '', err?: Error) => {
     const id = uuid();
-    // if (err) {
-    //   Sentry.captureException(err);
-    // }
     setAlerts((_alerts) => [
       ..._alerts,
       {
