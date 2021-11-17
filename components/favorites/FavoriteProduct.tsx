@@ -46,7 +46,9 @@ export default function FavoriteProduct({ product }: FavoriteProductProps) {
     }
   };
 
-  React.useEffect(() => {}, [favorites]);
+  React.useEffect(() => {
+    console.log('Keppler');
+  }, [favorites]);
 
   /**
    * findAndRemove
