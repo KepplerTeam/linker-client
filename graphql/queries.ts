@@ -78,6 +78,18 @@ export const GET_SHOPPING_CART = gql`
   }
 `;
 
+// Favoritos del usuario
+export const GET_FAVORITES = gql`
+  query GET_SHOPPING_CART($filter: FilterFindOneFavoritesInput) {
+    favorites(filter: $filter) {
+      _id
+      products {
+        _id
+      }
+    }
+  }
+`;
+
 // authentication
 export const CURRENT_USER = gql`
   query CURRENT_USER {

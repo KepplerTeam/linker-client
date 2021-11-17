@@ -193,3 +193,46 @@ export const REMOVE_SHOPPING_CART = gql`
     }
   }
 `;
+
+// Create Update y Delete de favorites
+export const CREATE_FAVORITES = gql`
+  mutation CREATE_FAVORITES($record: CreateOneFavoritesInput!) {
+    createFavorites(record: $record) {
+      record {
+        products {
+          _id
+          price
+          name
+        }
+      }
+    }
+  }
+`;
+
+export const UPDATE_FAVORITES = gql`
+  mutation UPDATE_FAVORITES(
+    $record: UpdateOneFavoritesInput!
+    $filter: FilterUpdateOneFavoritesInput
+  ) {
+    updateFavorites(record: $record, filter: $filter) {
+      record {
+        _id
+        products {
+          _id
+          name
+          price
+        }
+      }
+    }
+  }
+`;
+
+export const REMOVE_FAVORITES = gql`
+  mutation REMOVE_FAVORITES($filter: FilterRemoveOneFavoritesInput) {
+    removeFavorites(filter: $filter) {
+      record {
+        _id
+      }
+    }
+  }
+`;
