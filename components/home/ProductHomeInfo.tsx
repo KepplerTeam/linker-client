@@ -123,19 +123,51 @@ export default function ProductHomeInfo({
   return (
     <>
       <div className="card items-center justify-between min-w-full mr-4">
-        <button
-          type="button"
-          onClick={(e) => {
-            e.preventDefault();
-            router.push(`/product/${_id}`);
-          }}
-        >
-          <div className="w-full h-full">
+        <div className="w-full h-full">
+          <div className="flex flex-row justify-between w-full">
+            <div className="w-1/2 z-20">
+              <p className="font-bold break-normal">{name}</p>
+            </div>
+            {/* <div className="w-1/2">
+                <img src={images} alt={name} className="w-full h-auto" />
+			</div> */}
+            {!isFavorite ? (
+              <button
+                type="button"
+                className=""
+                onClick={(e) => {
+                  e.persist();
+                  e.preventDefault();
+                  addToFavorites();
+                  isNotFavorite();
+                }}
+              >
+                <HeartIcon className="w-6 h-6 text-gray-300 hover:text-gray-500 active:text-red-500" />
+              </button>
+            ) : (
+              <button
+                type="button"
+                className=""
+                onClick={(e) => {
+                  e.persist();
+                  e.preventDefault();
+                  removeFromFavorites();
+                  isNotFavorite();
+                }}
+              >
+                <HeartIcon className="w-6 h-6 text-red-500 hover:text-red-700 active:text-gray-300" />
+              </button>
+            )}
+          </div>
+          <button
+            type="button"
+            onClick={(e) => {
+              e.preventDefault();
+              router.push(`/product/${_id}`);
+            }}
+          >
             <div className="flex flex-row w-full">
-              <div className="w-1/2 z-20">
-                <p className="font-bold break-normal">{name}</p>
-              </div>
-              <div className="w-1/2">
+              <div className="ml-28 my-6 w-1/2">
                 <img src={images} alt={name} className="w-full h-auto" />
               </div>
             </div>
@@ -147,35 +179,8 @@ export default function ProductHomeInfo({
                 <RightArrowIcon className="w-4 h-4 mt-1" />
               </div>
             </div>
-          </div>
-        </button>
-        {!isFavorite ? (
-          <button
-            type="button"
-            className=""
-            onClick={(e) => {
-              e.persist();
-              e.preventDefault();
-              addToFavorites();
-              isNotFavorite();
-            }}
-          >
-            <HeartIcon className="w-4 h-4 text-gray-300 hover:text-gray-500 active:text-red-500" />
           </button>
-        ) : (
-          <button
-            type="button"
-            className=""
-            onClick={(e) => {
-              e.persist();
-              e.preventDefault();
-              removeFromFavorites();
-              isNotFavorite();
-            }}
-          >
-            <HeartIcon className="w-4 h-4 text-red-500 hover:text-red-700 active:text-gray-300" />
-          </button>
-        )}
+        </div>
       </div>
     </>
   );
