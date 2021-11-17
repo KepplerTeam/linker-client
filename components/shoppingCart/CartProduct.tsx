@@ -46,7 +46,9 @@ export default function CartProduct({ product }: CartProductProps) {
     }
   };
 
-  React.useEffect(() => {}, [cart]);
+  React.useEffect(() => {
+    console.log('KepplerTeam');
+  }, [cart]);
 
   /**
    * findAndRemove
