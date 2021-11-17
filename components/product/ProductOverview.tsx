@@ -154,10 +154,11 @@ export default function ProductOverview({ product }: ProductOverviewProps) {
     <div className="w-full min-h-screen">
       <div className="p-6">
         <div>
+          <h2 className="mb-1 font-semibold text-primary-100">
+            USD{product.price}
+          </h2>
           <div className="flex flex-row justify-between">
-            <h2 className="mb-1 font-semibold text-primary-100">
-              USD{product.price}
-            </h2>
+            <h2 className="text-2xl font-bold">{product.name}</h2>
             {!isFavorite ? (
               <button
                 type="button"
@@ -186,7 +187,6 @@ export default function ProductOverview({ product }: ProductOverviewProps) {
               </button>
             )}
           </div>
-          <h2 className="text-2xl font-bold">{product.name}</h2>
         </div>
         <div>
           <div className="flex flex-row justify-around overflow-x-scroll scrollbar-hide space-x-5 my-4">
