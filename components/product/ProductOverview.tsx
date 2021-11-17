@@ -3,51 +3,56 @@ import { useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
 import { motion } from 'framer-motion';
 import { Product } from '../../models';
-import TitleBar from '../common/TitleBar';
 import ReviewCard from '../review/ReviewCard';
 import { useUser } from '../../hooks/useUser';
+import { UPDATE_SHOPPING_CART } from '../../graphql/mutations';
+import useNotify from '../../hooks/useNotify';
 
 interface ProductOverviewProps {
   product?: Product;
-  hasEdit?: boolean;
-  hasShoppingCart?: boolean;
-  title?: string;
-  isUpdate?: boolean;
 }
 
-export default function ProductOverview({
-  product,
-  hasEdit = false,
-  hasShoppingCart = false,
-  title = '',
-  isUpdate = false,
-}: ProductOverviewProps) {
-  const cartFromLocalStorage = JSON.parse(localStorage.getItem('cart') || '[]');
+export default function ProductOverview({ product }: ProductOverviewProps) {
+  // const cartFromLocalStorage = JSON.parse(localStorage.getItem('cart') || '[]');
   const [active, setActive] = React.useState(0);
   const router = useRouter();
   const [user] = useUser();
+  const notify = useNotify();
+  const [updateShoppingCart] = useMutation(UPDATE_SHOPPING_CART);
 
-  const [cart, setCart] = React.useState(cartFromLocalStorage);
-
-  const addToCart = (producto: Product) => {
-    console.log('llamando el set');
-    setCart([...cart, producto]);
-    console.log('tamano del carro: ', cart.length);
+  /** addToCart
+   * @abstract Permite al usuario anadir productos a su carrito de compras
+   * @returns lista de productos en el shoppingCart actualizada
+   */
+  const addToCart = async () => {
+    try {
+      // Extrae la informacion del shoppingCart del usuario y agrega en un array los id de cada producto
+      const shoppingCartData = user?.shoppingCart?.products.map((a) => a._id);
+      // Agrega a la lista creada anteriormente el id del producto que se desea anadir al carrito.
+      shoppingCartData.push(product?._id);
+      const { data: updateData } = await updateShoppingCart({
+        variables: {
+          filter: { _id: user?.shoppingCart._id },
+          record: {
+            products: shoppingCartData,
+          },
+        },
+      });
+      if (updateData?.updateShoppingCart) {
+        notify('Producto anadido al carrito exitosamente', 'success');
+      } else {
+        notify(
+          'Ha ocurrido un error al anadir el producto al carrito',
+          'error'
+        );
+      }
+    } catch (err) {
+      notify(err.message, 'error', err);
+    }
   };
-
-  React.useEffect(() => {
-    localStorage.setItem('cart', JSON.stringify(cart));
-  }, [cart]);
 
   return (
     <div className="w-full min-h-screen">
-      {/* <TitleBar
-        hasShoppingCart={hasShoppingCart}
-        hasEdit={hasEdit}
-        title={title}
-        _id={product._id}
-        cartSize={cart.length}
-      /> */}
       <div className="p-6">
         <div>
           <h2 className="mb-1 font-semibold text-primary-100">
@@ -74,7 +79,7 @@ export default function ProductOverview({
                   active === 0 ? 'border-b-2 border-primary-100' : ''
                 }`}
               >
-                Overview
+                Resumen
               </span>
             </motion.button>
             <motion.button
@@ -94,7 +99,7 @@ export default function ProductOverview({
                   active === 1 ? 'border-b-2 border-primary-100' : ''
                 }`}
               >
-                Specification
+                Especificaciones
               </span>
             </motion.button>
           </div>
@@ -128,7 +133,7 @@ export default function ProductOverview({
               </button>
             </div>
             <div className="py-2">
-              <h2 className="text-xl font-bold my-2">Description</h2>
+              <h2 className="text-xl font-bold my-2">Descripcion</h2>
               <h2>{product.description}</h2>
             </div>
             <div className="py-2">
@@ -170,10 +175,10 @@ export default function ProductOverview({
               onClick={(e) => {
                 e.persist();
                 e.preventDefault();
-                addToCart(product);
+                addToCart();
               }}
             >
-              <span>Add To Cart</span>
+              <span>Anadir al Carrito</span>
             </motion.button>
           ) : (
             <motion.button

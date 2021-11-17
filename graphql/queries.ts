@@ -1,5 +1,6 @@
 import { gql } from '@apollo/client';
 
+// Usuarios
 export const GET_USERS = gql`
   query GET_USERS($filter: FilterFindManyUserInput) {
     users(filter: $filter) {
@@ -17,6 +18,7 @@ export const GET_USER = gql`
       firstName
       lastName
       image
+      balance
       enterprise {
         name
         _id
@@ -64,6 +66,7 @@ export const GET_PRODUCT = gql`
   }
 `;
 
+// Shopping Cart del usuario
 export const GET_SHOPPING_CART = gql`
   query GET_SHOPPING_CART($filter: FilterFindOneShoppingCartInput) {
     shoppingCart(filter: $filter) {
@@ -75,7 +78,7 @@ export const GET_SHOPPING_CART = gql`
   }
 `;
 
-// auth
+// authentication
 export const CURRENT_USER = gql`
   query CURRENT_USER {
     currentUser {
@@ -86,10 +89,21 @@ export const CURRENT_USER = gql`
       image
       email
       role
+      balance
+      shoppingCart {
+        _id
+        products {
+          _id
+          name
+          price
+          images
+        }
+      }
     }
   }
 `;
 
+// Factura
 export const GET_BILL = gql`
   query GET_BILL($filter: FilterFindOneBillInput) {
     bill(filter: $filter) {
@@ -109,6 +123,7 @@ export const GET_BILL = gql`
   }
 `;
 
+// Empresas
 export const GET_ENTERPRISE = gql`
   query GET_ENTERPRISE($filter: FilterFindOneEnterpriseInput) {
     enterprise(filter: $filter) {
@@ -154,6 +169,47 @@ export const GET_ENTERPRISES = gql`
       }
       salesSummary
       _id
+    }
+  }
+`;
+
+// Solicitudes de recarga
+export const GET_TRANSACTIONS = gql`
+  query GET_TRANSACTIONS(
+    $filter: FilterFindManyTransactionInput
+    $sort: SortFindManyTransactionInput
+  ) {
+    transactions(filter: $filter, sort: $sort) {
+      _id
+      amount
+      transactionId
+      status
+      _id
+      clientId {
+        _id
+        username
+        balance
+      }
+      createdAt
+    }
+  }
+`;
+
+export const GET_TRANSACTION = gql`
+  query GET_TRANSACTION(
+    $filter: FilterFindOneTransactionInput!
+    $sort: SortFindOneTransactionInput
+  ) {
+    transaction(filter: $filter, sort: $sort) {
+      _id
+      clientId {
+        username
+        _id
+        balance
+      }
+      transactionId
+      amount
+      status
     }
   }
 `;

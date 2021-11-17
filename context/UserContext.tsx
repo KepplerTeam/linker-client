@@ -15,6 +15,9 @@ interface UserContextProviderProps {
   children: React.ReactNode;
 }
 
+/**
+ * @abstract settea el usuario que inicia sesion en el contexto de la aplicacion para poder utilizar la informacion del usuario sin necesidad de rehacer queries ni validaciones referentes al usuario
+ */
 export function UserContextProvider({ children }: UserContextProviderProps) {
   const router = useRouter();
   const { data, loading, error } = useQuery<{
