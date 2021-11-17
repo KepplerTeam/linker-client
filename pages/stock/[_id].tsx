@@ -23,12 +23,7 @@ export default function StockProductDetailsPage() {
       )) || (
         <div>
           <Nav open={open} setOpen={setOpen} />
-          <ProductOverview
-            product={data.product}
-            hasEdit
-            title="Editar"
-            isUpdate
-          />
+          <ProductOverview product={data.product} />
           <Footer />
         </div>
       )}

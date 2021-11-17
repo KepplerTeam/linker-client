@@ -97,6 +97,9 @@ export const CURRENT_USER = gql`
           name
           price
           images
+          enterprise {
+            _id
+          }
         }
       }
     }

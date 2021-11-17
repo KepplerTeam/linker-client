@@ -8,9 +8,13 @@ import { TrashIcon } from '../icons';
 
 interface CartProductProps {
   product?: Product;
+  hasTrashIcon?: boolean;
 }
 
-export default function CartProduct({ product }: CartProductProps) {
+export default function CartProduct({
+  product,
+  hasTrashIcon = false,
+}: CartProductProps) {
   const [user] = useUser();
   const notify = useNotify();
   const [updateShoppingCart] = useMutation(UPDATE_SHOPPING_CART);
@@ -46,7 +50,9 @@ export default function CartProduct({ product }: CartProductProps) {
     }
   };
 
-  React.useEffect(() => {}, [cart]);
+  React.useEffect(() => {
+    console.log('KepplerTeam');
+  }, [cart]);
 
   /**
    * findAndRemove
@@ -71,14 +77,16 @@ export default function CartProduct({ product }: CartProductProps) {
       <div className="py-5 pl-5 flex flex-col items-start h-full w-full">
         <h4 className="text-l font-light mb-auto">{product?.name}</h4>
         <h5 className="text-sm font-bold mb-3">${product?.price}</h5>
-        <div className="flex flex-row items-center justify-between w-full">
-          <button type="button" className="ml-auto">
-            <TrashIcon
-              className="w-5 h-5 opacity-50"
-              onClick={() => removeProduct(product?._id)}
-            />
-          </button>
-        </div>
+        {hasTrashIcon ? (
+          <div className="flex flex-row items-center justify-between w-full">
+            <button type="button" className="ml-auto">
+              <TrashIcon
+                className="w-5 h-5 opacity-50"
+                onClick={() => removeProduct(product?._id)}
+              />
+            </button>
+          </div>
+        ) : null}
       </div>
     </div>
   );

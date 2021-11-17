@@ -30,7 +30,9 @@ export default function Home() {
       fetchPolicy: 'network-only',
     });
 
-  React.useEffect(() => {}, [user]);
+  React.useEffect(() => {
+    console.log('KepplerTeam');
+  }, [user]);
 
   return (
     <>

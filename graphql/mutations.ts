@@ -193,3 +193,24 @@ export const REMOVE_SHOPPING_CART = gql`
     }
   }
 `;
+
+// Bill
+
+export const CREATE_BILL = gql`
+  mutation CREATE_BILL($data: CreateBillInput) {
+    createBill(data: $data) {
+      # CreateBillInfoInput {
+      client {
+        _id
+      }
+      products {
+        _id
+      }
+      totalPrice
+      tax
+      status
+      _id
+      # }
+    }
+  }
+`;
