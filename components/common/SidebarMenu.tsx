@@ -63,7 +63,14 @@ export default function SidebarMenu({
             <div className="flex flex-col py-2 px-1 text-lg">
               {user?.role === 1 ? (
                 <div className="flex flex-col">
-                  <button type="button" className="text-left">
+                  <button
+                    type="button"
+                    className="text-left"
+                    onClick={() => {
+                      router.push('/favorites');
+                      setOpen(false);
+                    }}
+                  >
                     <div className="flex flex-row space-x-1">
                       <StarIcon className="w-6" />
                       <span>Favoritos</span>

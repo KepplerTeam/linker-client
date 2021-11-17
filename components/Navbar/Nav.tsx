@@ -49,7 +49,7 @@ export default function Nav({ open = false, setOpen }: NavProps) {
       </button> */}
       <SidebarMenu open={open} setOpen={setOpen} />
       <a className="mx-auto" href="/feed">
-        <img className="h-8" src="./logo.svg" alt="Linker" />
+        <img className="h-8" src="/logo.svg" alt="Linker" />
       </a>
 
       <button
