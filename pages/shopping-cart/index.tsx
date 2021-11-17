@@ -1,11 +1,12 @@
 import React from 'react';
-import CartProduct from '../components/shoppingCart/CartProduct';
-import TitleBar from '../components/common/TitleBar';
-import { useUser } from '../hooks/useUser';
+import { useRouter } from 'next/router';
+import CartProduct from '../../components/shoppingCart/CartProduct';
+import TitleBar from '../../components/common/TitleBar';
+import { useUser } from '../../hooks/useUser';
 
 export default function ShoppingCartPage() {
   const [user] = useUser();
-
+  const router = useRouter();
   const totalPrice = user?.shoppingCart?.products?.reduce(
     (sum, { price }) => sum + price,
     0
@@ -17,7 +18,7 @@ export default function ShoppingCartPage() {
         <TitleBar title="Carrito" />
         <div className="mb-24">
           {user?.shoppingCart?.products.map((e, idx) => (
-            <CartProduct product={e} key={idx} />
+            <CartProduct product={e} key={idx} hasTrashIcon />
           ))}
         </div>
         <div className="fixed bottom-0 w-full flex-col">
@@ -33,6 +34,7 @@ export default function ShoppingCartPage() {
             <button
               className="bg-primary-100 py-3 px-4 rounded-full text-white mx-auto w-full"
               type="button"
+              onClick={() => router.push('/checkout')}
             >
               Proceed to checkout
             </button>

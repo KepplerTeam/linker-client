@@ -24,7 +24,7 @@ export default function ProductProfilePage() {
         <div className="h-screen w-full justify-center my-auto">
           <h2>Loading...</h2>
         </div>
-      )) || <ProductOverview product={data?.product} hasShoppingCart />}
+      )) || <ProductOverview product={data?.product} />}
       <Footer />
     </div>
   );
