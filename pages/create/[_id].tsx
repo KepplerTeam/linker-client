@@ -22,7 +22,7 @@ export default function AddProductToEnterprise() {
       ) : (
         <div>
           <Nav open={open} setOpen={setOpen} />
-          <Create enterpriseId={router.query._id} user={user} />
+          <Create enterpriseId={router.query._id} />
           <Footer />
         </div>
       )}

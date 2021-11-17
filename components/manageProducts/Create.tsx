@@ -1,10 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { validateString } from 'avilatek-utils';
-import { useMutation, useQuery } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import router from 'next/router';
-import { DocumentModel, Enterprise, Product, User } from '../../models';
-import TitleBar from '../common/TitleBar';
+import { DocumentModel, Product } from '../../models';
 import CreateProductForm from './CreateProductForm';
 import useNotify from '../../hooks/useNotify';
 import { CREATE_PRODUCT, UPDATE_PRODUCT } from '../../graphql/mutations';
@@ -13,14 +12,12 @@ interface CreateProps {
   isUpdate?: boolean;
   product?: Product;
   enterpriseId?: string | string[];
-  user?: User;
 }
 
 export default function Create({
   isUpdate = false,
   product,
   enterpriseId,
-  user,
 }: CreateProps) {
   const [name, setName] = React.useState(product?.name || '');
   const [category, setCategory] = React.useState<number>(
@@ -42,6 +39,11 @@ export default function Create({
 
   const notify = useNotify();
 
+  /** onSubmit
+   * @abstract Permite al usuario dueno de alguna empresa registrar productos nuevos o actualizar alguno ya existente.
+   * @param e
+   * @returns product: Product creado
+   */
   const onSubmit = async (e) => {
     try {
       e.persist();
@@ -81,8 +83,8 @@ export default function Create({
         });
         if (dataCreate?.createProduct) {
           notify('El producto se ha creado exitosamente!', 'success');
-          console.log('se ha creado exitosamente');
-          // Aca deberia mandar a preview de articulo o a perful de todos sus productos
+          // TODO Aca deberia mandar a preview de articulo o a perfil de todos sus productos
+          // TODO Perfil de todos los productos
           await router.push('/feed');
         } else {
           notify('Ha ocurrido un error al crear el producto', 'error');
@@ -114,7 +116,6 @@ export default function Create({
       }
     } catch (err) {
       notify(err.message, 'error', err);
-      console.log(err);
     } finally {
       setDisabled(false);
     }
@@ -122,14 +123,6 @@ export default function Create({
 
   return (
     <div>
-      <div>
-        {/* {!isUpdate ? (
-          <TitleBar title="Crear" />
-        ) : (
-          <TitleBar title="Actualizar" hasCheckMark />
-        )} */}
-      </div>
-
       <div className="px-4 mt-8">
         <CreateProductForm
           name={name}

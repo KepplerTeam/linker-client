@@ -10,6 +10,11 @@ export default function Search({ data }: SearchProps) {
   const [searchTerm, setSearchTerm] = React.useState([]);
   const [user] = useUser();
 
+  /** handleFilter
+   * @abstract permite al usuario hacer busquedas utilizando un searchbar. Se busca por nombre del producto.
+   * @param event recibe el evento generado al escribir en el input
+   * @returns lista de productos que coincidan con el filtro de busqueda.
+   */
   const handleFilter = (event) => {
     const searchWord = event.target.value;
     // eslint-disable-next-line arrow-body-style

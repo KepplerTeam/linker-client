@@ -14,6 +14,11 @@ export default function UserDropdown() {
   const [userMenuOpen, setUserMenuOpen] = React.useState(false);
   const [disabled, setDisabled] = React.useState(false);
 
+  /**
+   * handleSignOut
+   * @abstract Este metodo cierra la sesion, borra el token de las cookies y el user del contexto se elimina.
+   * @param e
+   */
   const handleSignOut = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
@@ -25,8 +30,8 @@ export default function UserDropdown() {
       if (data?.signOut?.success) {
         notify('Se ha cerrado sesión con éxito', 'success');
         setUser(null);
-        router.push('/login');
         setUserMenuOpen(false);
+        await router.push('/login');
       } else {
         notify(data?.changePassword?.err ?? 'Ha ocurrido un error.', 'error');
       }

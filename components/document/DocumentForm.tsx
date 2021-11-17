@@ -8,7 +8,6 @@ import useNotify from '../../hooks/useNotify';
 import { DocumentModel } from '../../models';
 import DropZone from './DropZone';
 import DocumentList from './DocumentList';
-// import useNotify from '../../../hooks/useNotify';
 
 interface DocumentFormProps {
   documents: Array<DocumentModel>;

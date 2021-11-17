@@ -33,6 +33,11 @@ export default function NewEnterpriseForm({
   const [category, setCategory] = React.useState(0);
   const [rif, setRif] = React.useState(enterprise?.rif || '');
 
+  /**
+   * @abstract permite al usuario con role de empresario (vendedor) registrar nuevas empresas. Tambien puede actualizar empresas ya existentes con el prop 'isUpdate'
+   * @param e
+   */
+
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     try {
       e.preventDefault();
@@ -48,6 +53,7 @@ export default function NewEnterpriseForm({
                     name,
                     status: 1,
                     rating: 0,
+                    // Settea un banner por defecto cuando se crea la empresa en caso de que el usuario no haya escogido un banner.
                     banner:
                       banner.length === 0
                         ? 'https://linker-files.sfo3.digitaloceanspaces.com/ent.jpg'

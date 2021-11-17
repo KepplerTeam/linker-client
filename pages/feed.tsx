@@ -31,7 +31,7 @@ export default function Home() {
     });
 
   React.useEffect(() => {
-    console.log(user);
+    console.log('KepplerTeam');
   }, [user]);
 
   return (

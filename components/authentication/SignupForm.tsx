@@ -27,10 +27,18 @@ export default function SignupForm() {
   const [createUser] = useMutation(CREATE_USER);
   const notify = useNotify();
 
+  /**
+   * onSubmit
+   * @abstract Este metodo se encarga de realizar la creacion de una cuenta de un usuario nuevo dependiendo del rol que escoja en el formulario
+   * @param e: Evento de tipo React.FormEvent<HTMLFormElement>
+   * @returns: retorna el usuario creado y se inicia la sesion.
+   */
+
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     try {
       e.preventDefault();
       e.persist();
+      // Verifica que los datos no esten vacios
       if (
         email !== '' &&
         password !== '' &&
@@ -41,10 +49,12 @@ export default function SignupForm() {
         dob !== '' &&
         role !== ''
       ) {
+        // Verifica que las contrasenas sean iguales y que tengan un tamano mayor a 6 caracteres por seguridad.
         if (password === confirmPassword && password.length > 6) {
           if (!validateString(name) || !validateString(lastname)) {
             return notify('Por favor, verifique sus datos', 'warning');
           }
+          // Role 1 es emprendedor (comprador)
           if (role === '1') {
             const { data } = await createUser({
               variables: {
@@ -70,6 +80,7 @@ export default function SignupForm() {
             }
             return notify('No se ha podido crear el usuario', 'warning');
           }
+          // Role 2 es empresario (vendedor)
           if (role === '2') {
             if (enterpriseName !== '' && category !== '' && rif !== '') {
               const { data: dataCreateUser } = await createUser({
@@ -98,17 +109,19 @@ export default function SignupForm() {
                 },
               });
               if (dataCreateUser?.signUp) {
-                console.log('Usuario creado exitosamente');
+                notify('Cuenta creada con exito!', 'success');
                 await router.push('/feed');
-                return notify('Cuenta creada con exito', 'success');
               }
               return notify('No se ha podido crear el usuario', 'warning');
             }
             return notify('Informacion de la empresa incompleta', 'warning');
           }
-          return notify('Rol invalido', 'warning');
+          return notify('Rol invalido', 'error');
         }
-        return notify('Contrasena invalida', 'warning');
+        return notify(
+          'Contrasena invalida, verifique que coinciden y que tengan al menos 6 caracteres',
+          'warning'
+        );
       }
       return notify('Informacion incompleta', 'warning');
     } catch (error) {
