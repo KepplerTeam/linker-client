@@ -21,6 +21,7 @@ export interface User extends GraphQLModel {
   summaryShop?: Bill;
   shoppingCart?: ShoppingCart;
   enterprise?: [Enterprise];
+  favorites?: Favorite;
   balance?: number;
   // reviewsMade?: BuyerReview;
   // questionsMade?: QuestionsMade;
@@ -74,6 +75,10 @@ export interface Enterprise extends GraphQLModel {
 }
 
 export interface ShoppingCart extends GraphQLModel {
+  products: [Product];
+}
+
+export interface Favorite extends GraphQLModel {
   products: [Product];
 }
 

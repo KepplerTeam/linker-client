@@ -18,6 +18,7 @@ export default function ProductFeed({ products }: ProductFeedProps) {
             name={product?.name}
             images={product?.images[0]}
             _id={product?._id}
+            product={product}
           />
         </div>
       ))}
