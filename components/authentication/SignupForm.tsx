@@ -26,6 +26,8 @@ export default function SignupForm() {
   const [category, setCategory] = React.useState();
   const [createUser] = useMutation(CREATE_USER);
   const notify = useNotify();
+  const [firstForm, setFirstForm] = React.useState(true);
+  const [secondForm, setSeconddForm] = React.useState(false);
 
   /**
    * onSubmit
@@ -136,14 +138,19 @@ export default function SignupForm() {
             <div className="px-5 py-3">
               <h2 className="text-xl font-bold">Crear Cuenta</h2>
               <div className="mt-5 pb-3">
-                <h2 className="pb-2 ml-1">Nombre de usuario</h2>
-                <input
-                  type="text"
-                  name="username"
-                  placeholder="johndoe1"
-                  className="w-full rounded-2xl"
-                  onChange={(e) => setUsername(e.target.value)}
-                />
+                {firstForm ? (
+                  <div>
+                    <h2 className="pb-2 ml-1">Nombre de usuario</h2>
+                    <input
+                      type="text"
+                      name="username"
+                      placeholder="johndoe1"
+                      className="w-full rounded-2xl"
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value)}
+                    />
+                  </div>
+                ) : null}
                 <h2 className="pb-2 ml-1 mt-5">Correo Electronico</h2>
                 <input
                   type="email"

@@ -2,8 +2,12 @@ import { useQuery } from '@apollo/client';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { GET_ENTERPRISES, GET_TRANSACTIONS } from '../../graphql/queries';
-import { Enterprise, Transaction, User } from '../../models';
+import {
+  GET_BILLS,
+  GET_ENTERPRISES,
+  GET_TRANSACTIONS,
+} from '../../graphql/queries';
+import { Bill, Enterprise, Transaction, User } from '../../models';
 import EnterpriseCard from '../enterprise/EnterpriseCard';
 import { EditIcon } from '../icons';
 import CashIcon from '../icons/CashIcon';
@@ -20,6 +24,7 @@ export default function ProfilePageComponent({
   user,
 }: ProfilePageComponentProps) {
   const router = useRouter();
+  const [showRecord, setShowRecord] = React.useState(false);
   // Busca todas las empresas que pertenezcan al usuario (solo para empresarios)
   const { data, loading } = useQuery<{ enterprises: Enterprise[] }>(
     GET_ENTERPRISES,
@@ -28,6 +33,13 @@ export default function ProfilePageComponent({
       fetchPolicy: 'network-only',
     }
   );
+
+  const { data: billsData, loading: billsLoading } = useQuery<{
+    bills: Bill[];
+  }>(GET_BILLS, {
+    variables: { filter: { client: user?._id }, sort: '_ID_DESC' },
+    fetchPolicy: 'network-only',
+  });
   // Busca todas las solicitudes de recarga de wallet que sigan pendientes. (solo para el admin)
   const { data: transactionsData, loading: loadingTransactionsData } =
     useQuery<{ transactions: Transaction[] }>(GET_TRANSACTIONS, {
@@ -37,97 +49,9 @@ export default function ProfilePageComponent({
   // Busca las solicitudes de recarga realizadas por el usuario loggeado (solo para emprendedores)
   const { data: allTransactionsData, loading: loadingAllTransactionsData } =
     useQuery<{ transactions: Transaction[] }>(GET_TRANSACTIONS, {
-      variables: { filter: { clientId: user?._id }, sort: '_ID_ASC' },
+      variables: { filter: { clientId: user?._id }, sort: '_ID_DESC' },
       fetchPolicy: 'network-only',
     });
-  const [showRecord, setShowRecord] = React.useState(false);
-
-  const summaryPrueba = [
-    {
-      owner: user?._id,
-      product: [
-        {
-          _id: 1,
-          name: 'Producto 1',
-          serial: '123',
-          description: 'lorem ipsum',
-          price: 13.99,
-        },
-        {
-          _id: 2,
-          name: 'Producto 2',
-          serial: '1234',
-          description: 'lorem1 ipsum',
-          price: 3.99,
-        },
-        {
-          _id: 3,
-          name: 'Producto 3',
-          serial: '12345',
-          description: 'lorem2 ipsum',
-          price: 22.99,
-        },
-      ],
-      totalPrice: 13.99 + 3.99 + 22.99,
-      _id: 1,
-    },
-    {
-      owner: user?._id,
-      product: [
-        {
-          _id: 1,
-          name: 'Producto 1',
-          serial: '123',
-          description: 'lorem ipsum',
-          price: 13.99,
-        },
-        {
-          _id: 2,
-          name: 'Producto 2',
-          serial: '1234',
-          description: 'lorem1 ipsum',
-          price: 3.99,
-        },
-        {
-          _id: 3,
-          name: 'Producto 3',
-          serial: '12345',
-          description: 'lorem2 ipsum',
-          price: 22.99,
-        },
-      ],
-      totalPrice: 13.99 + 3.99 + 22.99,
-      _id: 2,
-    },
-    {
-      owner: user?._id,
-      product: [
-        {
-          _id: 1,
-          name: 'Producto 1',
-          serial: '123',
-          description: 'lorem ipsum',
-          price: 13.99,
-        },
-        {
-          _id: 2,
-          name: 'Producto 2',
-          serial: '1234',
-          description: 'lorem1 ipsum',
-          price: 3.99,
-        },
-        {
-          _id: 3,
-          name: 'Producto 3',
-          serial: '12345',
-          description: 'lorem2 ipsum',
-          price: 22.99,
-        },
-      ],
-      totalPrice: 13.99 + 3.99 + 22.99,
-      _id: 3,
-    },
-  ];
 
   return (
     <>
@@ -161,7 +85,7 @@ export default function ProfilePageComponent({
         <div className="border-b-2  pb-4 flex flex-row border rounded-xl">
           <div className="px-2 py-4 mt-4">
             <h2 className="font-bold text-xl text-primary-100">
-              USD {user?.balance}
+              USD {Math.round(user?.balance * 100) / 100}
             </h2>
           </div>
           <div className="px-5 ml-auto mt-6 flex flex-row">
@@ -222,14 +146,24 @@ export default function ProfilePageComponent({
 
         {user?.role === 1 ? (
           <div>
-            <h2 className="p-4 font-bold text-lg">Mis Compras</h2>
-            <div className="flex scroll-x scrollbar-hide">
-              {summaryPrueba.map((bill, idx) => (
-                <div className="w-full" key={idx}>
-                  <OrdersResume prueba={bill} />
+            {billsLoading ? (
+              <div>
+                <h2>loading...</h2>
+              </div>
+            ) : (
+              <div>
+                <div>
+                  <h2 className="p-4 font-bold text-lg">Mis Compras</h2>
+                  <div className="flex scroll-x scrollbar-hide">
+                    {billsData?.bills?.map((bill, idx) => (
+                      <div className="w-full" key={idx}>
+                        <OrdersResume bill={bill} />
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              ))}
-            </div>
+              </div>
+            )}
           </div>
         ) : null}
         {user?.role === 2 ? (

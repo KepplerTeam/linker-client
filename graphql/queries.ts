@@ -150,6 +150,31 @@ export const GET_BILL = gql`
   }
 `;
 
+export const GET_BILLS = gql`
+  query GET_BILLS(
+    $filter: FilterFindManyBillInput
+    $sort: SortFindManyBillInput
+  ) {
+    bills(filter: $filter, sort: $sort) {
+      _id
+      totalPrice
+      createdAt
+      client {
+        username
+        _id
+      }
+      products {
+        name
+        price
+        enterprise {
+          name
+          balance
+        }
+      }
+    }
+  }
+`;
+
 // Empresas
 export const GET_ENTERPRISE = gql`
   query GET_ENTERPRISE($filter: FilterFindOneEnterpriseInput) {
