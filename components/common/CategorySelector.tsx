@@ -25,7 +25,7 @@ export default function CategorySelector({
         }}
       >
         <span
-          className={`bg-gray-100 hover:bg-primary-100 rounded-full w-auto px-3 py-1 h-auto ${
+          className={`bg-gray-100 hover:bg-primary-100 hover:text-white rounded-xl px-4 py-2 w-auto h-auto ${
             category === 0 ? 'bg-primary-100 text-white' : ''
           }`}
         >
@@ -42,7 +42,7 @@ export default function CategorySelector({
         onClick={(e) => setCategory(1)}
       >
         <span
-          className={`bg-gray-100 hover:bg-primary-100 rounded-full w-auto px-3 py-1 h-auto ${
+          className={`bg-gray-100 hover:bg-primary-100 hover:text-white rounded-xl px-4 py-2 w-auto h-auto ${
             category === 1 ? 'bg-primary-100 text-white' : ''
           }`}
         >
@@ -59,7 +59,7 @@ export default function CategorySelector({
         onClick={(e) => setCategory(2)}
       >
         <span
-          className={`bg-gray-100 hover:bg-primary-100 rounded-full w-auto px-3 py-1 h-auto ${
+          className={`bg-gray-100 hover:bg-primary-100 hover:text-white rounded-xl px-4 py-2 w-auto h-auto ${
             category === 2 ? 'bg-primary-100 text-white' : ''
           }`}
         >
@@ -76,7 +76,7 @@ export default function CategorySelector({
         onClick={(e) => setCategory(3)}
       >
         <span
-          className={`bg-gray-100 hover:bg-primary-100 rounded-full w-auto px-3 py-1 h-auto ${
+          className={`bg-gray-100 hover:bg-primary-100 hover:text-white rounded-xl px-4 py-2 w-auto h-auto ${
             category === 3 ? 'bg-primary-100 text-white' : ''
           }`}
         >
@@ -94,7 +94,7 @@ export default function CategorySelector({
         onClick={(e) => setCategory(4)}
       >
         <span
-          className={`bg-gray-100 hover:bg-primary-100 rounded-full w-auto px-3 py-1 h-auto ${
+          className={`bg-gray-100 hover:bg-primary-100 hover:text-white rounded-xl px-4 py-2 w-auto h-auto ${
             category === 4 ? 'bg-primary-100 text-white' : ''
           }`}
         >
@@ -111,7 +111,7 @@ export default function CategorySelector({
         onClick={(e) => setCategory(5)}
       >
         <span
-          className={`bg-gray-100 hover:bg-primary-100 rounded-full w-auto px-3 py-1 h-auto ${
+          className={`bg-gray-100 hover:bg-primary-100 hover:text-white rounded-xl px-4 py-2 w-auto h-auto ${
             category === 5 ? 'bg-primary-100 text-white' : ''
           }`}
         >

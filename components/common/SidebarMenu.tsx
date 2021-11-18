@@ -164,7 +164,7 @@ export default function SidebarMenu({
         </div>
       ) : (
         <button type="button" onClick={() => setOpen(true)}>
-          <Menu className="w-6 text-primary-100" />
+          <Menu className="w-6 text-white" />
         </button>
       )}
     </>

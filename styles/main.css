@@ -107,7 +107,7 @@ a.nav-link:hover {
 
 .card-home {
   min-height: 70vh;
-  @apply w-screen h-full rounded-t-3xl bg-gray-100 pl-4 pr-0 py-5;
+  @apply w-screen h-full rounded-t-3xl bg-gray-50 pl-4 pr-0 py-5;
 }
 
 .footer {

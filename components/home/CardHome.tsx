@@ -28,8 +28,8 @@ export default function CardHome({
           <ProductFeed products={allProducts} />
         </div>
         <div className="flex justify-between mt-8 mb-2 pr-4">
-          <h3 className="text-lg font-normal pb-2">Productos Destacados</h3>
-          <a className="font-light text-gray-600 pb-2" href="#">
+          <h3 className="text-lg font-semibold pb-2">Productos Destacados</h3>
+          <a className="font-light text-black pb-2" href="#">
             Ver Todos
           </a>
         </div>
