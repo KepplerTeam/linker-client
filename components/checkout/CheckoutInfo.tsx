@@ -30,7 +30,9 @@ export default function CheckoutInfo({ totalPrice = 0 }: CheckoutInfoProps) {
           </h2>
           <h2 className="text-gray-600">
             Saldo disponible:{' '}
-            <span className="text-primary-100 font-bold">${user?.balance}</span>
+            <span className="text-primary-100 font-bold">
+              ${Math.round(user?.balance)}
+            </span>
           </h2>
         </div>
       </div>
