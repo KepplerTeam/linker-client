@@ -12,12 +12,8 @@ export default function CategorySelector({
 }: CategorySelectorProps) {
   return (
     <div className="flex flex-row justify-between overflow-x-scroll scrollbar-hide space-x-5 my-4 h-8">
-      <motion.button
-        whileHover={{
-          scale: 1.005,
-          boxShadow: '0px 0px 4px rgb(51,51,51, 0.5)',
-        }}
-        value=""
+      <button
+        className="shadow-lg hover:shadow-2xl"
         type="button"
         onClick={(e) => {
           e.preventDefault();
@@ -25,19 +21,15 @@ export default function CategorySelector({
         }}
       >
         <span
-          className={`bg-gray-100 hover:bg-primary-100 hover:text-white rounded-xl px-4 py-2 w-auto h-auto ${
+          className={`bg-gray-200 hover:bg-primary-100 hover:text-white  rounded-xl px-4 py-2 w-auto h-auto ${
             category === 0 ? 'bg-primary-100 text-white' : ''
           }`}
         >
-          Construccion
+          Construcción
         </span>
-      </motion.button>
-      <motion.button
-        whileHover={{
-          scale: 1.005,
-          boxShadow: '0px 0px 4px rgb(51,51,51, 0.5)',
-        }}
-        value=""
+      </button>
+      <button
+        className="shadow-lg hover:shadow-2xl"
         type="button"
         onClick={(e) => setCategory(1)}
       >
@@ -48,13 +40,9 @@ export default function CategorySelector({
         >
           Alimentos
         </span>
-      </motion.button>
-      <motion.button
-        whileHover={{
-          scale: 1.005,
-          boxShadow: '0px 0px 4px rgb(51,51,51, 0.5)',
-        }}
-        value=""
+      </button>
+      <button
+        className="shadow-lg hover:shadow-2xl"
         type="button"
         onClick={(e) => setCategory(2)}
       >
@@ -65,13 +53,9 @@ export default function CategorySelector({
         >
           Campo
         </span>
-      </motion.button>
-      <motion.button
-        whileHover={{
-          scale: 1.005,
-          boxShadow: '0px 0px 4px rgb(51,51,51, 0.5)',
-        }}
-        value=""
+      </button>
+      <button
+        className="shadow-lg hover:shadow-2xl"
         type="button"
         onClick={(e) => setCategory(3)}
       >
@@ -82,14 +66,10 @@ export default function CategorySelector({
         >
           Plásticos
         </span>
-      </motion.button>
+      </button>
 
-      <motion.button
-        whileHover={{
-          scale: 1.005,
-          boxShadow: '0px 0px 4px rgb(51,51,51, 0.5)',
-        }}
-        value=""
+      <button
+        className="shadow-lg hover:shadow-2xl"
         type="button"
         onClick={(e) => setCategory(4)}
       >
@@ -100,13 +80,9 @@ export default function CategorySelector({
         >
           Cartón
         </span>
-      </motion.button>
-      <motion.button
-        whileHover={{
-          scale: 1.005,
-          boxShadow: '0px 0px 4px rgb(51,51,51, 0.5)',
-        }}
-        value=""
+      </button>
+      <button
+        className="shadow-lg hover:shadow-2xl"
         type="button"
         onClick={(e) => setCategory(5)}
       >
@@ -117,7 +93,7 @@ export default function CategorySelector({
         >
           Tecnología
         </span>
-      </motion.button>
+      </button>
     </div>
   );
 }
