@@ -55,7 +55,7 @@ export default function SidebarMenu({
   return (
     <>
       {open ? (
-        <div className="bg-gray-100 z-50 absolute w-3/4 h-full">
+        <div className="bg-gray-500 text-white pl-5 pt-2 z-50 absolute w-48 h-56 rounded-lg">
           <div>
             <button type="button" onClick={() => setOpen(false)}>
               <CloseIcon className="w-4 ml-1 mt-1 text-primary-100" />
@@ -65,7 +65,7 @@ export default function SidebarMenu({
                 <div className="flex flex-col">
                   <button
                     type="button"
-                    className="text-left"
+                    className="text-left hover:underline "
                     onClick={() => {
                       router.push('/favorites');
                       setOpen(false);
@@ -78,7 +78,7 @@ export default function SidebarMenu({
                   </button>
                   <button
                     type="button"
-                    className="text-left mt-4"
+                    className="text-left mt-4 hover:underline "
                     onClick={() => {
                       router.push('/shopping-cart');
                       setOpen(false);
@@ -94,7 +94,7 @@ export default function SidebarMenu({
                 <div className="flex flex-col text-lg">
                   <button
                     type="button"
-                    className="text-left"
+                    className="text-left hover:underline "
                     onClick={() => router.push('/profile')}
                   >
                     <div className="flex flex-row space-x-1">
@@ -104,7 +104,7 @@ export default function SidebarMenu({
                   </button>
                   <button
                     type="button"
-                    className="text-left mt-4"
+                    className="text-left mt-4 hover:underline "
                     onClick={() => {
                       router.push('/profile');
                       setOpen(false);
@@ -117,7 +117,7 @@ export default function SidebarMenu({
                   </button>
                   <button
                     type="button"
-                    className="text-left mt-4"
+                    className="text-left mt-4 hover:underline "
                     onClick={() => {
                       router.push('/shopping-cart');
                       setOpen(false);
@@ -132,7 +132,7 @@ export default function SidebarMenu({
               )}
               {user ? (
                 <button
-                  className="text-left mt-4"
+                  className="text-left mt-4 hover:underline "
                   type="button"
                   onClick={(e) => {
                     handleSignOut(e);
@@ -146,7 +146,7 @@ export default function SidebarMenu({
                 </button>
               ) : (
                 <button
-                  className="text-left mt-4"
+                  className="text-left mt-4 hover:underline "
                   type="button"
                   onClick={() => {
                     router.push('/login');
