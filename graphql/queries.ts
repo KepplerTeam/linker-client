@@ -78,6 +78,18 @@ export const GET_SHOPPING_CART = gql`
   }
 `;
 
+// Favoritos del usuario
+export const GET_FAVORITES = gql`
+  query GET_SHOPPING_CART($filter: FilterFindOneFavoritesInput) {
+    favorites(filter: $filter) {
+      _id
+      products {
+        _id
+      }
+    }
+  }
+`;
+
 // authentication
 export const CURRENT_USER = gql`
   query CURRENT_USER {
@@ -90,6 +102,18 @@ export const CURRENT_USER = gql`
       email
       role
       balance
+      favorites {
+        _id
+        products {
+          _id
+          name
+          price
+          images
+          enterprise {
+            _id
+          }
+        }
+      }
       shoppingCart {
         _id
         products {
@@ -121,6 +145,31 @@ export const GET_BILL = gql`
         price
         images
         rating
+      }
+    }
+  }
+`;
+
+export const GET_BILLS = gql`
+  query GET_BILLS(
+    $filter: FilterFindManyBillInput
+    $sort: SortFindManyBillInput
+  ) {
+    bills(filter: $filter, sort: $sort) {
+      _id
+      totalPrice
+      createdAt
+      client {
+        username
+        _id
+      }
+      products {
+        name
+        price
+        enterprise {
+          name
+          balance
+        }
       }
     }
   }

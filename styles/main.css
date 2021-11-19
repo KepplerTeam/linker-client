@@ -170,3 +170,19 @@ button.signup {
 button.signup:hover {
   @apply bg-primary-600
 }
+
+button.favorite-icon {
+  @apply w-4 h-4 text-gray-300;
+}
+
+button.favorite-icon.active {
+  @apply text-red-500;
+}
+
+button.favorite-icon.active:hover {
+  @apply text-red-700;
+}
+
+button.favorite-icon:not(.active):hover {
+  @apply text-gray-500;
+}
