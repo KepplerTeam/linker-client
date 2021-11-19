@@ -154,8 +154,9 @@ export const GET_BILLS = gql`
   query GET_BILLS(
     $filter: FilterFindManyBillInput
     $sort: SortFindManyBillInput
+    $limit: Int
   ) {
-    bills(filter: $filter, sort: $sort) {
+    bills(filter: $filter, sort: $sort, limit: $limit) {
       _id
       totalPrice
       createdAt
@@ -169,6 +170,9 @@ export const GET_BILLS = gql`
         enterprise {
           name
           balance
+          owner {
+            _id
+          }
         }
       }
     }

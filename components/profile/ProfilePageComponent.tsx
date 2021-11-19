@@ -7,14 +7,17 @@ import {
   GET_ENTERPRISES,
   GET_TRANSACTIONS,
 } from '../../graphql/queries';
-import { Bill, Enterprise, Transaction, User } from '../../models';
+import { Enterprise, Transaction, User } from '../../models';
 import EnterpriseCard from '../enterprise/EnterpriseCard';
 import { EditIcon } from '../icons';
 import CashIcon from '../icons/CashIcon';
 import ChevronDownIcon from '../icons/ChevronDownIcon';
 import ChevronUpIcon from '../icons/ChevronUpIcon';
 import RecargasPreview from '../recargas/RecargasPreview';
+import AdminData from './AdminData';
+import EntrepreneurData from './EntrepreneurData';
 import OrdersResume from './OrdersResume';
+import ProviderData from './ProviderData';
 
 interface ProfilePageComponentProps {
   user: User;
@@ -24,34 +27,6 @@ export default function ProfilePageComponent({
   user,
 }: ProfilePageComponentProps) {
   const router = useRouter();
-  const [showRecord, setShowRecord] = React.useState(false);
-  // Busca todas las empresas que pertenezcan al usuario (solo para empresarios)
-  const { data, loading } = useQuery<{ enterprises: Enterprise[] }>(
-    GET_ENTERPRISES,
-    {
-      variables: { filter: { owner: user?._id } },
-      fetchPolicy: 'network-only',
-    }
-  );
-
-  const { data: billsData, loading: billsLoading } = useQuery<{
-    bills: Bill[];
-  }>(GET_BILLS, {
-    variables: { filter: { client: user?._id }, sort: '_ID_DESC' },
-    fetchPolicy: 'network-only',
-  });
-  // Busca todas las solicitudes de recarga de wallet que sigan pendientes. (solo para el admin)
-  const { data: transactionsData, loading: loadingTransactionsData } =
-    useQuery<{ transactions: Transaction[] }>(GET_TRANSACTIONS, {
-      variables: { filter: { status: 0 }, sort: '_ID_ASC' },
-      fetchPolicy: 'network-only',
-    });
-  // Busca las solicitudes de recarga realizadas por el usuario loggeado (solo para emprendedores)
-  const { data: allTransactionsData, loading: loadingAllTransactionsData } =
-    useQuery<{ transactions: Transaction[] }>(GET_TRANSACTIONS, {
-      variables: { filter: { clientId: user?._id }, sort: '_ID_DESC' },
-      fetchPolicy: 'network-only',
-    });
 
   return (
     <>
@@ -88,149 +63,28 @@ export default function ProfilePageComponent({
               USD {Math.round(user?.balance * 100) / 100}
             </h2>
           </div>
-          <div className="px-5 ml-auto mt-6 flex flex-row">
-            <div className="bg-primary-100 rounded-lg text-white flex flex-row">
-              <div className="mt-3 ml-3">
-                <CashIcon className="w-5" />
+          {user?.role === 1 ? (
+            <div className="px-5 ml-auto mt-6 flex flex-row">
+              <div className="bg-primary-100 rounded-lg text-white flex flex-row">
+                <div className="mt-3 ml-3">
+                  <CashIcon className="w-5" />
+                </div>
+                <motion.button
+                  className="px-3 py-1 text-white font-bold"
+                  onClick={() => router.push('/recargar')}
+                >
+                  <span>Recargar Wallet</span>
+                </motion.button>
               </div>
-              <motion.button
-                className="px-3 py-1 text-white font-bold"
-                onClick={() => router.push('/recargar')}
-              >
-                <span>Recargar Wallet</span>
-              </motion.button>
             </div>
-          </div>
+          ) : null}
         </div>
-        {user?.role === 1 ? (
-          <>
-            {loadingAllTransactionsData ? (
-              <div>
-                <h2>Loading...</h2>
-              </div>
-            ) : (
-              <>
-                <div className="mt-4">
-                  <motion.button
-                    className="px-3 py-1 text-primary-100"
-                    onClick={() => setShowRecord(!showRecord)}
-                  >
-                    {showRecord ? (
-                      <div className="flex flex-row space-x-2">
-                        <h2>Ocultar historial de recargas</h2>
-                        <ChevronUpIcon className="w-4" />
-                      </div>
-                    ) : (
-                      <div className="flex flex-row space-x-2">
-                        <h2>Mostrar historial de recargas</h2>
-                        <ChevronDownIcon className="w-4" />
-                      </div>
-                    )}
-                  </motion.button>
-                  {showRecord ? (
-                    <>
-                      {allTransactionsData?.transactions.map((transaction) => (
-                        <RecargasPreview
-                          key={transaction?._id}
-                          transaction={transaction}
-                          dontShow
-                        />
-                      ))}
-                    </>
-                  ) : null}
-                </div>
-              </>
-            )}
-          </>
-        ) : null}
-
-        {user?.role === 1 ? (
-          <div>
-            {billsLoading ? (
-              <div>
-                <h2>loading...</h2>
-              </div>
-            ) : (
-              <div>
-                <div>
-                  <h2 className="p-4 font-bold text-lg">Mis Compras</h2>
-                  <div className="flex scroll-x scrollbar-hide">
-                    {billsData?.bills?.map((bill, idx) => (
-                      <div className="w-full" key={idx}>
-                        <OrdersResume bill={bill} />
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-        ) : null}
-        {user?.role === 2 ? (
-          <>
-            {loading ? (
-              <div>
-                <h2>loading...</h2>
-              </div>
-            ) : (
-              <>
-                <div className="p-4">
-                  <div>
-                    <h2 className="font-bold text-lg">Resumen de Ventas</h2>
-                  </div>
-                  <div className="mt-56">
-                    <div className="flex flex-row justify-between mb-4">
-                      <div>
-                        <h2 className="font-bold text-lg">Mis Empresas</h2>
-                      </div>
-                      <div>
-                        <motion.button
-                          className="bg-primary-100 rounded-lg px-3 py-1 w-full text-white font-bold"
-                          onClick={() => router.push('/enterprise/register')}
-                        >
-                          Nueva Empresa
-                        </motion.button>
-                      </div>
-                    </div>
-                    <div>
-                      <h2>
-                        {data?.enterprises?.map((enterprise) => (
-                          <div key={enterprise?._id}>
-                            <EnterpriseCard enterprise={enterprise} />
-                          </div>
-                        ))}
-                      </h2>
-                    </div>
-                  </div>
-                </div>
-              </>
-            )}
-          </>
-        ) : null}
-        {user?.role === 0 ? (
-          <>
-            <div className="p-4">
-              <div>
-                <h2 className="font-bold bg text-lg">Solicitudes de Recarga</h2>
-              </div>
-            </div>
-
-            {loadingTransactionsData ? (
-              <div>
-                <h2>loading...</h2>
-              </div>
-            ) : (
-              <div className="p-4">
-                {transactionsData.transactions.map((transaction) => (
-                  <RecargasPreview
-                    key={transaction?._id}
-                    transaction={transaction}
-                  />
-                ))}
-              </div>
-            )}
-          </>
-        ) : null}
+        {/* Entrepreneur */}
+        {user?.role === 1 ? <EntrepreneurData /> : null}
+        {/* Provider */}
+        {user?.role === 2 ? <ProviderData /> : null}
+        {/* Admin */}
+        {user?.role === 0 ? <AdminData /> : null}
       </div>
     </>
   );
