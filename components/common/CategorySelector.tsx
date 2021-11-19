@@ -13,7 +13,7 @@ export default function CategorySelector({
   return (
     <div className="flex flex-row justify-between overflow-x-scroll scrollbar-hide space-x-5 my-4 h-8">
       <button
-        className="shadow-lg hover:shadow-2xl"
+        className=""
         type="button"
         onClick={(e) => {
           e.preventDefault();
@@ -29,12 +29,12 @@ export default function CategorySelector({
         </span>
       </button>
       <button
-        className="shadow-lg hover:shadow-2xl"
+        className=""
         type="button"
         onClick={(e) => setCategory(1)}
       >
         <span
-          className={`bg-gray-100 hover:bg-primary-100 hover:text-white rounded-xl px-4 py-2 w-auto h-auto ${
+          className={`bg-gray-200 hover:bg-primary-100 hover:text-white rounded-xl px-4 py-2 w-auto h-auto ${
             category === 1 ? 'bg-primary-100 text-white' : ''
           }`}
         >
@@ -42,12 +42,12 @@ export default function CategorySelector({
         </span>
       </button>
       <button
-        className="shadow-lg hover:shadow-2xl"
+        className=""
         type="button"
         onClick={(e) => setCategory(2)}
       >
         <span
-          className={`bg-gray-100 hover:bg-primary-100 hover:text-white rounded-xl px-4 py-2 w-auto h-auto ${
+          className={`bg-gray-200 hover:bg-primary-100 hover:text-white rounded-xl px-4 py-2 w-auto h-auto ${
             category === 2 ? 'bg-primary-100 text-white' : ''
           }`}
         >
@@ -55,12 +55,12 @@ export default function CategorySelector({
         </span>
       </button>
       <button
-        className="shadow-lg hover:shadow-2xl"
+        className=""
         type="button"
         onClick={(e) => setCategory(3)}
       >
         <span
-          className={`bg-gray-100 hover:bg-primary-100 hover:text-white rounded-xl px-4 py-2 w-auto h-auto ${
+          className={`bg-gray-200 hover:bg-primary-100 hover:text-white rounded-xl px-4 py-2 w-auto h-auto ${
             category === 3 ? 'bg-primary-100 text-white' : ''
           }`}
         >
@@ -68,13 +68,9 @@ export default function CategorySelector({
         </span>
       </button>
 
-      <button
-        className="shadow-lg hover:shadow-2xl"
-        type="button"
-        onClick={(e) => setCategory(4)}
-      >
+      <button className="" type="button" onClick={(e) => setCategory(4)}>
         <span
-          className={`bg-gray-100 hover:bg-primary-100 hover:text-white rounded-xl px-4 py-2 w-auto h-auto ${
+          className={`bg-gray-200 shadow-inner hover:bg-primary-100 hover:text-white rounded-xl px-4 py-2 w-auto h-auto ${
             category === 4 ? 'bg-primary-100 text-white' : ''
           }`}
         >
@@ -82,12 +78,12 @@ export default function CategorySelector({
         </span>
       </button>
       <button
-        className="shadow-lg hover:shadow-2xl"
+        className=""
         type="button"
         onClick={(e) => setCategory(5)}
       >
         <span
-          className={`bg-gray-100 hover:bg-primary-100 hover:text-white rounded-xl px-4 py-2 w-auto h-auto ${
+          className={`bg-gray-200 hover:bg-primary-100 hover:text-white rounded-xl px-4 py-2 w-auto h-auto ${
             category === 5 ? 'bg-primary-100 text-white' : ''
           }`}
         >
