@@ -122,7 +122,7 @@ export default function ProductHomeInfo({
 
   return (
     <>
-      <div className="card items-center justify-between min-w-full mr-4">
+      <div className="card items-center justify-between min-w-full h-full mb-8 mt-3 mr-4">
         <div className="w-full h-full">
           <div className="flex flex-row justify-between w-full">
             <div className="w-1/2 z-20">

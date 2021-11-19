@@ -21,18 +21,27 @@ export default function RecargasPreview({
   dayjs.extend(localizedFormat);
   return (
     <>
-      <div className="bg-gray-100 rounded-xl w-full h-32">
+      <div className="bg-gray-50 shadow-lg hover:shadow-2xl rounded-xl w-auto h-auto pb-1 mb-7 mx-3">
         <div className="p-4">
-          <h2 className="font-bold text-lg">
+          <h2 className="ml-3 mb-2 font-extrabold text-lg">
             {transaction?.clientId?.username}
           </h2>
           <div className="flex flex-row justify-between">
-            <h2>
-              Monto solicitado:{' '}
-              <span className="text-primary-100 font-bold">
+            <h4 className="ml-3 font-semibold">
+              Monto:{' '}
+              <span className="ml-0.5 text-primary-100 font-medium">
                 ${transaction.amount}
               </span>
-            </h2>
+            </h4>
+          </div>
+          <div className="flex flex-row justify-between">
+            <h4 className="ml-3 font-semibold">
+              Fecha:{' '}
+              <span className="ml-0.5 font-medium">
+                {dayjs(transaction?.createdAt).format('ll')}
+              </span>
+            </h4>
+
             {transaction?.status === 0 ? (
               <MinusCircleIcon className="w-6 mr-3 text-black" />
             ) : null}
@@ -43,16 +52,15 @@ export default function RecargasPreview({
               <XCircleIcon className="w-6 mr-3 text-red-600" />
             ) : null}
           </div>
-          <h2>
-            Fecha de solicitud: {dayjs(transaction?.createdAt).format('ll')}
-          </h2>
           {!dontShow ? (
-            <motion.button
-              className="bg-primary-100 rounded-full w-full text-white font-bold mt-3 py-px"
-              onClick={() => router.push(`/transaction/${transaction?._id}`)}
-            >
-              Ver detalles
-            </motion.button>
+            <div className="flex justify-center">
+              <motion.button
+                className="bg-primary-100 hover:bg-primary-600 rounded-lg text-white font-bold mt-5 py-2 px-8 shadow-md"
+                onClick={() => router.push(`/transaction/${transaction?._id}`)}
+              >
+                Ver detalles
+              </motion.button>
+            </div>
           ) : null}
         </div>
       </div>

@@ -42,7 +42,7 @@ export default function Home() {
             <h2>Loading...</h2>
           </div>
         )) || (
-          <div className="w-screen h-full p-0">
+          <div className="w-screen h-full p-0 bg-gray-200">
             <div>
               <Nav open={open} setOpen={setOpen} />
               <Search data={featuredProducts?.products} />
