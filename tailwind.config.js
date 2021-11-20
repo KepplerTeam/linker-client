@@ -20,6 +20,7 @@ module.exports = {
     },
     backgroundImage: (theme) => ({
       'landing-background': "url('../public/landing-background.png')",
+      'login-background': "url('../public/login-background.png')",
     }),
 
     fontWeight: {

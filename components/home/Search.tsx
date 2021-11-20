@@ -29,7 +29,7 @@ export default function Search({ data }: SearchProps) {
       <h4 className="text-lg font-light pb-2">Bienvenido, {user?.firstName}</h4>
       <h1 className="text-3xl font-bold">¿Qué desea comprar hoy?</h1>
       <input
-        className="input-text shadow-md focus:outline-none focus:ring-0 focus:border-primary-100 focus:border-8"
+        className="input-text shadow-md focus:ring-1 focus:border-primary-100 focus:ring-primary-100 focus:border-8"
         type="text"
         name="search"
         id="search"
