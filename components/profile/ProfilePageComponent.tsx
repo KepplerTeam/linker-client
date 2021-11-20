@@ -92,6 +92,21 @@ export default function ProfilePageComponent({
               </div>
             </div>
           ) : null}
+          {user?.role === 2 ? (
+            <div className="px-5 ml-auto mt-6 flex flex-row">
+              <div className="bg-primary-100 rounded-lg text-white flex flex-row">
+                <div className="mt-3 ml-3">
+                  <CashIcon className="w-5" />
+                </div>
+                <motion.button
+                  className="px-3 py-1 text-white font-bold"
+                  onClick={() => router.push('/profile')}
+                >
+                  <span>Solicitar Retiro</span>
+                </motion.button>
+              </div>
+            </div>
+          ) : null}
         </div>
         {/* Entrepreneur */}
         {user?.role === 1 ? <EntrepreneurData /> : null}
