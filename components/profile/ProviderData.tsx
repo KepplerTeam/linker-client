@@ -36,7 +36,7 @@ export default function ProviderData() {
           <>
             <div className="px-6 pb-4 pt-8 border-t-2 shadow-inner">
               <div>
-                <h2 className="font-bold text-lg">Resumen de Ventas</h2>
+                <h2 className="font-bold text-lg mb-8">Resumen de Ventas</h2>
                 {billsData?.bills?.map((bill) => (
                   <div key={bill?._id}>
                     <OrdersResume bill={bill} />
@@ -44,7 +44,7 @@ export default function ProviderData() {
                 ))}
               </div>
             </div>
-            <div className="mt-56 px-6 pb-4 pt-8  border-t-2 shadow-inner">
+            <div className="mt-6 px-6 pb-4 pt-8  border-t-2 shadow-inner">
               <div className="flex flex-row justify-between mb-4">
                 <div>
                   <h2 className="font-bold text-lg">Mis Empresas</h2>
