@@ -27,7 +27,7 @@ export default function EnterpriseProfilePage() {
           <h2>loading...</h2>
         </div>
       ) : (
-        <div>
+        <div className="bg-gray-200">
           <Nav open={open} setOpen={setOpen} />
           <EnterpriseProfile user={user} enterprise={data?.enterprise} />
           <Footer />

@@ -85,7 +85,7 @@ export default function ProfilePageComponent({
                   className="px-3 py-1 text-white font-bold"
                   onClick={() => router.push('/recargar')}
                 >
-                  <span>Recargar Wallet</span>
+                  <span>Recargar Billetera</span>
                 </motion.button>
               </div>
             </div>
