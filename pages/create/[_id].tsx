@@ -11,7 +11,7 @@ export default function AddProductToEnterprise() {
   const [open, setOpen] = React.useState(false);
   return (
     <div>
-      {!user ? (
+      {!user || user?.role !== 2 ? (
         <div>
           <Nav open={open} setOpen={setOpen} />
           <div className="min-h-screen">

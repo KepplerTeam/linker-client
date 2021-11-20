@@ -59,7 +59,7 @@ function Image({
           file?.type !== 'application/pdf'
         ) {
           setError(true);
-          return notify('El formato de este archivo no es válido', 'error');
+          return notify('El formato de este archivo no es válido', 'danger');
         }
         if (
           file?.type !== 'image/jpg' &&
@@ -68,13 +68,13 @@ function Image({
           fileType === 'img'
         ) {
           setError(true);
-          return notify('El formato de esta imagen no es válido', 'error');
+          return notify('El formato de esta imagen no es válido', 'danger');
         }
         if (file?.type !== 'application/pdf' && fileType === 'pdf') {
           setError(true);
           return notify(
             'El formato de este archivo no es válido. Solo se aceptan archivos en formato PDF',
-            'error'
+            'danger'
           );
         }
         const { data } = await signS3({
@@ -107,11 +107,11 @@ function Image({
           updateSrc(id, data?.signS3?.url, name, file);
           notify('Archivo agregado exitosamente', 'success');
         } else {
-          notify(`Error cargando el archivo ${name}`, 'error');
+          notify(`Error cargando el archivo ${name}`, 'danger');
           setError(true);
         }
       } catch (err) {
-        notify(err.message, 'error', err);
+        notify(err.message, 'danger', err);
         setError(true);
       } finally {
         setUploading(false);

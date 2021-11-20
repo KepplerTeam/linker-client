@@ -21,6 +21,7 @@ export const GET_USER = gql`
       balance
       enterprise {
         name
+        balance
         _id
       }
       summaryShop
@@ -102,6 +103,10 @@ export const CURRENT_USER = gql`
       email
       role
       balance
+      enterprise {
+        _id
+        balance
+      }
       favorites {
         _id
         products {
@@ -110,6 +115,7 @@ export const CURRENT_USER = gql`
           price
           images
           enterprise {
+            balance
             _id
           }
         }
@@ -135,7 +141,12 @@ export const GET_BILL = gql`
   query GET_BILL($filter: FilterFindOneBillInput) {
     bill(filter: $filter) {
       _id
-      owner
+      totalPrice
+      createdAt
+      client {
+        username
+        _id
+      }
       products {
         _id
         name
@@ -154,9 +165,13 @@ export const GET_BILLS = gql`
   query GET_BILLS(
     $filter: FilterFindManyBillInput
     $sort: SortFindManyBillInput
+    $limit: Int
   ) {
-    bills(filter: $filter, sort: $sort) {
+    bills(filter: $filter, sort: $sort, limit: $limit) {
       _id
+      enterpriseOwner {
+        _id
+      }
       totalPrice
       createdAt
       client {
@@ -169,6 +184,9 @@ export const GET_BILLS = gql`
         enterprise {
           name
           balance
+          owner {
+            _id
+          }
         }
       }
     }
@@ -185,6 +203,7 @@ export const GET_ENTERPRISE = gql`
       name
       rating
       category
+      balance
       owner {
         _id
       }
@@ -208,6 +227,7 @@ export const GET_ENTERPRISES = gql`
       rating
       category
       banner
+      balance
       owner {
         _id
         dni

@@ -44,7 +44,7 @@ export default function RecargaPageComponent() {
         notify('Datos incompletos, verifique la informacion', 'warning');
       }
     } catch (err) {
-      notify(err.message, 'error', err);
+      notify(err.message, 'danger', err);
     }
   };
 

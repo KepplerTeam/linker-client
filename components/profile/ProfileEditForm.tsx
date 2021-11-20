@@ -61,7 +61,7 @@ export default function ProfileEditForm() {
         notify('No se ha podido actualizar el perfil', 'warning');
       }
     } catch (err) {
-      notify(err.message, 'error', err);
+      notify(err.message, 'danger', err);
     }
   };
 

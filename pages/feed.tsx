@@ -1,5 +1,6 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
+import { useRouter } from 'next/router';
 import Nav from '../components/Navbar/Nav';
 import Search from '../components/home/Search';
 import CardHome from '../components/home/CardHome';
@@ -7,12 +8,12 @@ import Footer from '../components/common/Footer';
 import { GET_PRODUCTS } from '../graphql/queries';
 import { Product } from '../models';
 import { useUser } from '../hooks/useUser';
-import SidebarMenu from '../components/common/SidebarMenu';
 
 export default function Home() {
   const [category, setCategory] = React.useState<number>(0);
   const [user] = useUser();
   const [open, setOpen] = React.useState(false);
+  const router = useRouter();
 
   const { data, loading } = useQuery<{
     products: Product[];
@@ -31,7 +32,9 @@ export default function Home() {
     });
 
   React.useEffect(() => {
-    console.log('KepplerTeam');
+    if (!user) {
+      router.push('/');
+    }
   }, [user]);
 
   return (
@@ -42,7 +45,7 @@ export default function Home() {
             <h2>Loading...</h2>
           </div>
         )) || (
-          <div className="w-screen h-full p-0">
+          <div className="w-screen h-full p-0 bg-gray-200">
             <div>
               <Nav open={open} setOpen={setOpen} />
               <Search data={featuredProducts?.products} />

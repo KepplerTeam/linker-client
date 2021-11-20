@@ -44,10 +44,10 @@ export default function RecargasDetails({ transaction }: RecargasDetailsProps) {
           notify('Recarga aprobada exitosamente!', 'success');
           await router.push('/profile');
         } else {
-          notify('Error', 'error');
+          notify('Error', 'danger');
         }
       } else {
-        notify('Error 2', 'error');
+        notify('Error 2', 'danger');
       }
     } catch (err) {
       notify(err.message, 'err', err);
@@ -69,10 +69,10 @@ export default function RecargasDetails({ transaction }: RecargasDetailsProps) {
         notify('La recarga ha sido rechazada', 'success');
         await router.push('/profile');
       } else {
-        notify('Ha ocurrido un error', 'error');
+        notify('Ha ocurrido un error', 'danger');
       }
     } catch (err) {
-      notify(err.message, 'error', err);
+      notify(err.message, 'danger', err);
     }
   };
   return (

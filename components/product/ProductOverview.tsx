@@ -49,13 +49,10 @@ export default function ProductOverview({ product }: ProductOverviewProps) {
       if (updateData?.updateShoppingCart) {
         notify('Producto anadido al carrito exitosamente', 'success');
       } else {
-        notify(
-          'Ha ocurrido un error al anadir el producto al carrito',
-          'error'
-        );
+        notify('Ha ocurrido un error al anadir el producto al carrito', 'err');
       }
     } catch (err) {
-      notify(err.message, 'error', err);
+      notify(err.message, 'err', err);
     }
   };
 
@@ -83,21 +80,18 @@ export default function ProductOverview({ product }: ProductOverviewProps) {
         notify('Producto anadido a favoritos exitosamente', 'success');
       } else {
         console.log('me rompi aqui');
-        notify(
-          'Ha ocurrido un error al anadir el producto a favoritos',
-          'error'
-        );
+        notify('Ha ocurrido un error al anadir el producto a favoritos', 'err');
       }
     } catch (err) {
       console.log('me rompi abajo');
-      notify(err.message, 'error', err);
+      notify(err.message, 'err', err);
     }
   };
 
   const isNotFavorite = async () => {
     // Extrae la informacion de favoritos del usuario y agrega en un array los id de cada producto
-    setFavoritesData(user?.favorites?.products.map((a) => a._id));
-    if (favoritesData.includes(product?._id)) {
+    setFavoritesData(user?.favorites?.products?.map((a) => a._id));
+    if (favoritesData?.includes(product?._id)) {
       setIsFavorite(true);
     } else {
       setIsFavorite(false);
@@ -115,12 +109,12 @@ export default function ProductOverview({ product }: ProductOverviewProps) {
   const removeFromFavorites = async () => {
     try {
       // currentFavorites es un arreglo que contiene el id de los productos existentes en favoritos
-      const currentFavorites = user?.favorites?.products.map((p) => p._id);
+      const currentFavorites = user?.favorites?.products?.map((p) => p._id);
       // newFavorites es el carrito actualizado, contiene el id de los productos anteriores pero sin el producto eliminado
       const newFavorites = findAndRemove(currentFavorites, product?._id);
       const { data: updateData } = await updateFavorites({
         variables: {
-          filter: { _id: user?.favorites._id },
+          filter: { _id: user?.favorites?._id },
           record: {
             products: newFavorites,
           },
@@ -129,10 +123,10 @@ export default function ProductOverview({ product }: ProductOverviewProps) {
       if (updateData?.updateFavorites) {
         notify('Producto eliminado de favoritos exitosamente!', 'success');
       } else {
-        notify('Ha ocurrido un error', 'error');
+        notify('Ha ocurrido un error', 'danger');
       }
     } catch (err) {
-      notify(err.message, 'error', err);
+      notify(err.message, 'danger', err);
     }
   };
 
@@ -291,7 +285,7 @@ export default function ProductOverview({ product }: ProductOverviewProps) {
           </div>
         )}
         <div>
-          {user?._id !== product?.enterprise.owner._id ? (
+          {user?.role === 1 ? (
             <motion.button
               whileHover={{
                 scale: 1.005,
@@ -308,7 +302,8 @@ export default function ProductOverview({ product }: ProductOverviewProps) {
             >
               <span>Anadir al Carrito</span>
             </motion.button>
-          ) : (
+          ) : null}
+          {user?.role === 2 && user?._id === product?.enterprise?.owner?._id ? (
             <motion.button
               whileHover={{
                 scale: 1.005,
@@ -325,7 +320,7 @@ export default function ProductOverview({ product }: ProductOverviewProps) {
             >
               <span>Editar Producto</span>
             </motion.button>
-          )}
+          ) : null}
           <div>
             <h2 className="my-3">Review(#)</h2>
           </div>

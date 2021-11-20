@@ -43,15 +43,15 @@ export default function CartProduct({
       if (updateData?.updateShoppingCart) {
         notify('Producto eliminado del carrito exitosamente!', 'success');
       } else {
-        notify('Ha ocurrido un error', 'error');
+        notify('Ha ocurrido un error', 'danger');
       }
     } catch (err) {
-      notify(err.message, 'error', err);
+      notify(err.message, 'danger', err);
     }
   };
 
   React.useEffect(() => {
-    console.log('KepplerTeam');
+    console.log('');
   }, [cart]);
 
   /**

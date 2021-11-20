@@ -39,7 +39,7 @@ function DocumentList({
     [updateDocs, updateURLs]
   );
   return (
-    <section className="file-list flex flex-col justify-center mt-5 max-h-48 overflow-y-scroll">
+    <section className="file-list flex flex-col justify-center mt-5 max-h-48 overflow-y-scroll w-full">
       {docs.map((doc, idx) => (
         <Image
           file={doc?.file}

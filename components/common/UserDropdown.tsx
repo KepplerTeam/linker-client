@@ -33,10 +33,10 @@ export default function UserDropdown() {
         setUserMenuOpen(false);
         await router.push('/login');
       } else {
-        notify(data?.changePassword?.err ?? 'Ha ocurrido un error.', 'error');
+        notify(data?.changePassword?.err ?? 'Ha ocurrido un error.', 'danger');
       }
     } catch (err) {
-      notify(err.message, 'error', err);
+      notify(err.message, 'danger', err);
     } finally {
       setDisabled(false);
       NProgress.done();

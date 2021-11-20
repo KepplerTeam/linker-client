@@ -23,6 +23,8 @@ export default function CheckoutPageComponent() {
   const onSubmit = async () => {
     try {
       const cartContent = user?.shoppingCart?.products.map((p) => p._id);
+      let uniqueEnterpriseProducts = [];
+
       if (user?.balance >= totalPrice) {
         //   Se crea la factura en la bd
         const productOwners = user?.shoppingCart?.products.map(
@@ -58,71 +60,68 @@ export default function CheckoutPageComponent() {
                 uniqueEnterprises[x] ===
                 user?.shoppingCart?.products[i].enterprise._id
               ) {
-                const uniqueEnterpriseProducts = [];
                 uniqueEnterpriseProducts.push(user?.shoppingCart?.products[i]);
-                const enterpriseId = uniqueEnterprises[x];
-                const totalBillPrice = uniqueEnterpriseProducts.reduce(
-                  (sum, { price }) => sum + price,
-                  0
-                );
-                const { data: billData } = await createBill({
+              }
+            }
+            const totalBillPrice = uniqueEnterpriseProducts.reduce(
+              (sum, { price }) => sum + price,
+              0
+            );
+            const enterpriseId = uniqueEnterprises[x];
+            const { data: billData } = await createBill({
+              variables: {
+                data: {
+                  createBillInfoInput: {
+                    client: user?._id,
+                    enterprise: enterpriseId,
+                    totalPrice: Math.round(totalBillPrice * 100) / 100,
+                  },
+                  addingProducts: uniqueEnterpriseProducts.map((p) => p._id),
+                },
+              },
+            });
+            if (billData.createBill) {
+              // Se actualiza el balance del usuario
+              const { data: userData } = await updateUser({
+                variables: {
+                  filter: { _id: user?._id },
+                  record: {
+                    balance: user?.balance - totalBillPrice,
+                  },
+                },
+              });
+              if (userData.updateUser) {
+                //   Se vacia el carrito de compras
+                const { data: shoppingCartData } = await updateShoppingCart({
                   variables: {
-                    data: {
-                      createBillInfoInput: {
-                        client: user?._id,
-                        enterprise: enterpriseId,
-                        totalPrice: Math.round(totalBillPrice * 100) / 100,
-                      },
-                      addingProducts: uniqueEnterpriseProducts.map(
-                        (p) => p._id
-                      ),
+                    filter: { _id: user?.shoppingCart?._id },
+                    record: {
+                      products: null,
                     },
                   },
                 });
-                if (billData.createBill) {
-                  // Se actualiza el balance del usuario
-                  const { data: userData } = await updateUser({
-                    variables: {
-                      filter: { _id: user?._id },
-                      record: {
-                        balance: user?.balance - totalBillPrice,
-                      },
-                    },
-                  });
-                  if (userData.updateUser) {
-                    //   Se vacia el carrito de compras
-                    const { data: shoppingCartData } = await updateShoppingCart(
-                      {
-                        variables: {
-                          filter: { _id: user?.shoppingCart?._id },
-                          record: {
-                            products: null,
-                          },
-                        },
-                      }
-                    );
-                    if (shoppingCartData.updateShoppingCart) {
-                      notify('Felicidades por su compra!', 'success');
-                    } else {
-                      notify('Ha ocurrido un error 1', 'error');
-                    }
-                  } else {
-                    notify('Ha ocurrido un error 2', 'error');
-                  }
+                if (shoppingCartData.updateShoppingCart) {
+                  console.log('nooooise');
+                  uniqueEnterpriseProducts = [];
                 } else {
-                  notify('Ha ocurrido un error 3', 'error');
+                  notify('error', 'danger');
                 }
+              } else {
+                notify('Ha ocurrido un error 2', 'danger');
               }
+            } else {
+              notify('Ha ocurrido un error 3', 'danger');
             }
           }
         };
         const billDivision = handleBillDivision();
         newUniqueBill(billDivision);
       } else {
-        notify('Balance insuficiente para realizar la compra', 'error');
+        notify('Balance insuficiente para realizar la compra', 'danger');
       }
+      notify('Felicidades por su compra!', 'success');
     } catch (error) {
-      notify(error.message, 'error', error);
+      notify(error.message, 'danger', error);
     }
   };
 

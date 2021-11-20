@@ -87,7 +87,7 @@ export default function Create({
           // TODO Perfil de todos los productos
           await router.push('/feed');
         } else {
-          notify('Ha ocurrido un error al crear el producto', 'error');
+          notify('Ha ocurrido un error al crear el producto', 'danger');
           console.log('error al crear el producto');
         }
       } else {
@@ -115,7 +115,7 @@ export default function Create({
         }
       }
     } catch (err) {
-      notify(err.message, 'error', err);
+      notify(err.message, 'danger', err);
     } finally {
       setDisabled(false);
     }

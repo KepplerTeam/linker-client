@@ -16,7 +16,7 @@ export default function FavoriteProduct({ product }: FavoriteProductProps) {
   const [updateFavorites] = useMutation(UPDATE_FAVORITES);
 
   // Estado para validar en el useEffect cuando cambia la data y recargar el componente
-  const [favorites] = React.useState(user.favorites.products);
+  const [favorites] = React.useState(user?.favorites?.products);
 
   /** removeProduct
    * @abstract Permite al usuario eliminar productos de los favoritos
@@ -39,10 +39,10 @@ export default function FavoriteProduct({ product }: FavoriteProductProps) {
       if (updateData?.updateFavorites) {
         notify('Producto eliminado de favoritos exitosamente!', 'success');
       } else {
-        notify('Ha ocurrido un error', 'error');
+        notify('Ha ocurrido un error', 'danger');
       }
     } catch (err) {
-      notify(err.message, 'error', err);
+      notify(err.message, 'danger', err);
     }
   };
 

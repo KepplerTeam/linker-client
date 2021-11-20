@@ -36,14 +36,14 @@ export default function ProductHomeInfo({
   const addToFavorites = async () => {
     try {
       // Extrae la informacion de favoritos del usuario y agrega en un array los id de cada producto
-      setFavoritesData(user?.favorites?.products.map((a) => a._id));
+      setFavoritesData(user?.favorites?.products?.map((a) => a._id));
       console.log('llegue 1');
       // Agrega a la lista creada anteriormente el id del producto que se desea anadir al carrito.
       favoritesData.push(product?._id);
       console.log(favoritesData);
       const { data: updateData } = await updateFavorites({
         variables: {
-          filter: { _id: user?.favorites._id },
+          filter: { _id: user?.favorites?._id },
           record: {
             products: favoritesData,
           },
@@ -55,19 +55,19 @@ export default function ProductHomeInfo({
         console.log('me rompi aqui');
         notify(
           'Ha ocurrido un error al anadir el producto a favoritos',
-          'error'
+          'danger'
         );
       }
     } catch (err) {
       console.log('me rompi abajo');
-      notify(err.message, 'error', err);
+      notify(err.message, 'danger', err);
     }
   };
 
   const isNotFavorite = async () => {
     // Extrae la informacion de favoritos del usuario y agrega en un array los id de cada producto
-    setFavoritesData(user?.favorites?.products.map((a) => a._id));
-    if (favoritesData.includes(product?._id)) {
+    setFavoritesData(user?.favorites?.products?.map((a) => a._id));
+    if (favoritesData?.includes(product?._id)) {
       setIsFavorite(true);
     } else {
       setIsFavorite(false);
@@ -99,10 +99,10 @@ export default function ProductHomeInfo({
       if (updateData?.updateFavorites) {
         notify('Producto eliminado de favoritos exitosamente!', 'success');
       } else {
-        notify('Ha ocurrido un error', 'error');
+        notify('Ha ocurrido un error', 'danger');
       }
     } catch (err) {
-      notify(err.message, 'error', err);
+      notify(err.message, 'danger', err);
     }
   };
 
@@ -122,7 +122,7 @@ export default function ProductHomeInfo({
 
   return (
     <>
-      <div className="card items-center justify-between min-w-full mr-4">
+      <div className="card items-center justify-between min-w-full h-full mb-8 mt-3 mr-4">
         <div className="w-full h-full">
           <div className="flex flex-row justify-between w-full">
             <div className="w-1/2 z-20">

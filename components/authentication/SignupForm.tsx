@@ -54,7 +54,7 @@ export default function SignupForm() {
         // Verifica que las contrasenas sean iguales y que tengan un tamano mayor a 6 caracteres por seguridad.
         if (password === confirmPassword && password.length > 6) {
           if (!validateString(name) || !validateString(lastname)) {
-            return notify('Por favor, verifique sus datos', 'warning');
+            return notify('Por favor, verifique sus datos', 'danger');
           }
           // Role 1 es emprendedor (comprador)
           if (role === '1') {
@@ -80,7 +80,7 @@ export default function SignupForm() {
               notify('Usuario creado exitosamente', 'success');
               await router.push('/feed');
             }
-            return notify('No se ha podido crear el usuario', 'warning');
+            return notify('No se ha podido crear el usuario', 'danger');
           }
           // Role 2 es empresario (vendedor)
           if (role === '2') {
@@ -114,20 +114,20 @@ export default function SignupForm() {
                 notify('Cuenta creada con exito!', 'success');
                 await router.push('/feed');
               }
-              return notify('No se ha podido crear el usuario', 'warning');
+              return notify('No se ha podido crear el usuario', 'danger');
             }
-            return notify('Informacion de la empresa incompleta', 'warning');
+            return notify('Informacion de la empresa incompleta', 'danger');
           }
-          return notify('Rol invalido', 'error');
+          return notify('Rol invalido', 'danger');
         }
         return notify(
           'Contrasena invalida, verifique que coinciden y que tengan al menos 6 caracteres',
-          'warning'
+          'danger'
         );
       }
-      return notify('Informacion incompleta', 'warning');
+      return notify('Informacion incompleta', 'danger');
     } catch (error) {
-      return notify('Ha ocurrido un error', 'warning');
+      return notify('Ha ocurrido un error', 'danger');
     }
   };
   return (
