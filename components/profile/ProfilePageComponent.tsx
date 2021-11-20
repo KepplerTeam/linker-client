@@ -1,7 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
-import { useQuery } from '@apollo/client';
 import { Enterprise, User } from '../../models';
 import { EditIcon } from '../icons';
 import CashIcon from '../icons/CashIcon';
@@ -27,7 +26,6 @@ export default function ProfilePageComponent({
       const add = (accumulator, a) => accumulator + a;
       const sum = bal.reduce(add, 0);
       setProviderBalance(sum);
-      // eslint-disable-next-line no-plusplus
     }
   }, [providerBalance]);
 

@@ -169,6 +169,9 @@ export const GET_BILLS = gql`
   ) {
     bills(filter: $filter, sort: $sort, limit: $limit) {
       _id
+      enterpriseOwner {
+        _id
+      }
       totalPrice
       createdAt
       client {

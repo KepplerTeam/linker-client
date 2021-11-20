@@ -22,7 +22,7 @@ export default function ProviderData() {
   const { data: billsData, loading: loadingBillsData } = useQuery<{
     bills: Bill[];
   }>(GET_BILLS, {
-    variables: { filter: {}, limit: 3 },
+    variables: { filter: { enterpriseOwner: user?._id } },
     fetchPolicy: 'network-only',
   });
   return (
@@ -39,12 +39,12 @@ export default function ProviderData() {
                 <h2 className="font-bold text-lg">Resumen de Ventas</h2>
                 {billsData?.bills?.map((bill) => (
                   <div key={bill?._id}>
-                    <OrdersResume bill={bill} />
+                    <OrdersResume bill={bill} isSeller />
                   </div>
                 ))}
               </div>
             </div>
-            <div className="mt-56 px-6 pb-4 pt-8  border-t-2 shadow-inner">
+            <div className="px-6 pb-4 pt-8  border-t-2 shadow-inner">
               <div className="flex flex-row justify-between mb-4">
                 <div>
                   <h2 className="font-bold text-lg">Mis Empresas</h2>
