@@ -23,7 +23,7 @@ export default function CheckoutPageComponent() {
   const onSubmit = async () => {
     try {
       const cartContent = user?.shoppingCart?.products.map((p) => p._id);
-      const uniqueEnterpriseProducts = [];
+      let uniqueEnterpriseProducts = [];
 
       if (user?.balance >= totalPrice) {
         //   Se crea la factura en la bd
@@ -102,6 +102,7 @@ export default function CheckoutPageComponent() {
                 });
                 if (shoppingCartData.updateShoppingCart) {
                   console.log('nooooise');
+                  uniqueEnterpriseProducts = [];
                 } else {
                   notify('error', 'danger');
                 }
