@@ -10,7 +10,7 @@ import { Enterprise } from '../../models';
 export default function ProfilePage() {
   const [open, setOpen] = React.useState(false);
   const [user] = useUser();
-  const { data, loading } = useQuery<{ enterprise: Enterprise[] }>(
+  const { data, loading } = useQuery<{ enterprises: Enterprise[] }>(
     GET_ENTERPRISES,
     { variables: { filter: { owner: user?._id } }, fetchPolicy: 'network-only' }
   );
