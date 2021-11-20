@@ -70,6 +70,7 @@ export interface Enterprise extends GraphQLModel {
   category?: number;
   products?: Array<Product>;
   banner?: string;
+  balance?: number;
   // salesSummary?: Types.ObjectId; //BillDocument[]
   // commentsMadeIt?: Types.ObjectId; //SellerComment[]
 }

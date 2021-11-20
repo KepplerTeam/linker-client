@@ -1,32 +1,35 @@
-import { useQuery } from '@apollo/client';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
-import React from 'react';
-import {
-  GET_BILLS,
-  GET_ENTERPRISES,
-  GET_TRANSACTIONS,
-} from '../../graphql/queries';
-import { Enterprise, Transaction, User } from '../../models';
-import EnterpriseCard from '../enterprise/EnterpriseCard';
+import { useQuery } from '@apollo/client';
+import { Enterprise, User } from '../../models';
 import { EditIcon } from '../icons';
 import CashIcon from '../icons/CashIcon';
-import ChevronDownIcon from '../icons/ChevronDownIcon';
-import ChevronUpIcon from '../icons/ChevronUpIcon';
-import RecargasPreview from '../recargas/RecargasPreview';
 import AdminData from './AdminData';
 import EntrepreneurData from './EntrepreneurData';
-import OrdersResume from './OrdersResume';
 import ProviderData from './ProviderData';
 
 interface ProfilePageComponentProps {
   user: User;
+  enterprise?: Enterprise[];
 }
 
 export default function ProfilePageComponent({
   user,
+  enterprise = [],
 }: ProfilePageComponentProps) {
   const router = useRouter();
+  const [providerBalance, setProviderBalance] = React.useState(0);
+
+  React.useEffect(() => {
+    if (user?.role === 2) {
+      const bal = enterprise.map((p) => p.balance);
+      const add = (accumulator, a) => accumulator + a;
+      const sum = bal.reduce(add, 0);
+      setProviderBalance(sum);
+      // eslint-disable-next-line no-plusplus
+    }
+  }, [providerBalance]);
 
   return (
     <>
@@ -61,9 +64,18 @@ export default function ProfilePageComponent({
         </div>
         <div className="flex flex-row items-center justify-between mx-6 mb-12 bottom-1 p-5 rounded-xl bg-gray-50 shadow-lg hover:shadow-2xl">
           <div className="px-2">
-            <h2 className="font-black text-xl text-black">
-              USD {Math.round(user?.balance * 100) / 100}
-            </h2>
+            {user?.role === 1 ? (
+              <h2 className="font-black text-xl text-black">
+                USD {Math.round(user?.balance * 100) / 100}
+              </h2>
+            ) : null}
+            {user?.role === 2 ? (
+              <div>
+                <h2 className="font-black text-xl text-black">
+                  USD {Math.round(providerBalance * 100) / 100}
+                </h2>{' '}
+              </div>
+            ) : null}
           </div>
           {user?.role === 1 ? (
             <div className="px-5 ml-auto mt-6 flex flex-row">

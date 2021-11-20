@@ -94,13 +94,34 @@ export default function EnterpriseProfile({
       {active === 0 ? (
         <div className="">
           <div className="my-4">
+            <h2 className="font-bold">Balance actual</h2>
+            <h2>${enterprise?.balance}</h2>
+          </div>
+          <div className="my-4">
             <h2 className="font-bold">Rif de la Empresa</h2>
             <h2>{enterprise?.rif}</h2>
           </div>
           <div className="my-4">
             <h2 className="font-bold">
               Categoria:{' '}
-              <span className="font-normal">{enterprise?.category}</span>
+              {enterprise?.category === 0 ? (
+                <span className="font-normal">Construccion y metales</span>
+              ) : null}
+              {enterprise?.category === 1 ? (
+                <span className="font-normal">Alimentos</span>
+              ) : null}
+              {enterprise?.category === 2 ? (
+                <span className="font-normal">Campo y Fertilizantes</span>
+              ) : null}
+              {enterprise?.category === 3 ? (
+                <span className="font-normal">Plasticos y reutilizables</span>
+              ) : null}
+              {enterprise?.category === 4 ? (
+                <span className="font-normal">Carton y desechables</span>
+              ) : null}
+              {enterprise?.category === 5 ? (
+                <span className="font-normal">Tecnologia y computacion</span>
+              ) : null}
             </h2>
           </div>
         </div>
