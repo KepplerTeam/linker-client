@@ -1,9 +1,7 @@
-import { useQuery } from '@apollo/client';
-import { motion } from 'framer-motion';
-import router, { useRouter } from 'next/router';
-import { Tab } from '@headlessui/react';
 import React from 'react';
-import { GET_ENTERPRISE } from '../../graphql/queries';
+import { motion } from 'framer-motion';
+import router from 'next/router';
+import { Tab } from '@headlessui/react';
 import { Enterprise, User } from '../../models';
 import ProductCard from '../product/ProductCard';
 
@@ -130,19 +128,13 @@ export default function EnterpriseProfile({
               <ul>
                 <li className="relative p-3 rounded-md hover:bg-coolGray-100">
                   <h3 className="text-sm font-medium leading-5">Title</h3>
-
                   <ul className="flex mt-1 space-x-1 text-xs font-normal leading-4 text-coolGray-500">
-                    <li></li>
+                    <li />
                     <li>&middot;</li>
                     <li> comments</li>
                     <li>&middot;</li>
                     <li>shares</li>
                   </ul>
-
-                  <a
-                    href="#"
-                    className="absolute inset-0 rounded-md focus:z-10 focus:outline-none focus:ring-2 ring-blue-400"
-                  />
                 </li>
               </ul>
             </Tab.Panel>
