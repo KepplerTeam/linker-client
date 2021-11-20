@@ -39,7 +39,7 @@ export default function Nav({ open = false, setOpen }: NavProps) {
   };
 
   return (
-    <div className="nav p-3">
+    <div className="nav p-3 bg-gray-600 shadow-lg sticky">
       {/* <button
         type="button"
         className="flex items-center"
@@ -49,7 +49,7 @@ export default function Nav({ open = false, setOpen }: NavProps) {
       </button> */}
       <SidebarMenu open={open} setOpen={setOpen} />
       <a className="mx-auto" href="/feed">
-        <img className="h-8" src="/logo.svg" alt="Linker" />
+        <img className="h-8" src="/logo-white.svg" alt="Linker" />
       </a>
 
       <button

@@ -26,43 +26,46 @@ export default function EntrepreneurData() {
     });
   return (
     <div>
-      {loadingAllTransactionsData ? (
-        <div>
-          <h2>Loading...</h2>
-        </div>
-      ) : (
-        <>
-          <div className="mt-4">
-            <motion.button
-              className="px-3 py-1 text-primary-100"
-              onClick={() => setShowRecord(!showRecord)}
-            >
-              {showRecord ? (
-                <div className="flex flex-row space-x-2">
-                  <h2>Ocultar historial de recargas</h2>
-                  <ChevronUpIcon className="w-4" />
-                </div>
-              ) : (
-                <div className="flex flex-row space-x-2">
-                  <h2>Mostrar historial de recargas</h2>
-                  <ChevronDownIcon className="w-4" />
-                </div>
-              )}
-            </motion.button>
-            {showRecord ? (
-              <>
-                {allTransactionsData?.transactions.map((transaction) => (
-                  <RecargasPreview
-                    key={transaction?._id}
-                    transaction={transaction}
-                    dontShow
-                  />
-                ))}
-              </>
-            ) : null}
+      <>
+        {loadingAllTransactionsData ? (
+          <div>
+            <h2>Loading...</h2>
           </div>
-        </>
-      )}
+        ) : (
+          <>
+            <div className="mt-4">
+              <motion.button
+                className="px-3 py-1 text-primary-100"
+                onClick={() => setShowRecord(!showRecord)}
+              >
+                {showRecord ? (
+                  <div className="flex flex-row space-x-2">
+                    <h2>Ocultar historial de recargas</h2>
+                    <ChevronUpIcon className="w-4" />
+                  </div>
+                ) : (
+                  <div className="flex flex-row space-x-2">
+                    <h2>Mostrar historial de recargas</h2>
+                    <ChevronDownIcon className="w-4" />
+                  </div>
+                )}
+              </motion.button>
+              {showRecord ? (
+                <>
+                  {allTransactionsData?.transactions.map((transaction) => (
+                    <RecargasPreview
+                      key={transaction?._id}
+                      transaction={transaction}
+                      dontShow
+                    />
+                  ))}
+                </>
+              ) : null}
+            </div>
+          </>
+        )}
+      </>
+
       <div>
         {billsLoading ? (
           <div>

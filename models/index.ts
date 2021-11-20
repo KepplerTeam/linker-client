@@ -30,7 +30,7 @@ export interface User extends GraphQLModel {
 }
 
 export interface Bill extends GraphQLModel {
-  owner?: User;
+  client?: User;
   products?: [Product];
   totalPrice?: number;
 }

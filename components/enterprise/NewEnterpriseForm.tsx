@@ -67,7 +67,7 @@ export default function NewEnterpriseForm({
                 notify('Empresa Creada con exito!', 'success');
                 await router.push('/profile');
               } else {
-                notify('Error la informacion.', 'warning');
+                notify('Error la informacion.', 'danger');
               }
             } else {
               const { data } = await updateEnterprise({
@@ -84,7 +84,7 @@ export default function NewEnterpriseForm({
                 notify('Empresa actualizada exitosamente!', 'success');
                 await router.push(`/enterprise/${enterprise?._id}`);
               } else {
-                notify('Error al actualizar', 'error');
+                notify('Error al actualizar', 'danger');
               }
             }
           } else {
@@ -98,7 +98,7 @@ export default function NewEnterpriseForm({
         notify('Datos invalidos', 'warning');
       }
     } catch (err) {
-      notify(err.message, 'error', err);
+      notify(err.message, 'danger', err);
     } finally {
       setName('');
       setBanner([]);

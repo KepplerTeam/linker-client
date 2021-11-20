@@ -135,7 +135,12 @@ export const GET_BILL = gql`
   query GET_BILL($filter: FilterFindOneBillInput) {
     bill(filter: $filter) {
       _id
-      owner
+      totalPrice
+      createdAt
+      client {
+        username
+        _id
+      }
       products {
         _id
         name

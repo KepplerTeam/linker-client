@@ -30,9 +30,11 @@ export default function ProfilePageComponent({
 
   return (
     <>
-      <div className="w-full min-h-screen">
-        <h2 className="text-lg font-bold p-4">Mi Perfil</h2>
-        <div className="flex flex-row px-4 pb-4  space-x-3">
+      <div className="w-full min-h-screen bg-gray-100">
+        <h2 className="text-lg font-black pt-6 pb-4 px-6 border-t-2">
+          Mi Perfil
+        </h2>
+        <div className="flex flex-row px-4 pb-4 space-x-3 mb-4">
           <div>
             <img
               src={user?.image}
@@ -57,9 +59,9 @@ export default function ProfilePageComponent({
             <h2 className="font-thin text-sm">{user?.email}</h2>
           </div>
         </div>
-        <div className="border-b-2  pb-4 flex flex-row border rounded-xl">
-          <div className="px-2 py-4 mt-4">
-            <h2 className="font-bold text-xl text-primary-100">
+        <div className="flex flex-row items-center justify-between mx-6 mb-12 bottom-1 p-5 rounded-xl bg-gray-50 shadow-lg hover:shadow-2xl">
+          <div className="px-2">
+            <h2 className="font-black text-xl text-black">
               USD {Math.round(user?.balance * 100) / 100}
             </h2>
           </div>

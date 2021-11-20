@@ -6,9 +6,13 @@ import { Bill } from '../../models';
 
 interface OrderResumeProps {
   bill: Bill;
+  isSeller?: boolean;
 }
 
-export default function OrdersResume({ bill }: OrderResumeProps) {
+export default function OrdersResume({
+  bill,
+  isSeller = false,
+}: OrderResumeProps) {
   const router = useRouter();
   dayjs.extend(localizedFormat);
   return (
@@ -18,6 +22,7 @@ export default function OrdersResume({ bill }: OrderResumeProps) {
           {bill.products.map((product, idx) => (
             <div className="w-full" key={idx}>
               <div>
+                {isSeller ? <h2>Comprador: {bill?.client?.username}</h2> : null}
                 <h2>{product.name}</h2>
                 <h2 className="text-sm mt-1">
                   {dayjs(bill?.createdAt).format('ll')}

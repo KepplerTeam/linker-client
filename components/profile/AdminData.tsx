@@ -16,9 +16,9 @@ export default function AdminData() {
   return (
     <div>
       <>
-        <div className="p-4">
+        <div className="pt-6 pb-4 px-6 border-t-2 shadow-inner">
           <div>
-            <h2 className="font-bold bg text-lg">Solicitudes de Recarga</h2>
+            <h2 className="font-bold text-lg">Solicitudes de Recarga</h2>
           </div>
         </div>
 

@@ -104,13 +104,13 @@ export default function CheckoutPageComponent() {
                     if (shoppingCartData.updateShoppingCart) {
                       notify('Felicidades por su compra!', 'success');
                     } else {
-                      notify('Ha ocurrido un error 1', 'error');
+                      notify('Ha ocurrido un error 1', 'danger');
                     }
                   } else {
-                    notify('Ha ocurrido un error 2', 'error');
+                    notify('Ha ocurrido un error 2', 'danger');
                   }
                 } else {
-                  notify('Ha ocurrido un error 3', 'error');
+                  notify('Ha ocurrido un error 3', 'danger');
                 }
               }
             }
@@ -119,10 +119,10 @@ export default function CheckoutPageComponent() {
         const billDivision = handleBillDivision();
         newUniqueBill(billDivision);
       } else {
-        notify('Balance insuficiente para realizar la compra', 'error');
+        notify('Balance insuficiente para realizar la compra', 'danger');
       }
     } catch (error) {
-      notify(error.message, 'error', error);
+      notify(error.message, 'danger', error);
     }
   };
 
