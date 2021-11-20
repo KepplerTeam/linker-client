@@ -1,9 +1,7 @@
-import { useQuery } from '@apollo/client';
-import { motion } from 'framer-motion';
-import router, { useRouter } from 'next/router';
-import { Tab } from '@headlessui/react';
 import React from 'react';
-import { GET_ENTERPRISE } from '../../graphql/queries';
+import { motion } from 'framer-motion';
+import router from 'next/router';
+import { Tab } from '@headlessui/react';
 import { Enterprise, User } from '../../models';
 import ProductCard from '../product/ProductCard';
 

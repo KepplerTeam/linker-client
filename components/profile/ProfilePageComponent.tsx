@@ -1,7 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
-import { useQuery } from '@apollo/client';
 import { Enterprise, User } from '../../models';
 import { EditIcon } from '../icons';
 import CashIcon from '../icons/CashIcon';
@@ -27,7 +26,6 @@ export default function ProfilePageComponent({
       const add = (accumulator, a) => accumulator + a;
       const sum = bal.reduce(add, 0);
       setProviderBalance(sum);
-      // eslint-disable-next-line no-plusplus
     }
   }, [providerBalance]);
 
@@ -88,6 +86,21 @@ export default function ProfilePageComponent({
                   onClick={() => router.push('/recargar')}
                 >
                   <span>Recargar Wallet</span>
+                </motion.button>
+              </div>
+            </div>
+          ) : null}
+          {user?.role === 2 ? (
+            <div className="px-5 ml-auto mt-6 flex flex-row">
+              <div className="bg-primary-100 rounded-lg text-white flex flex-row">
+                <div className="mt-3 ml-3">
+                  <CashIcon className="w-5" />
+                </div>
+                <motion.button
+                  className="px-3 py-1 text-white font-bold"
+                  onClick={() => router.push('/profile')}
+                >
+                  <span>Solicitar Retiro</span>
                 </motion.button>
               </div>
             </div>

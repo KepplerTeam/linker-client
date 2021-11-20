@@ -19,17 +19,17 @@ export default function OrdersResume({
     <>
       <div className="bg-gray-50 shadow-lg hover:shadow-2xl rounded-xl p-4 mx-3 mb-4 flex flex-col w-80 min-w-max">
         <div className="w-full h-auto">
+          {isSeller ? <h2>Comprador: {bill?.client?.username}</h2> : null}
           {bill.products.map((product, idx) => (
             <div className="w-full" key={idx}>
               <div>
-                {isSeller ? <h2>Comprador: {bill?.client?.username}</h2> : null}
                 <h2 className="font-semibold">{product.name}</h2>
-                <h2 className="text-base mt-1">
-                  {dayjs(bill?.createdAt).format('ll')}
-                </h2>
               </div>
             </div>
           ))}
+          <h2 className="text-base mt-1">
+            {dayjs(bill?.createdAt).format('ll')}
+          </h2>
           <div className="w-full mt-1">
             <div className="flex justify-between">
               <div>
