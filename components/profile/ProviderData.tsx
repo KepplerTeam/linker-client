@@ -34,38 +34,38 @@ export default function ProviderData() {
           </div>
         ) : (
           <>
-            <div className="p-4">
+            <div className="px-6 pb-4 pt-8 border-t-2 shadow-inner">
               <div>
                 <h2 className="font-bold text-lg">Resumen de Ventas</h2>
                 {billsData?.bills?.map((bill) => (
                   <div key={bill?._id}>
-                    <OrdersResume bill={bill} isSeller />
+                    <OrdersResume bill={bill} />
                   </div>
                 ))}
               </div>
-              <div className="mt-6">
-                <div className="flex flex-row justify-between mb-4">
-                  <div>
-                    <h2 className="font-bold text-lg">Mis Empresas</h2>
-                  </div>
-                  <div>
-                    <motion.button
-                      className="bg-primary-100 rounded-lg px-3 py-1 w-full text-white font-bold"
-                      onClick={() => router.push('/enterprise/register')}
-                    >
-                      Nueva Empresa
-                    </motion.button>
-                  </div>
+            </div>
+            <div className="mt-56 px-6 pb-4 pt-8  border-t-2 shadow-inner">
+              <div className="flex flex-row justify-between mb-4">
+                <div>
+                  <h2 className="font-bold text-lg">Mis Empresas</h2>
                 </div>
                 <div>
-                  <h2>
-                    {data?.enterprises?.map((enterprise) => (
-                      <div key={enterprise?._id}>
-                        <EnterpriseCard enterprise={enterprise} />
-                      </div>
-                    ))}
-                  </h2>
+                  <motion.button
+                    className="bg-primary-100 hover:bg-primary-600 shadow-md rounded-lg px-3 py-1 w-full text-white font-bold"
+                    onClick={() => router.push('/enterprise/register')}
+                  >
+                    Nueva Empresa
+                  </motion.button>
                 </div>
+              </div>
+              <div>
+                <h2>
+                  {data?.enterprises?.map((enterprise) => (
+                    <div key={enterprise?._id}>
+                      <EnterpriseCard enterprise={enterprise} />
+                    </div>
+                  ))}
+                </h2>
               </div>
             </div>
           </>
