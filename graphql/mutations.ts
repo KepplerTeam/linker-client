@@ -200,6 +200,9 @@ export const CREATE_BILL = gql`
   mutation CREATE_BILL($data: CreateBillInput) {
     createBill(data: $data) {
       # CreateBillInfoInput {
+      enterpriseOwner {
+        _id
+      }
       client {
         _id
       }
