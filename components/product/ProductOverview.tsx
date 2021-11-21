@@ -11,12 +11,18 @@ import {
 } from '../../graphql/mutations';
 import useNotify from '../../hooks/useNotify';
 import HeartIcon from '../icons/HeartIcon';
+import StarsRating from '../review/StarsRating';
+import { Input } from '../inputs';
 
 interface ProductOverviewProps {
   product?: Product;
+  isReview?: boolean;
 }
 
-export default function ProductOverview({ product }: ProductOverviewProps) {
+export default function ProductOverview({
+  product,
+  isReview = false,
+}: ProductOverviewProps) {
   // const cartFromLocalStorage = JSON.parse(localStorage.getItem('cart') || '[]');
   const [active, setActive] = React.useState(0);
   const router = useRouter();
@@ -27,6 +33,9 @@ export default function ProductOverview({ product }: ProductOverviewProps) {
   const [isFavorite, setIsFavorite] = React.useState(false);
   const [favorites] = React.useState([]);
   const [favoritesData, setFavoritesData] = React.useState([]);
+  const [reviewComment, setReviewComment] = React.useState('');
+  const [rating, setRating] = React.useState(null);
+  const [hover, setHover] = React.useState(null);
 
   /** addToCart
    * @abstract Permite al usuario anadir productos a su carrito de compras
@@ -285,7 +294,7 @@ export default function ProductOverview({ product }: ProductOverviewProps) {
           </div>
         )}
         <div>
-          {user?.role === 1 ? (
+          {user?.role === 1 && !isReview ? (
             <motion.button
               whileHover={{
                 scale: 1.005,
@@ -303,7 +312,9 @@ export default function ProductOverview({ product }: ProductOverviewProps) {
               <span>Anadir al Carrito</span>
             </motion.button>
           ) : null}
-          {user?.role === 2 && user?._id === product?.enterprise?.owner?._id ? (
+          {user?.role === 2 &&
+          user?._id === product?.enterprise?.owner?._id &&
+          !isReview ? (
             <motion.button
               whileHover={{
                 scale: 1.005,
@@ -321,10 +332,45 @@ export default function ProductOverview({ product }: ProductOverviewProps) {
               <span>Editar Producto</span>
             </motion.button>
           ) : null}
-          <div>
-            <h2 className="my-3">Review(#)</h2>
-          </div>
+
           <div className="pt-4">
+            {isReview ? (
+              <div>
+                <div className="mb-3">
+                  <h2 className="mb-1">Que te parecio el producto?</h2>
+                  <StarsRating
+                    setRating={setRating}
+                    setHover={setHover}
+                    rating={rating}
+                    hover={hover}
+                  />
+                </div>
+                <div>
+                  <h2>Comentario</h2>
+                  <Input
+                    type="comment"
+                    id="comment"
+                    name="comment"
+                    placeholder=""
+                    className="w-3/4 h-8 my-1 text-sm "
+                    value={reviewComment}
+                    setValue={setReviewComment}
+                    label=""
+                  />
+                </div>
+                <motion.button
+                  whileHover={{
+                    scale: 1.005,
+                    boxShadow: '0px 0px 4px rgb(51,51,51, 0.5)',
+                  }}
+                  value=""
+                  type="button"
+                  className="w-full h-11 bg-primary-100 text-white rounded-2xl px-4 py-2 my-12"
+                >
+                  <span>Enviar review</span>
+                </motion.button>
+              </div>
+            ) : null}
             <ReviewCard
               name="Madelina"
               rating={3}

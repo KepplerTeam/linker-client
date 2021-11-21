@@ -142,6 +142,9 @@ export const GET_BILL = gql`
     bill(filter: $filter) {
       _id
       totalPrice
+      enterpriseOwner {
+        _id
+      }
       createdAt
       client {
         username

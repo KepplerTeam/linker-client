@@ -33,6 +33,7 @@ export interface Bill extends GraphQLModel {
   client?: User;
   products?: [Product];
   totalPrice?: number;
+  enterpriseOwner?: User;
 }
 
 export interface DocumentModel {
