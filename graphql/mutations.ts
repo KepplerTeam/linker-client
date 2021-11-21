@@ -258,3 +258,23 @@ export const REMOVE_FAVORITES = gql`
     }
   }
 `;
+
+export const SET_REVIEW = gql`
+  mutation SET_REVIEW($data: CreateReviewInput) {
+    setReview(data: $data) {
+      client {
+        _id
+      }
+      product {
+        _id
+      }
+      enterprise {
+        _id
+      }
+      productComment
+      productRating
+      enterpriseComment
+      enterpriseRating
+    }
+  }
+`;
