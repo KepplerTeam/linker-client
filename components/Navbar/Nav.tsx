@@ -8,8 +8,6 @@ import { useUser } from '../../hooks/useUser';
 import { User } from '../../models';
 import SidebarMenu from '../common/SidebarMenu';
 import UserDropdown from '../common/UserDropdown';
-import { GetCurrentUserMobile } from '../../../linker-API/src/types/CurrentMobileUserInput';
-import { currentUserMobile } from '../../../linker-API/src/controllers/AuthController';
 
 interface NavProps {
   open: boolean;
