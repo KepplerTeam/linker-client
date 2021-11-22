@@ -1,13 +1,10 @@
 import { useMutation, useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { GET_CURRENT_USER_MOBILE, SIGN_OUT } from '../../graphql/mutations';
+import { GET_CURRENT_USER_MOBILE } from '../../graphql/mutations';
 import { CURRENT_USER } from '../../graphql/queries';
-import useNotify from '../../hooks/useNotify';
-import { useUser } from '../../hooks/useUser';
 import { User } from '../../models';
 import SidebarMenu from '../common/SidebarMenu';
-import UserDropdown from '../common/UserDropdown';
 
 interface NavProps {
   open: boolean;
@@ -16,9 +13,7 @@ interface NavProps {
 
 export default function Nav({ open = false, setOpen }: NavProps) {
   // const [user, setUser] = useUser();
-  const [signOut] = useMutation(SIGN_OUT);
   const router = useRouter();
-  const notify = useNotify();
   const [active, setActive] = React.useState(false);
   const { data, loading } = useQuery<{ currentUser: User }>(CURRENT_USER, {
     fetchPolicy: 'network-only',
@@ -69,14 +64,24 @@ export default function Nav({ open = false, setOpen }: NavProps) {
         <img className="h-7" src="./icons/menu-variant.svg" alt="Menu" />
       </button> */}
       <SidebarMenu open={open} setOpen={setOpen} />
-      <a className="mx-auto" href="/feed">
+      <button
+        type="button"
+        className="mx-auto"
+        onClick={(e) => {
+          e.preventDefault();
+          router.push('/feed');
+        }}
+      >
         <img className="h-8" src="/logo-white.svg" alt="Linker" />
-      </a>
+      </button>
 
       <button
         type="button"
         className="flex items-center px-1"
-        onClick={() => router.push('/profile')}
+        onClick={(e) => {
+          e.preventDefault();
+          router.push('/profile');
+        }}
       >
         <img className="h-7" src={user?.image} alt="perfil" />
       </button>
