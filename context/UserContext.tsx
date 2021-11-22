@@ -44,14 +44,13 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
           },
         });
         setUser(userMobile?.data?.currentUserMobile);
-      }
-      catch(err){
+      } catch (err) {
         setUser(null);
         console.log(err);
-      };
+      }
     };
     getUserMobile();
-    
+
     if (!loading && data) {
       if (data?.currentUser) {
         setUser(data?.currentUser);
