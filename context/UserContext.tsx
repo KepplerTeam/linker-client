@@ -28,17 +28,17 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
 
   const [user, setUser] = useUser();
 
-  const { data, loading } = useQuery<{currentUser: User}>(CURRENT_USER)
+  const { data, loading } = useQuery<{ currentUser: User }>(CURRENT_USER);
 
   React.useEffect(() => {
-    if(!loading && data.currentUser) {
-      setUser(data?.currentUser)
+    if (!loading && data.currentUser) {
+      setUser(data?.currentUser);
     }
-  })
+  });
 
   // React.useEffect(() => {
   //   console.log(localStorage.getItem("token"))
-    
+
   //   if (!loading && data && typeof window !== "undefined") {
   //     if (data?.currentUserMobile) {
   //       setUser(data?.currentUserMobile);

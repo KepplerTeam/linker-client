@@ -1,8 +1,8 @@
 import { useMutation, useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { GET_CURRENT_USER_MOBILE } from '../../graphql/queries';
-import { CURRENT_USER } from '../../graphql/queries';
+import { GET_CURRENT_USER_MOBILE, CURRENT_USER } from '../../graphql/queries';
+
 import { useUser } from '../../hooks/useUser';
 import { User } from '../../models';
 import SidebarMenu from '../common/SidebarMenu';
@@ -21,21 +21,21 @@ export default function Nav({ open = false, setOpen }: NavProps) {
   //   fetchPolicy: 'network-only',
   // });
 
-  const {data, loading} = useQuery<{currentUser: User}>(CURRENT_USER, {fetchPolicy: 'network-only'})
+  const { data, loading } = useQuery<{ currentUser: User }>(CURRENT_USER, {
+    fetchPolicy: 'network-only',
+  });
 
-
-  //const [user, setUser] = React.useState<User>();
+  // const [user, setUser] = React.useState<User>();
   const [user, setUser] = useUser();
 
   React.useEffect(() => {
-    if(!loading && data) {
-      setUser(data.currentUser)
+    if (!loading && data) {
+      setUser(data.currentUser);
     }
-  }, [loading, data])
+  }, [loading, data]);
 
   // React.useEffect(() => {
-    
-    
+
   //   if (!loading && data && typeof window != "undefined") {
   //     if (data?.currentUserMobile) {
   //       // setUser(data?.currentUserMobile);

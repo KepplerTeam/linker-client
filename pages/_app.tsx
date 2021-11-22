@@ -23,11 +23,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     Router.events.on('routeChangeError', () => {
       NProgress.done();
     });
-<<<<<<< HEAD
   //localStorage.setItem('token', '');
-=======
-    // localStorage.setItem('token', '');
->>>>>>> 64ae4cce95cc5a76434aed7d44600ee9b300a700
   }, []);
   return (
     <ApolloProvider client={apolloClient}>

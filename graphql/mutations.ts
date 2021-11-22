@@ -106,7 +106,6 @@ export const SIGN_IN_MOBILE = gql`
   }
 `;
 
-
 // auth - cierre de sesion
 export const SIGN_OUT = gql`
   mutation SIGN_OUT {
