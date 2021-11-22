@@ -48,6 +48,7 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
       if (data?.currentUser) {
         setUser(data?.currentUser);
       }
+      
       getUserMobile();
       
     }
