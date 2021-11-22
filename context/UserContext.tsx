@@ -32,7 +32,7 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
   const [user, setUser] = React.useState<User>();
   React.useEffect(() => {
     const getUserMobile = async () => {
-      const user = await getCurrentUserMobile({
+      const userMobile = await getCurrentUserMobile({
         variables: {
           data: {
             getCurrentUserInfo: {
@@ -41,8 +41,7 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
           },
         },
       });
-      setUser(user?.data?.currentUserMobile);
-      return user;
+      setUser(userMobile?.data?.currentUserMobile);
     };
 
     if (!loading && data) {
