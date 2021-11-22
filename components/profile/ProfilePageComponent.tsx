@@ -63,46 +63,42 @@ export default function ProfilePageComponent({
         <div className="flex flex-row items-center justify-between mx-6 mb-12 bottom-1 p-5 rounded-xl bg-gray-50 shadow-lg hover:shadow-2xl">
           <div className="px-2">
             {user?.role === 1 ? (
-              <h2 className="font-black text-xl text-black">
-                USD {Math.round(user?.balance * 100) / 100}
-              </h2>
+              <div className="flex flex-col items-center font-black text-xl text-black">
+                <h2>USD</h2>
+                <h2>{Math.round(user?.balance * 100) / 100}</h2>
+              </div>
             ) : null}
             {user?.role === 2 ? (
-              <div>
-                <h2 className="font-black text-xl text-black">
-                  USD {Math.round(providerBalance * 100) / 100}
-                </h2>{' '}
+              <div className="flex flex-col items-center font-black text-xl text-black">
+                <h2>USD</h2>
+                <h2>{Math.round(providerBalance * 100) / 100}</h2>
               </div>
             ) : null}
           </div>
           {user?.role === 1 ? (
-            <div className="px-5 ml-auto mt-6 flex flex-row">
-              <div className="bg-primary-100 rounded-lg text-white flex flex-row">
-                <div className="mt-3 ml-3">
+            <div className="px-5 flex flex-row">
+              <button
+                onClick={() => router.push('/recargar')}
+                className="font-bold px-4 py-2 bg-primary-100 hover:bg-primary-600 shadow-md hover:shadow-xl rounded-lg text-white flex flex-row items-center"
+              >
+                <div className="">
                   <CashIcon className="w-5" />
                 </div>
-                <motion.button
-                  className="px-3 py-1 text-white font-bold"
-                  onClick={() => router.push('/recargar')}
-                >
-                  <span>Recargar Billetera</span>
-                </motion.button>
-              </div>
+                <span>Recargar Billetera</span>
+              </button>
             </div>
           ) : null}
           {user?.role === 2 ? (
-            <div className="px-5 ml-auto mt-6 flex flex-row">
-              <div className="bg-primary-100 rounded-lg text-white flex flex-row">
-                <div className="mt-3 ml-3">
+            <div className="px-5 flex flex-row">
+              <button
+                onClick={() => router.push('/profile')}
+                className="font-bold px-4 py-2 bg-primary-100 hover:bg-primary-600 shadow-md hover:shadow-xl rounded-lg text-white flex flex-row items-center"
+              >
+                <div className="">
                   <CashIcon className="w-5" />
                 </div>
-                <motion.button
-                  className="px-3 py-1 text-white font-bold"
-                  onClick={() => router.push('/profile')}
-                >
-                  <span>Solicitar Retiro</span>
-                </motion.button>
-              </div>
+                <span>Solicitar Retiro</span>
+              </button>
             </div>
           ) : null}
         </div>

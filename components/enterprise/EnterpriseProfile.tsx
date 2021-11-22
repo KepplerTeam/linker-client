@@ -31,7 +31,7 @@ export default function EnterpriseProfile({
         </div>
         <div className="w-full max-w mt-5 pb-16">
           <Tab.Group>
-            <Tab.List className="flex bg-gray-50 justify-center py-3 space-x-16 shadow-inner rounded-xl">
+            <Tab.List className="flex bg-gray-50 justify-center py-3 shadow-inner rounded-xl">
               <Tab
                 className={({ selected }) =>
                   selected
