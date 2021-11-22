@@ -25,10 +25,10 @@ export default function OrdersResume({
               <h2>{bill?.client?.username}</h2>
             </>
           ) : null}
+          <h2 className="font-semibold mt-4">Productos: </h2>
           {bill.products.map((product, idx) => (
             <div className="w-full" key={idx}>
               <div>
-                <h2 className="font-semibold mt-4">Productos: </h2>
                 <h2 className="">{product.name}</h2>
               </div>
             </div>
