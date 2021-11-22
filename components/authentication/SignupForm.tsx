@@ -5,7 +5,7 @@ import { useMutation } from '@apollo/client';
 import { validateString } from 'avilatek-utils';
 import SSNDropdown from '../common/SSNDropdown';
 import useNotify from '../../hooks/useNotify';
-import { CREATE_USER } from '../../graphql/mutations';
+import { CREATE_USER_MOBILE } from '../../graphql/mutations';
 import RoleDropdown from '../common/RoleDropdown';
 import CategorySelector from '../common/CategorySelector';
 
@@ -24,7 +24,7 @@ export default function SignupForm() {
   const [enterpriseName, setEnterpriseName] = React.useState('');
   const [rif, setRif] = React.useState('');
   const [category, setCategory] = React.useState();
-  const [createUser] = useMutation(CREATE_USER);
+  const [createUser] = useMutation(CREATE_USER_MOBILE);
   const notify = useNotify();
   const [firstForm, setFirstForm] = React.useState(true);
   const [secondForm, setSeconddForm] = React.useState(false);

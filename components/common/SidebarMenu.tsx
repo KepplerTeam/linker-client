@@ -38,9 +38,10 @@ export default function SidebarMenu({
       const { data: dataSignOut } = await signOut({});
       if (dataSignOut?.signOut?.success) {
         notify('Se ha cerrado sesión con éxito', 'success');
+        localStorage.removeItem('token');
         setUser(null);
-
         setActive(false);
+        router.push('/');
       } else {
         localStorage.removeItem('token');
         router.push('/');
