@@ -40,7 +40,7 @@ export default function NewEnterpriseForm({
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     try {
-      e.preventDefault();
+      // e.preventDefault();
       e.persist();
       if (validateString(name)) {
         if (name !== '' && rif !== '') {

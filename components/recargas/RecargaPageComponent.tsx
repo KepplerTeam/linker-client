@@ -24,7 +24,7 @@ export default function RecargaPageComponent() {
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     try {
-      e.preventDefault();
+      // e.preventDefault();
       e.persist();
       if (amount > 0 && documents.length > 0) {
         const { data: dataCreate } = await createTransaction({

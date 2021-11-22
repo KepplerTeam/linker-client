@@ -168,7 +168,7 @@ export default function ProductOverview({
                 className=""
                 onClick={(e) => {
                   e.persist();
-                  e.preventDefault();
+                  // e.preventDefault();
                   addToFavorites();
                   isNotFavorite();
                 }}
@@ -181,7 +181,7 @@ export default function ProductOverview({
                 className=""
                 onClick={(e) => {
                   e.persist();
-                  e.preventDefault();
+                  // e.preventDefault();
                   removeFromFavorites();
                   isNotFavorite();
                 }}
@@ -201,7 +201,7 @@ export default function ProductOverview({
               value=""
               type="button"
               onClick={(e) => {
-                e.preventDefault();
+                // e.preventDefault();
                 setActive(0);
               }}
             >
@@ -221,7 +221,7 @@ export default function ProductOverview({
               value=""
               type="button"
               onClick={(e) => {
-                e.preventDefault();
+                // e.preventDefault();
                 setActive(1);
               }}
             >
@@ -305,7 +305,7 @@ export default function ProductOverview({
               className="w-full h-11 bg-primary-100 text-white rounded-2xl px-4 py-2 my-12"
               onClick={(e) => {
                 e.persist();
-                e.preventDefault();
+                // e.preventDefault();
                 addToCart();
               }}
             >
@@ -325,7 +325,7 @@ export default function ProductOverview({
               className="w-full h-11 bg-primary-100 text-white rounded-2xl px-4 py-2 my-12"
               onClick={(e) => {
                 e.persist();
-                e.preventDefault();
+                // e.preventDefault();
                 router.push(`/product/update/${product._id}`);
               }}
             >
@@ -374,7 +374,7 @@ export default function ProductOverview({
             <ReviewCard
               name="Madelina"
               rating={3}
-              comment="  
+              comment="
 			  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas, recusandae?
 			  "
             />
@@ -383,7 +383,7 @@ export default function ProductOverview({
             <ReviewCard
               name="Javier"
               rating={4}
-              comment="  
+              comment="
 			  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas, recusandae?
 			  "
             />

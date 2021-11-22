@@ -34,7 +34,7 @@ export default function SidebarMenu({
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     try {
-      e.preventDefault();
+      // e.preventDefault();
       const { data: dataSignOut } = await signOut({});
       if (dataSignOut?.signOut?.success) {
         notify('Se ha cerrado sesión con éxito', 'success');

@@ -21,7 +21,7 @@ export default function FeaturedProduct({
       <button
         type="button"
         onClick={(e) => {
-          e.preventDefault();
+          // e.preventDefault();
           router.push(`/product/${_id}`);
         }}
       >

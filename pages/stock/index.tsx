@@ -39,7 +39,7 @@ export default function StockPage() {
               <motion.button
                 className="bg-primary-100 px-3 h-auto py-1 text-white rounded-lg w-full mt-6 mb-2"
                 onClick={(e) => {
-                  e.preventDefault();
+                  // e.preventDefault();
                   router.push('/create');
                 }}
               >

@@ -31,7 +31,7 @@ export default function TitleBar({
         <motion.button
           type="button"
           onClick={(e) => {
-            e.preventDefault();
+            // e.preventDefault();
             router.push('/feed');
           }}
         >
@@ -46,7 +46,7 @@ export default function TitleBar({
           type="button"
           className=""
           onClick={(e) => {
-            e.preventDefault();
+            // e.preventDefault();
             router.push(`/stock/update/${_id}`);
           }}
         >
@@ -60,7 +60,7 @@ export default function TitleBar({
             type="button"
             className=""
             onClick={(e) => {
-              e.preventDefault();
+              // e.preventDefault();
               router.push(`/shopping-cart`);
             }}
           >

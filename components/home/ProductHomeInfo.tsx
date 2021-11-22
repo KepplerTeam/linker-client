@@ -137,7 +137,7 @@ export default function ProductHomeInfo({
                 className=""
                 onClick={(e) => {
                   e.persist();
-                  e.preventDefault();
+                  // e.preventDefault();
                   addToFavorites();
                   isNotFavorite();
                 }}
@@ -150,7 +150,7 @@ export default function ProductHomeInfo({
                 className=""
                 onClick={(e) => {
                   e.persist();
-                  e.preventDefault();
+                  // e.preventDefault();
                   removeFromFavorites();
                   isNotFavorite();
                 }}
@@ -162,7 +162,7 @@ export default function ProductHomeInfo({
           <button
             type="button"
             onClick={(e) => {
-              e.preventDefault();
+              // e.preventDefault();
               router.push(`/product/${_id}`);
             }}
           >

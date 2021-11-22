@@ -26,7 +26,7 @@ export default function LoginForm() {
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     try {
-      e.preventDefault();
+      // e.preventDefault();
       const { data } = await signInMobile({
         variables: {
           data: {

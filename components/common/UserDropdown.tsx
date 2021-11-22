@@ -23,7 +23,7 @@ export default function UserDropdown() {
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     try {
-      e.preventDefault();
+      // e.preventDefault();
       setDisabled(true);
       NProgress.start();
       const { data } = await signOut({});
@@ -50,7 +50,7 @@ export default function UserDropdown() {
           userMenuOpen ? 'rounded-t-md bg-gray-100' : ''
         }`}
         onClick={(e) => {
-          e.preventDefault();
+          // e.preventDefault();
           setUserMenuOpen(!userMenuOpen);
         }}
       >
@@ -62,7 +62,7 @@ export default function UserDropdown() {
             type="button"
             className="p-2 w-full font-semibold focus:outline-none focus:shadow-none hover:bg-gray-3200 hover:text-primary-blue-500"
             onClick={(e) => {
-              e.preventDefault();
+              // e.preventDefault();
               router.push(`/`);
               setUserMenuOpen(false);
             }}

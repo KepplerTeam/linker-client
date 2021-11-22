@@ -27,7 +27,7 @@ function _Select({
         className={`mt-1 block w-full text-neutral-800 rounded-md border-neutral-200 shadow-sm focus:border-0 focus:ring focus:ring-primary-100 focus:ring-opacity-50 ${className}`}
         name={name}
         onChange={(e) => {
-          e.preventDefault();
+          // e.preventDefault();
           setValue(e.target.value);
         }}
         {...rest}

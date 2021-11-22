@@ -16,7 +16,7 @@ export default function CategorySelector({
         className=""
         type="button"
         onClick={(e) => {
-          e.preventDefault();
+          // e.preventDefault();
           setCategory(0);
         }}
       >

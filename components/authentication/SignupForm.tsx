@@ -38,7 +38,7 @@ export default function SignupForm() {
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     try {
-      e.preventDefault();
+      // e.preventDefault();
       e.persist();
       // Verifica que los datos no esten vacios
       if (

@@ -95,7 +95,7 @@ export default function EnterpriseProfile({
                     <button
                       type="button"
                       onClick={(e) => {
-                        e.preventDefault();
+                        // e.preventDefault();
                         router.push(`/enterprise/update/${enterprise?._id}`);
                       }}
                       className="bg-gray-50 shadow-lg font-medium text-black ring-primary-100 ring-2 hover:ring-0 mt-12 px-8 py-2 rounded-lg hover:text-white hover:bg-primary-100 "
@@ -113,7 +113,7 @@ export default function EnterpriseProfile({
                     <button
                       type="button"
                       onClick={(e) => {
-                        e.preventDefault();
+                        // e.preventDefault();
                         router.push(`/create/${enterprise?._id}`);
                       }}
                       className="bg-gray-50 shadow-lg font-semibold text-primary-100 ring-primary-100 ring-2 hover:ring-0 mt-8 px-8 py-2 rounded-lg hover:text-white hover:bg-primary-100 "

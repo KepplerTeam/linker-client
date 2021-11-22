@@ -25,7 +25,7 @@ function _Textarea({
         className={`mt-1 block w-full text-neutral-800 border-0 border-b h-52 ${className}`}
         name={name}
         onChange={(e) => {
-          e.preventDefault();
+          // e.preventDefault();
           setValue(e.target.value);
         }}
         {...rest}
