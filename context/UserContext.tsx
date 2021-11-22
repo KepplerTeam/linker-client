@@ -45,11 +45,11 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
     };
 
     if (!loading && data) {
-      if (data?.currentUser) {
-        setUser(data?.currentUser);
-      }
+      // if (data?.currentUser) {
+      //   setUser(data?.currentUser);
+      // }
 
-      
+
       getUserMobile();
       
     }
