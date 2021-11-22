@@ -1,8 +1,9 @@
 import { useMutation, useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { GET_CURRENT_USER_MOBILE } from '../../graphql/mutations';
+import { GET_CURRENT_USER_MOBILE } from '../../graphql/queries';
 import { CURRENT_USER } from '../../graphql/queries';
+import { useUser } from '../../hooks/useUser';
 import { User } from '../../models';
 import SidebarMenu from '../common/SidebarMenu';
 
@@ -15,36 +16,33 @@ export default function Nav({ open = false, setOpen }: NavProps) {
   // const [user, setUser] = useUser();
   const router = useRouter();
   const [active, setActive] = React.useState(false);
-  const { data, loading } = useQuery<{ currentUser: User }>(CURRENT_USER, {
-    fetchPolicy: 'network-only',
-  });
+  // const { data, loading } = useQuery<{ currentUserMobile: User }>(GET_CURRENT_USER_MOBILE, {
+  //   variables: {data: {"token": localStorage.getItem("token")}},
+  //   fetchPolicy: 'network-only',
+  // });
 
-  const [getCurrentUserMobile] = useMutation<{ currentUserMobile: User }>(
-    GET_CURRENT_USER_MOBILE
-  );
+  const {data, loading} = useQuery<{currentUser: User}>(CURRENT_USER, {fetchPolicy: 'network-only'})
 
-  const [user, setUser] = React.useState<User>();
+
+  //const [user, setUser] = React.useState<User>();
+  const [user, setUser] = useUser();
+
   React.useEffect(() => {
-    const getUserMobile = async () => {
-      const userMobile = await getCurrentUserMobile({
-        variables: {
-          data: {
-            getCurrentUserInfo: {
-              token: localStorage.getItem('token'),
-            },
-          },
-        },
-      });
-      setUser(userMobile?.data?.currentUserMobile);
-    };
-    getUserMobile();
-
-    if (!loading && data) {
-      if (data?.currentUser) {
-        setUser(data?.currentUser);
-      }
+    if(!loading && data) {
+      setUser(data.currentUser)
     }
-  }, [loading, data]);
+  }, [loading, data])
+
+  // React.useEffect(() => {
+    
+    
+  //   if (!loading && data && typeof window != "undefined") {
+  //     if (data?.currentUserMobile) {
+  //       // setUser(data?.currentUserMobile);
+  //       setUser(data.currentUserMobile ?? {})
+  //     }
+  //   }
+  // }, [loading, data]);
 
   const handleClick = () => {
     setActive(!active);
