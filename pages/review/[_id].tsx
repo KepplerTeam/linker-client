@@ -19,30 +19,30 @@ export default function ReviewPage() {
   const [reviewComment, setReviewComment] = React.useState('');
   const [uniqueProduct, setUniqueProduct] = React.useState([]);
 
-  const checkDuplicates = async () => {
-    const { data: orderData, loading: loadingOrderData } = await useQuery<{
-      bill: Bill;
-    }>(GET_BILL, {
-      variables: { filter: { _id: router.query._id } },
-      fetchPolicy: 'network-only',
-    });
-    if (!loadingOrderData) {
-      const products = orderData?.bill?.products;
-      const uniqueProductList = [];
-      for (let x = 0; x < products.length; x++) {
-        if (uniqueProductList.includes(products[x])) {
-          console.log('producto repetido');
-        } else {
-          uniqueProductList.push(products[x]);
-        }
-      }
-      setUniqueProduct(uniqueProductList);
-    }
-  };
+  // const checkDuplicates = async () => {
+  //   const { data: orderData, loading: loadingOrderData } = await useQuery<{
+  //     bill: Bill;
+  //   }>(GET_BILL, {
+  //     variables: { filter: { _id: router.query._id } },
+  //     fetchPolicy: 'network-only',
+  //   });
+  //   if (!loadingOrderData) {
+  //     const products = orderData?.bill?.products;
+  //     const uniqueProductList = [];
+  //     for (let x = 0; x < products.length; x++) {
+  //       if (uniqueProductList.includes(products[x])) {
+  //         console.log('producto repetido');
+  //       } else {
+  //         uniqueProductList.push(products[x]);
+  //       }
+  //     }
+  //     setUniqueProduct(uniqueProductList);
+  //   }
+  // };
 
-  React.useEffect(() => {
-    checkDuplicates();
-  }, []);
+  // React.useEffect(() => {
+  //   checkDuplicates();
+  // }, []);
 
   const [setReview] = useMutation(SET_REVIEW);
 

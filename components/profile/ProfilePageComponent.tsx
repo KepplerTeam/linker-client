@@ -79,6 +79,7 @@ export default function ProfilePageComponent({
             <div className="px-5 flex flex-row">
               <button
                 onClick={() => router.push('/recargar')}
+                type="button"
                 className="font-bold px-4 py-2 bg-primary-100 hover:bg-primary-600 shadow-md hover:shadow-xl rounded-lg text-white flex flex-row items-center"
               >
                 <div className="">
@@ -92,6 +93,7 @@ export default function ProfilePageComponent({
             <div className="px-5 flex flex-row">
               <button
                 onClick={() => router.push('/profile')}
+                type="button"
                 className="font-bold px-4 py-2 bg-primary-100 hover:bg-primary-600 shadow-md hover:shadow-xl rounded-lg text-white flex flex-row items-center"
               >
                 <div className="">
