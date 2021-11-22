@@ -23,7 +23,6 @@ export default function ProductOverview({
   product,
   isReview = false,
 }: ProductOverviewProps) {
-  // const cartFromLocalStorage = JSON.parse(localStorage.getItem('cart') || '[]');
   const [active, setActive] = React.useState(0);
   const router = useRouter();
   const [user] = useUser();
