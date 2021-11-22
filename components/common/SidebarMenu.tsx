@@ -40,7 +40,7 @@ export default function SidebarMenu({
         notify('Se ha cerrado sesión con éxito', 'success');
         setUser(null);
         router.push('/');
-        localStorage.removeItem("token");
+        localStorage.removeItem('token');
         setActive(false);
       } else {
         notify(

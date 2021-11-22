@@ -12,7 +12,8 @@ export default function LoginForm() {
   const [user, setUser] = useUser();
   const notify = useNotify();
 
-  const [signInMobile] = useMutation<{ signInMobile: {User, token} }>(SIGN_IN_MOBILE);
+  const [signInMobile] =
+    useMutation<{ signInMobile: { User; token } }>(SIGN_IN_MOBILE);
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
 
@@ -36,7 +37,7 @@ export default function LoginForm() {
       });
       if (data.signInMobile) {
         setUser(data?.signInMobile.User);
-        localStorage.setItem("token", data?.signInMobile.token);
+        localStorage.setItem('token', data?.signInMobile.token);
         notify('Inicio de sesion correcto', 'success');
         await router.push('/feed');
       }

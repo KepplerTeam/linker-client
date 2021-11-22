@@ -49,7 +49,7 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
       if (data?.currentUser) {
         setUser(data?.currentUser);
       }
-      if(localStorage.getItem("token")){
+      if (localStorage.getItem('token')) {
         getUserMobile();
       }
     }
