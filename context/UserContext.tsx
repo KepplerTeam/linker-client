@@ -34,7 +34,7 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
     if (!loading && data.currentUser) {
       setUser(data?.currentUser);
     }
-  });
+  }, [data, loading]);
 
   // React.useEffect(() => {
   //   console.log(localStorage.getItem("token"))
