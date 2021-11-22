@@ -172,15 +172,26 @@ export default function NewEnterpriseForm({
                 ) : (
                   ''
                 )}
-                <div>
-                  <motion.button
-                    className="bg-primary-100 rounded-full px-3 py-2 w-full mt-6 text-white font-bold"
-                    type="submit"
-                    value="Send"
-                  >
-                    Registrar Empresa
-                  </motion.button>
-                </div>
+                {isUpdate ? (
+                  <div>
+                    <motion.button
+                      className="bg-primary-100 rounded-full px-3 py-2 w-full mt-6 text-white font-bold"
+                      onClick={() => setStatus(1)}
+                    >
+                      Actualizar
+                    </motion.button>
+                  </div>
+                ) : (
+                  <div>
+                    <motion.button
+                      className="bg-primary-100 rounded-full px-3 py-2 w-full mt-6 text-white font-bold"
+                      type="submit"
+                      value="Send"
+                    >
+                      Registrar Empresa
+                    </motion.button>
+                  </div>
+                )}
               </div>
             </div>
           </div>
