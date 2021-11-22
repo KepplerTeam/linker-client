@@ -48,9 +48,8 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
       if (data?.currentUser) {
         setUser(data?.currentUser);
       }
-      if (localStorage.getItem('token')) {
-        getUserMobile();
-      }
+      getUserMobile();
+      
     }
     if (!loading && !data) {
       if (router.pathname === '/reset-password/[token]') {
