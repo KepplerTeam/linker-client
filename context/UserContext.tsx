@@ -30,6 +30,7 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
   );
 
   const [user, setUser] = React.useState<User>();
+
   React.useEffect(() => {
     const getUserMobile = async () => {
       const userMobile = await getCurrentUserMobile({
@@ -43,15 +44,12 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
       });
       setUser(userMobile?.data?.currentUserMobile);
     };
+    getUserMobile();
 
     if (!loading && data) {
-      // if (data?.currentUser) {
-      //   setUser(data?.currentUser);
-      // }
-
-
-      getUserMobile();
-      
+      if (data?.currentUser) {
+        setUser(data?.currentUser);
+      }
     }
     if (!loading && !data) {
       if (router.pathname === '/reset-password/[token]') {
@@ -59,9 +57,9 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
       }
       router.push('/');
     }
-    if (!loading && !data?.currentUser) {
-      router.push('/');
-    }
+    // if (!loading && !data?.currentUser) {
+    //   router.push('/');
+    // }
   }, [data, loading, error]);
   return (
     <UserContext.Provider value={{ user, setUser }}>

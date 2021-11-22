@@ -1,13 +1,15 @@
 import { useMutation, useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { SIGN_OUT } from '../../graphql/mutations';
+import { GET_CURRENT_USER_MOBILE, SIGN_OUT } from '../../graphql/mutations';
 import { CURRENT_USER } from '../../graphql/queries';
 import useNotify from '../../hooks/useNotify';
 import { useUser } from '../../hooks/useUser';
 import { User } from '../../models';
 import SidebarMenu from '../common/SidebarMenu';
 import UserDropdown from '../common/UserDropdown';
+import { GetCurrentUserMobile } from '../../../linker-API/src/types/CurrentMobileUserInput';
+import { currentUserMobile } from '../../../linker-API/src/controllers/AuthController';
 
 interface NavProps {
   open: boolean;
@@ -15,7 +17,7 @@ interface NavProps {
 }
 
 export default function Nav({ open = false, setOpen }: NavProps) {
-  const [user, setUser] = useUser();
+  // const [user, setUser] = useUser();
   const [signOut] = useMutation(SIGN_OUT);
   const router = useRouter();
   const notify = useNotify();
@@ -24,9 +26,30 @@ export default function Nav({ open = false, setOpen }: NavProps) {
     fetchPolicy: 'network-only',
   });
 
+  const [getCurrentUserMobile] = useMutation<{ currentUserMobile: User }>(
+    GET_CURRENT_USER_MOBILE
+  );
+
+  const [user, setUser] = React.useState<User>();
   React.useEffect(() => {
+    const getUserMobile = async () => {
+      const userMobile = await getCurrentUserMobile({
+        variables: {
+          data: {
+            getCurrentUserInfo: {
+              token: localStorage.getItem('token'),
+            },
+          },
+        },
+      });
+      setUser(userMobile?.data?.currentUserMobile);
+    };
+    getUserMobile();
+
     if (!loading && data) {
-      setUser(data.currentUser);
+      if (data?.currentUser) {
+        setUser(data?.currentUser);
+      }
     }
   }, [loading, data]);
 
