@@ -26,14 +26,14 @@ export default function ReviewPage() {
   //     variables: { filter: { _id: router.query._id } },
   //     fetchPolicy: 'network-only',
   //   });
-  //   if(!loadingOrderData) {
+  //   if (!loadingOrderData) {
   //     const products = orderData?.bill?.products;
-  //     const uniqueProductList = []
-  //     for(let x = 0; x < products.length; x++) {
-  //       if(uniqueProductList.includes(products[x])) {
+  //     const uniqueProductList = [];
+  //     for (let x = 0; x < products.length; x++) {
+  //       if (uniqueProductList.includes(products[x])) {
   //         console.log('producto repetido');
   //       } else {
-  //         uniqueProductList.push(products[x])
+  //         uniqueProductList.push(products[x]);
   //       }
   //     }
   //     setUniqueProduct(uniqueProductList);
@@ -41,8 +41,8 @@ export default function ReviewPage() {
   // };
 
   // React.useEffect(() => {
-  //   checkDuplicates()
-  // }, [])
+  //   checkDuplicates();
+  // }, []);
 
   const [setReview] = useMutation(SET_REVIEW);
 
@@ -52,25 +52,25 @@ export default function ReviewPage() {
     <div>
       <Nav open={open} setOpen={setOpen} />
 
-        <div className="p-4 min-h-screen">
-          {uniqueProduct.map((product) => (
-            <div className="">
-              <h2>{product.name}</h2>
-              <motion.button
-                whileHover={{
-                  scale: 1.005,
-                  boxShadow: '0px 0px 4px rgb(51,51,51, 0.5)',
-                }}
-                value=""
-                type="button"
-                className="h-11  text-white rounded-2xl px-4 py-2text-white bg-primary-100 hover:cursor-pointer"
-              >
-                <span>Rate Product</span>
-              </motion.button>
-            </div>
-          ))}
-        </div>
-      )}
+      <div className="p-4 min-h-screen">
+        {uniqueProduct.map((product) => (
+          <div className="">
+            <h2>{product.name}</h2>
+            <motion.button
+              whileHover={{
+                scale: 1.005,
+                boxShadow: '0px 0px 4px rgb(51,51,51, 0.5)',
+              }}
+              value=""
+              type="button"
+              className="h-11  text-white rounded-2xl px-4 py-2text-white bg-primary-100 hover:cursor-pointer"
+            >
+              <span>Rate Product</span>
+            </motion.button>
+          </div>
+        ))}
+      </div>
+
       <Footer />
     </div>
   );
