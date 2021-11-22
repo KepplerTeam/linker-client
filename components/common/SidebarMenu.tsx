@@ -39,14 +39,11 @@ export default function SidebarMenu({
       if (dataSignOut?.signOut?.success) {
         notify('Se ha cerrado sesión con éxito', 'success');
         setUser(null);
-        router.push('/');
-        localStorage.removeItem('token');
+
         setActive(false);
       } else {
-        notify(
-          dataSignOut?.changePassword?.err ?? 'Ha ocurrido un error.',
-          'danger'
-        );
+        localStorage.removeItem('token');
+        router.push('/');
       }
     } catch (err) {
       notify(err.message, 'danger', err);

@@ -66,8 +66,8 @@ export default function Home() {
           <h2 className="flex justify-center font-bold text-2xl my-8">
             Conoce al equipo
           </h2>
-          <p className="flex justify-center my-2 mx-6 text-justify text-lg font-light pb-4">
-            Establecido en 2021, KepplerTeam está conformado por:
+          <p className="flex justify-center my-2 mx-6 text-justify text-2xl font-bold  text-primary-100 pb-4">
+            KepplerTeam
           </p>
           <div className="w-full my-12 px-4">
             <div className="px-6">
