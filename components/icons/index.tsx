@@ -12,6 +12,7 @@ import LogOutIcon from './LogOutIcon';
 import LoginIcon from './LoginIcon';
 import TruckIcon from './TruckIcon';
 import TagIcon from './TagIcon';
+import HeartIcon from './HeartIcon';
 
 export {
   EditIcon,
@@ -28,4 +29,5 @@ export {
   LoginIcon,
   TruckIcon,
   TagIcon,
+  HeartIcon,
 };

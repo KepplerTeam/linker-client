@@ -132,11 +132,14 @@ export default function SignupForm() {
   };
   return (
     <form onSubmit={onSubmit}>
-      <div className="bg-white min-h-screen w-full bg-opacity-60 px-6 py-12">
+      <div className="bg-login-background bg-cover min-h-screen w-full bg-opacity-60 px-6 py-12">
         <div className="">
-          <div className="bg-gray-100 rounded-lg w-4/5 mx-auto">
+          <div className="flex flex-col items-center mb-12">
+            <img className="h-16 mr-5" src="/logo.svg" alt="Linker" />
+          </div>
+          <div className="bg-gray-50 shadow-2xl rounded-lg w-4/5 mx-auto">
             <div className="px-5 py-3">
-              <h2 className="text-xl font-bold">Crear Cuenta</h2>
+              <h2 className="text-xl mt-2 font-bold">Crear Cuenta</h2>
               <div className="mt-5 pb-3">
                 {firstForm ? (
                   <div>
@@ -145,7 +148,7 @@ export default function SignupForm() {
                       type="text"
                       name="username"
                       placeholder="johndoe1"
-                      className="w-full rounded-2xl"
+                      className="w-full rounded-2xl focus:ring-1 focus:border-primary-100 focus:ring-primary-100"
                       value={username}
                       onChange={(e) => setUsername(e.target.value)}
                     />
@@ -156,7 +159,7 @@ export default function SignupForm() {
                   type="email"
                   name="email"
                   placeholder="johndoe@gmail.com"
-                  className="w-full rounded-2xl"
+                  className="w-full rounded-2xl focus:ring-1 focus:border-primary-100 focus:ring-primary-100"
                   onChange={(e) => setEmail(e.target.value)}
                 />
                 <h2 className="py-2 mt-5 ml-1">Contrasena</h2>
@@ -164,7 +167,7 @@ export default function SignupForm() {
                   type="password"
                   name="password"
                   placeholder="*************"
-                  className="w-full rounded-2xl"
+                  className="w-full rounded-2xl focus:ring-1 focus:border-primary-100 focus:ring-primary-100"
                   onChange={(e) => setPassword(e.target.value)}
                 />
                 <h2 className="py-2 mt-5 ml-1">Confirmar Contrasena</h2>
@@ -172,7 +175,7 @@ export default function SignupForm() {
                   type="password"
                   name="password"
                   placeholder="*************"
-                  className="w-full rounded-2xl"
+                  className="w-full rounded-2xl focus:ring-1 focus:border-primary-100 focus:ring-primary-100"
                   onChange={(e) => setConfirmPassword(e.target.value)}
                 />
                 <h2 className="py-2 mt-5 ml-1">Nombre</h2>
@@ -180,7 +183,7 @@ export default function SignupForm() {
                   type="text"
                   name="name"
                   placeholder="John"
-                  className="w-full rounded-2xl"
+                  className="w-full rounded-2xl focus:ring-1 focus:border-primary-100 focus:ring-primary-100"
                   onChange={(e) => setName(e.target.value)}
                 />
                 <h2 className="py-2 mt-5 ml-1">Apellido</h2>
@@ -188,7 +191,7 @@ export default function SignupForm() {
                   type="text"
                   name="lastname"
                   placeholder="Doe"
-                  className="w-full rounded-2xl"
+                  className="w-full rounded-2xl focus:ring-1 focus:border-primary-100 focus:ring-primary-100"
                   onChange={(e) => setLastname(e.target.value)}
                 />
                 <h2 className="py-2 mt-5 ml-1">Cedula o Rif del usuario</h2>
@@ -200,7 +203,7 @@ export default function SignupForm() {
                     type="text"
                     name="ssn"
                     placeholder="1234567"
-                    className="w-full rounded-2xl h-full"
+                    className="w-full rounded-2xl h-full focus:ring-1 focus:border-primary-100 focus:ring-primary-100"
                     onChange={(e) => setSsn(e.target.value)}
                   />
                 </div>
@@ -209,7 +212,7 @@ export default function SignupForm() {
                   type="date"
                   name="dob"
                   placeholder="*************"
-                  className="w-full rounded-2xl"
+                  className="w-full rounded-2xl focus:ring-1 focus:border-primary-100 focus:ring-primary-100"
                   onChange={(e) => setDob(e.target.value)}
                 />
                 <h2 className="py-2 mt-5 ml-1">Seleccione su rol</h2>
@@ -221,7 +224,7 @@ export default function SignupForm() {
                       type="text"
                       name="enterpriseName"
                       placeholder="Coca-Cola"
-                      className="w-full rounded-2xl"
+                      className="w-full rounded-2xl focus:ring-1 focus:border-primary-100 focus:ring-primary-100"
                       onChange={(e) => setEnterpriseName(e.target.value)}
                     />
                     <h2 className="py-2 mt-5 ml-1">Rif de la Empresa</h2>
@@ -229,7 +232,7 @@ export default function SignupForm() {
                       type="text"
                       name="rif"
                       placeholder="18842899F"
-                      className="w-full rounded-2xl"
+                      className="w-full rounded-2xl focus:ring-1 focus:border-primary-100 focus:ring-primary-100"
                       onChange={(e) => setRif(e.target.value)}
                     />
                     <h2 className="py-2 mt-5 ml-1">Categoria de la empresa</h2>
