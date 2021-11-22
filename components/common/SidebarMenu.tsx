@@ -39,7 +39,8 @@ export default function SidebarMenu({
       if (dataSignOut?.signOut?.success) {
         notify('Se ha cerrado sesión con éxito', 'success');
         setUser(null);
-        router.push('/feed');
+        router.push('/');
+        localStorage.removeItem("token");
         setActive(false);
       } else {
         notify(
