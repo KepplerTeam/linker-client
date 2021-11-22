@@ -1,9 +1,9 @@
 import React from 'react';
 import { useQuery, useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
-import { CURRENT_USER } from '../graphql/queries';
-import { GET_CURRENT_USER_MOBILE } from '../graphql/mutations';
+import { CURRENT_USER, GET_CURRENT_USER_MOBILE } from '../graphql/queries';
 import { User } from '../models';
+import { useUser } from '../hooks/useUser';
 
 export type TUserContext = {
   user?: User;
@@ -21,51 +21,39 @@ interface UserContextProviderProps {
  */
 export function UserContextProvider({ children }: UserContextProviderProps) {
   const router = useRouter();
-  const { data, loading, error } = useQuery<{
-    currentUser: User;
-  }>(CURRENT_USER);
+  // const { data, loading, error } = useQuery<{ currentUserMobile: User }>(GET_CURRENT_USER_MOBILE, {
+  //   variables: {data: {"token": localStorage.getItem("token")}},
+  //   fetchPolicy: 'network-only',
+  // });
 
-  const [getCurrentUserMobile] = useMutation<{ currentUserMobile: User }>(
-    GET_CURRENT_USER_MOBILE
-  );
+  const [user, setUser] = useUser();
 
-  const [user, setUser] = React.useState<User>();
+  const { data, loading } = useQuery<{currentUser: User}>(CURRENT_USER)
 
   React.useEffect(() => {
-    const getUserMobile = async () => {
-      try {
-        const userMobile = await getCurrentUserMobile({
-          variables: {
-            data: {
-              getCurrentUserInfo: {
-                token: localStorage.getItem('token'),
-              },
-            },
-          },
-        });
-        setUser(userMobile?.data?.currentUserMobile);
-      } catch (err) {
-        setUser(null);
-        console.log(err);
-      }
-    };
-    getUserMobile();
+    if(!loading && data.currentUser) {
+      setUser(data?.currentUser)
+    }
+  })
 
-    if (!loading && data) {
-      if (data?.currentUser) {
-        setUser(data?.currentUser);
-      }
-    }
-    if (!loading && !data) {
-      if (router.pathname === '/reset-password/[token]') {
-        return;
-      }
-      router.push('/');
-    }
-    // if (!loading && !data?.currentUser) {
-    //   router.push('/');
-    // }
-  }, [data, loading, error]);
+  // React.useEffect(() => {
+  //   console.log(localStorage.getItem("token"))
+    
+  //   if (!loading && data && typeof window !== "undefined") {
+  //     if (data?.currentUserMobile) {
+  //       setUser(data?.currentUserMobile);
+  //     }
+  //   }
+  //   if (!loading && !data) {
+  //     if (router.pathname === '/reset-password/[token]') {
+  //       return;
+  //     }
+  //     router.push('/');
+  //   }
+  //   // if (!loading && !data?.currentUser) {
+  //   //   router.push('/');
+  //   // }
+  // }, [data, loading, error]);
   return (
     <UserContext.Provider value={{ user, setUser }}>
       {loading ? null : children}

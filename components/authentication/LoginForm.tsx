@@ -36,8 +36,8 @@ export default function LoginForm() {
         },
       });
       if (data.signInMobile) {
-        setUser(data?.signInMobile.User);
-        localStorage.setItem('token', data?.signInMobile.token);
+        await setUser(data?.signInMobile.User);
+        await localStorage.setItem('token', data?.signInMobile.token);
         notify('Inicio de sesion correcto', 'success');
         await router.push('/feed');
       }
