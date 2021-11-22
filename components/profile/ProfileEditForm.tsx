@@ -34,7 +34,7 @@ export default function ProfileEditForm() {
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     try {
-      // e.preventDefault();
+      e.preventDefault();
 
       if (
         !validateString(name) ||

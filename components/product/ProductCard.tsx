@@ -21,7 +21,7 @@ export default function ProductCard({ products }: ProductCardProps) {
               <motion.button
                 className="text-left"
                 onClick={(e) => {
-                  // e.preventDefault();
+                  e.preventDefault();
                   router.push(`/stock/${product?._id}`);
                 }}
               >

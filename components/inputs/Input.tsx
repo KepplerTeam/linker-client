@@ -26,7 +26,7 @@ function _Input({
         className={`mt-1 block text-neutral-800 border-0 border-b ${className}`}
         name={name}
         onChange={(e) => {
-          // e.preventDefault();
+          e.preventDefault();
           setValue(e.target.value);
         }}
         {...rest}

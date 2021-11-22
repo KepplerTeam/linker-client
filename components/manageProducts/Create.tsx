@@ -47,7 +47,7 @@ export default function Create({
   const onSubmit = async (e) => {
     try {
       e.persist();
-      // e.preventDefault();
+      e.preventDefault();
       setDisabled(true);
 
       if (!validateString(name)) {
