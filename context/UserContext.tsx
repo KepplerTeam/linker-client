@@ -42,7 +42,6 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
         },
       });
       setUser(userMobile?.data?.currentUserMobile);
-      return;
     };
 
     if (!loading && data) {
