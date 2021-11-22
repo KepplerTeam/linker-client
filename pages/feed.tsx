@@ -31,11 +31,11 @@ export default function Home() {
       fetchPolicy: 'network-only',
     });
 
-  React.useEffect(() => {
-    if (!user) {
-      router.push('/');
-    }
-  }, [user]);
+  // React.useEffect(() => {
+  //   if (!user) {
+  //     router.push('/');
+  //   }
+  // }, []);
 
   return (
     <>

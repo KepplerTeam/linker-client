@@ -1,7 +1,8 @@
 import React from 'react';
-import { useQuery } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
 import { CURRENT_USER } from '../graphql/queries';
+import { GET_CURRENT_USER_MOBILE } from '../graphql/mutations';
 import { User } from '../models';
 
 export type TUserContext = {
@@ -24,10 +25,32 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
     currentUser: User;
   }>(CURRENT_USER);
 
+  const [getCurrentUserMobile] = useMutation<{ currentUserMobile: User }>(
+    GET_CURRENT_USER_MOBILE
+  );
+
   const [user, setUser] = React.useState<User>();
   React.useEffect(() => {
+    const getUserMobile = async () => {
+      const userMobile = await getCurrentUserMobile({
+        variables: {
+          data: {
+            getCurrentUserInfo: {
+              token: localStorage.getItem('token'),
+            },
+          },
+        },
+      });
+      setUser(userMobile?.data?.currentUserMobile);
+    };
+
     if (!loading && data) {
-      setUser(data?.currentUser ?? null);
+      if (data?.currentUser) {
+        setUser(data?.currentUser);
+      }
+      if (localStorage.getItem('token')) {
+        getUserMobile();
+      }
     }
     if (!loading && !data) {
       if (router.pathname === '/reset-password/[token]') {

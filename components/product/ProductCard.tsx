@@ -13,7 +13,10 @@ export default function ProductCard({ products }: ProductCardProps) {
     <div className="px-1 min-h-screen">
       <div className="bg-gray-100 p-3 pb-5 w-full rounded-2xl gap-4">
         {products.map((product) => (
-          <div className="bg-white rounded-2xl mb-5 p-3 shadow-lg hover:shadow-2xl" key={product?._id}>
+          <div
+            className="bg-white rounded-2xl mb-5 p-3 shadow-lg hover:shadow-2xl"
+            key={product?._id}
+          >
             <div className="flex flex-col">
               <motion.button
                 className="text-left"
@@ -31,7 +34,9 @@ export default function ProductCard({ products }: ProductCardProps) {
                 </div>
                 <div className="m-2">
                   <p className="text-lg font-bold">{product?.name}</p>
-                  <p className="font-semibold text-primary-100 text-sm">USD{" "}{product?.price}</p>
+                  <p className="font-semibold text-primary-100 text-sm">
+                    USD {product?.price}
+                  </p>
                 </div>
                 <div className="flex flex-row justify-between m-2 ">
                   <div className="flex items-center">

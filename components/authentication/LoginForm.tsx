@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
 import { useMutation } from '@apollo/client';
-import { SIGN_IN } from '../../graphql/mutations';
+import { SIGN_IN_MOBILE } from '../../graphql/mutations';
 import { User } from '../../models';
 import { useUser } from '../../hooks/useUser';
 import useNotify from '../../hooks/useNotify';
@@ -12,7 +12,8 @@ export default function LoginForm() {
   const [user, setUser] = useUser();
   const notify = useNotify();
 
-  const [signIn] = useMutation<{ signIn: User }>(SIGN_IN);
+  const [signInMobile] =
+    useMutation<{ signInMobile: { User; token } }>(SIGN_IN_MOBILE);
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
 
@@ -26,7 +27,7 @@ export default function LoginForm() {
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     try {
       e.preventDefault();
-      const { data } = await signIn({
+      const { data } = await signInMobile({
         variables: {
           data: {
             email,
@@ -34,8 +35,9 @@ export default function LoginForm() {
           },
         },
       });
-      if (data.signIn) {
-        setUser(data?.signIn);
+      if (data.signInMobile) {
+        setUser(data?.signInMobile.User);
+        localStorage.setItem('token', data?.signInMobile.token);
         notify('Inicio de sesion correcto', 'success');
         await router.push('/feed');
       }

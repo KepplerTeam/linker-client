@@ -80,6 +80,62 @@ export const SIGN_IN = gql`
   }
 `;
 
+export const SIGN_IN_MOBILE = gql`
+  mutation SIGN_IN_MOBILE($data: SignInInput) {
+    signInMobile(data: $data) {
+      user {
+        email
+        password
+      }
+      token
+    }
+  }
+`;
+
+export const GET_CURRENT_USER_MOBILE = gql`
+  mutation GET_CURRENT_USER_MOBILE($data: GetCurrentUserMobile) {
+    currentUserMobile(data: $data) {
+      _id
+      username
+      firstName
+      lastName
+      image
+      email
+      role
+      balance
+      enterprise {
+        _id
+        balance
+      }
+      favorites {
+        _id
+        products {
+          _id
+          name
+          price
+          images
+          enterprise {
+            balance
+            _id
+          }
+        }
+      }
+      shoppingCart {
+        _id
+        products {
+          _id
+          name
+          price
+          images
+          enterprise {
+            _id
+          }
+        }
+      }
+    }
+  }
+`;
+
 // auth - cierre de sesion
 export const SIGN_OUT = gql`
   mutation SIGN_OUT {
@@ -255,6 +311,26 @@ export const REMOVE_FAVORITES = gql`
       record {
         _id
       }
+    }
+  }
+`;
+
+export const SET_REVIEW = gql`
+  mutation SET_REVIEW($data: CreateReviewInput) {
+    setReview(data: $data) {
+      client {
+        _id
+      }
+      product {
+        _id
+      }
+      enterprise {
+        _id
+      }
+      productComment
+      productRating
+      enterpriseComment
+      enterpriseRating
     }
   }
 `;

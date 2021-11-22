@@ -130,7 +130,7 @@ export default function EnterpriseProfile({
           </Tab.Group>
         </div>
         {active === 0 ? (
-          <div className=""></div>
+          <div className="" />
         ) : (
           <>
             <ProductCard products={enterprise?.products} />
