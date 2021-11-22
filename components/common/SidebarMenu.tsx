@@ -38,10 +38,15 @@ export default function SidebarMenu({
       const { data: dataSignOut } = await signOut({});
       if (dataSignOut?.signOut?.success) {
         notify('Se ha cerrado sesión con éxito', 'success');
+        localStorage.removeItem('token');
         setUser(null);
+<<<<<<< HEAD
+=======
         localStorage.removeItem('token');
 
+>>>>>>> e3ef776bae54495c6e52a9891b8b4d445a120515
         setActive(false);
+        router.push('/');
       } else {
         localStorage.removeItem('token');
         router.push('/');

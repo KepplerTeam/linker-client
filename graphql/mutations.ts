@@ -70,6 +70,20 @@ export const CREATE_USER = gql`
     }
   }
 `;
+
+export const CREATE_USER_MOBILE = gql`
+  mutation CREATE_USER_MOBILE($data: CreateUserInput) {
+    signUpMobile(data: $data) {
+      username
+      dni
+      firstName
+      lastName
+      email
+      password
+      image
+    }
+  }
+`;
 // auth - inicio de sesion
 export const SIGN_IN = gql`
   mutation SIGN_IN($data: SignInInput) {

@@ -33,19 +33,25 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
 
   React.useEffect(() => {
     const getUserMobile = async () => {
-      const userMobile = await getCurrentUserMobile({
-        variables: {
-          data: {
-            getCurrentUserInfo: {
-              token: localStorage.getItem('token'),
+      try {
+        const userMobile = await getCurrentUserMobile({
+          variables: {
+            data: {
+              getCurrentUserInfo: {
+                token: localStorage.getItem('token'),
+              },
             },
           },
-        },
-      });
-      setUser(userMobile?.data?.currentUserMobile);
+        });
+        setUser(userMobile?.data?.currentUserMobile);
+      }
+      catch(err){
+        setUser(null);
+        console.log(err);
+      };
     };
     getUserMobile();
-
+    
     if (!loading && data) {
       if (data?.currentUser) {
         setUser(data?.currentUser);
