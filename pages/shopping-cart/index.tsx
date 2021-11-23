@@ -18,13 +18,13 @@ export default function ShoppingCartPage() {
 
   return (
     <>
-      <div className="w-screen h-screen p-0 bg-gray-200">
+      <div className="w-screen min-h-screen p-0 bg-gray-200">
         <div>
           <Nav open={open} setOpen={setOpen} />
           <div className="bg-gray-100 flex justify-center">
             <h2 className=" font-semibold text-2xl p-4">Mi Carrito</h2>
           </div>
-          <div className="border-t-2 shadow-inner p-6">
+          <div className="border-t-2 shadow-inner p-6 pb-48">
             {user?.shoppingCart?.products.map((e, idx) => (
               <CartProduct product={e} key={idx} hasTrashIcon />
             ))}

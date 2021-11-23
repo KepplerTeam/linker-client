@@ -18,6 +18,8 @@ export default function FeaturedProductFeed({
             images={product?.images[0]}
             price={product?.price}
             _id={product?._id}
+            rating={product?.rating}
+            reviews={product?.review.length}
           />
         </div>
       ))}
