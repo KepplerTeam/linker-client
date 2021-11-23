@@ -62,6 +62,9 @@ export default function Create({
           'warning'
         );
       }
+      if (images.length <= 0) {
+        return notify('Por favor adjunte una foto', 'danger');
+      }
       if (!isUpdate) {
         const { data: dataCreate } = await createProduct({
           variables: {
