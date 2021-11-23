@@ -8,6 +8,7 @@ import Footer from '../components/common/Footer';
 import { GET_PRODUCTS } from '../graphql/queries';
 import { Product } from '../models';
 import { useUser } from '../hooks/useUser';
+import Loading from '../components/common/Loading';
 
 export default function Home() {
   const [category, setCategory] = React.useState<number>(0);
@@ -41,8 +42,12 @@ export default function Home() {
     <>
       {loading ||
         (loadingFeaturedProducts && (
-          <div className="h-screen w-full justify-center my-auto">
-            <h2>Loading...</h2>
+          <div className="w-screen h-full p-0 bg-gray-200">
+            <Nav open={open} setOpen={setOpen} />
+            
+            <Loading />
+          
+            <Footer />
           </div>
         )) || (
           <div className="w-screen h-full p-0 bg-gray-200">
