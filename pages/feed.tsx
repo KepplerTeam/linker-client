@@ -44,9 +44,7 @@ export default function Home() {
         (loadingFeaturedProducts && (
           <div className="w-screen h-full p-0 bg-gray-200">
             <Nav open={open} setOpen={setOpen} />
-            
             <Loading />
-          
             <Footer />
           </div>
         )) || (

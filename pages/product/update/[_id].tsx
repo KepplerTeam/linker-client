@@ -6,6 +6,7 @@ import Create from '../../../components/manageProducts/Create';
 import Nav from '../../../components/Navbar/Nav';
 import { GET_PRODUCT } from '../../../graphql/queries';
 import { Product } from '../../../models';
+import Loading from '../../../components/common/Loading';
 
 export default function UpdateProductPage() {
   const [open, setOpen] = React.useState(false);
@@ -17,8 +18,10 @@ export default function UpdateProductPage() {
   return (
     <>
       {loading ? (
-        <div>
-          <h2>Loading...</h2>
+        <div className="w-screen h-full p-0 bg-gray-200">
+          <Nav open={open} setOpen={setOpen} />
+          <Loading />
+          <Footer />
         </div>
       ) : (
         <div>

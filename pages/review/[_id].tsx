@@ -7,6 +7,7 @@ import Nav from '../../components/Navbar/Nav';
 import { GET_BILL } from '../../graphql/queries';
 import { Bill } from '../../models';
 import { useUser } from '../../hooks/useUser';
+import Loading from '../../components/common/Loading';
 
 export default function ReviewPage() {
   const router = useRouter();
@@ -26,8 +27,8 @@ export default function ReviewPage() {
       {orderData?.bill?.client?._id === user?._id ? (
         <div>
           {loadingOrderData ? (
-            <div>
-              <h2>loading...</h2>
+            <div className="w-screen h-full p-0 bg-gray-200">
+              <Loading />
             </div>
           ) : (
             <div>

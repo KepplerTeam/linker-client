@@ -9,6 +9,7 @@ import { Product } from '../../models';
 import ProductCard from '../../components/product/ProductCard';
 import CategorySelector from '../../components/common/CategorySelector';
 import Nav from '../../components/Navbar/Nav';
+import Loading from '../../components/common/Loading';
 
 export default function StockPage() {
   const { data, loading } = useQuery<{
@@ -26,8 +27,10 @@ export default function StockPage() {
   return (
     <>
       {(loading && (
-        <div className="h-screen w-full justify-center my-auto">
-          <h2>Loading...</h2>
+        <div className="w-screen h-full p-0 bg-gray-200">
+          <Nav open={open} setOpen={setOpen} />
+          <Loading />
+          <Footer />
         </div>
       )) || (
         <div className="">

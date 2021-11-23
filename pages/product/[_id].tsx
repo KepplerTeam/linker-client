@@ -6,6 +6,7 @@ import Nav from '../../components/Navbar/Nav';
 import ProductOverview from '../../components/product/ProductOverview';
 import { GET_PRODUCT } from '../../graphql/queries';
 import { Product } from '../../models';
+import Loading from '../../components/common/Loading';
 
 export default function ProductProfilePage() {
   const router = useRouter();
@@ -21,8 +22,8 @@ export default function ProductProfilePage() {
     <div>
       <Nav open={open} setOpen={setOpen} />
       {(loading && (
-        <div className="h-screen w-full justify-center my-auto">
-          <h2>Loading...</h2>
+        <div className="w-screen h-full p-0 bg-gray-200">
+          <Loading />
         </div>
       )) || <ProductOverview product={data?.product} />}
       <Footer />

@@ -7,6 +7,7 @@ import Nav from '../../components/Navbar/Nav';
 import { GET_ENTERPRISE } from '../../graphql/queries';
 import { useUser } from '../../hooks/useUser';
 import { Enterprise } from '../../models';
+import Loading from '../../components/common/Loading';
 
 export default function EnterpriseProfilePage() {
   const [user] = useUser();
@@ -23,8 +24,10 @@ export default function EnterpriseProfilePage() {
   return (
     <div>
       {loading ? (
-        <div>
-          <h2>loading...</h2>
+        <div className="w-screen h-full p-0 bg-gray-200">
+          <Nav open={open} setOpen={setOpen} />
+          <Loading />
+          <Footer />
         </div>
       ) : (
         <div className="bg-gray-200">
