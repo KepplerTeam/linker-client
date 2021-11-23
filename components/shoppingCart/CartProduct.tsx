@@ -68,25 +68,25 @@ export default function CartProduct({
     return arr;
   };
   return (
-    <div className="card flex flex-row px-8 items-center justify-center w-full">
+    <div className="card bg-gray-50 flex flex-row mb-6 items-center justify-between">
       <img
-        className="h-32 w-auto p-4 bg-gray-100 rounded-3xl"
+        className="h-32 w-32 p-3 rounded-3xl"
         src={product?.images[0]}
         alt={product?.name}
       />
-      <div className="py-5 pl-5 flex flex-col items-start h-full w-full">
-        <h4 className="text-l font-light mb-auto">{product?.name}</h4>
-        <h5 className="text-sm font-bold mb-3">${product?.price}</h5>
-        {hasTrashIcon ? (
-          <div className="flex flex-row items-center justify-between w-full">
+      <div className="ml-3 flex flex-col items-start h-full w-full">
+        <h4 className="text-lg font-bold mb-2">{product?.name}</h4>
+        <div className="flex flex-row items-center justify-between w-full">
+          <h5 className="text-md text-primary-700 font-bold">${product?.price}</h5>
+          {hasTrashIcon ? (
             <button type="button" className="ml-auto">
               <TrashIcon
-                className="w-5 h-5 opacity-50"
+                className="w-6 h-6 opacity-50 hover:opacity-100"
                 onClick={() => removeProduct(product?._id)}
               />
             </button>
-          </div>
-        ) : null}
+          ) : null}
+        </div>
       </div>
     </div>
   );

@@ -9,6 +9,9 @@ import SidebarMenu from '../components/common/SidebarMenu';
 
 export default function Home() {
   const router = useRouter();
+  React.useEffect(() => {
+    localStorage.setItem('token', 'PUTITA');
+  }, []);
 
   return (
     <>

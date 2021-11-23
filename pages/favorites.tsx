@@ -2,24 +2,24 @@ import React from 'react';
 import FavoriteProduct from '../components/favorites/FavoriteProduct';
 import TitleBar from '../components/common/TitleBar';
 import { useUser } from '../hooks/useUser';
+import Nav from '../components/Navbar/Nav';
 
 export default function FavoritesPage() {
   const [user] = useUser();
+  const [open, setOpen] = React.useState(false);
 
   return (
     <>
-      <div>
-        <TitleBar title="Favoritos" />
-        <div className="mb-24">
-          {user?.favorites?.products.map((e, idx) => (
-            <FavoriteProduct product={e} key={idx} />
-          ))}
-        </div>
-        <div className="fixed bottom-0 w-full flex-col">
-          <div className="flex flex-row px-8 items-center justify-between">
-            <h6 className="text-gray-500 font-semibold mr mb-4">
-              Productos: {user?.favorites?.products.length}
-            </h6>
+      <div className="w-screen h-screen p-0 bg-gray-200">
+        <div>
+          <Nav open={open} setOpen={setOpen} />
+          <div className="bg-gray-100 flex justify-center">
+            <h2 className=" font-semibold text-2xl p-4">Favoritos</h2>
+          </div>
+          <div className="border-t-2 shadow-inner p-6">
+            {user?.favorites?.products.map((e, idx) => (
+              <FavoriteProduct product={e} key={idx} />
+            ))}
           </div>
         </div>
       </div>

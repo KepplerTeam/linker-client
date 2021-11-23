@@ -106,50 +106,6 @@ export const SIGN_IN_MOBILE = gql`
   }
 `;
 
-export const GET_CURRENT_USER_MOBILE = gql`
-  mutation GET_CURRENT_USER_MOBILE($data: GetCurrentUserMobile) {
-    currentUserMobile(data: $data) {
-      _id
-      username
-      firstName
-      lastName
-      image
-      email
-      role
-      balance
-      enterprise {
-        _id
-        balance
-      }
-      favorites {
-        _id
-        products {
-          _id
-          name
-          price
-          images
-          enterprise {
-            balance
-            _id
-          }
-        }
-      }
-      shoppingCart {
-        _id
-        products {
-          _id
-          name
-          price
-          images
-          enterprise {
-            _id
-          }
-        }
-      }
-    }
-  }
-`;
-
 // auth - cierre de sesion
 export const SIGN_OUT = gql`
   mutation SIGN_OUT {

@@ -138,6 +138,50 @@ export const CURRENT_USER = gql`
   }
 `;
 
+export const GET_CURRENT_USER_MOBILE = gql`
+  mutation GET_CURRENT_USER_MOBILE($data: GetCurrentUserMobile) {
+    currentUserMobile(data: $data) {
+      _id
+      username
+      firstName
+      lastName
+      image
+      email
+      role
+      balance
+      enterprise {
+        _id
+        balance
+      }
+      favorites {
+        _id
+        products {
+          _id
+          name
+          price
+          images
+          enterprise {
+            balance
+            _id
+          }
+        }
+      }
+      shoppingCart {
+        _id
+        products {
+          _id
+          name
+          price
+          images
+          enterprise {
+            _id
+          }
+        }
+      }
+    }
+  }
+`;
+
 // Factura
 export const GET_BILL = gql`
   query GET_BILL($filter: FilterFindOneBillInput) {
