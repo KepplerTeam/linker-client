@@ -39,6 +39,7 @@ export const GET_PRODUCTS = gql`
       category
       price
       images
+      rating
     }
   }
 `;
@@ -56,6 +57,7 @@ export const GET_PRODUCT = gql`
       quantity
       units
       images
+      rating
       enterprise {
         _id
         name
@@ -285,6 +287,27 @@ export const GET_TRANSACTION = gql`
       transactionId
       amount
       status
+    }
+  }
+`;
+
+export const GET_REVIEWS = gql`
+  query GET_REVIEWS(
+    $filter: FilterFindManyReviewInput
+    $limit: Int
+    $sort: SortFindManyReviewInput
+  ) {
+    reviews(filter: $filter, limit: $limit, sort: $sort) {
+      client {
+        _id
+        username
+      }
+      product {
+        _id
+      }
+      enterprise
+      productComment
+      productRating
     }
   }
 `;

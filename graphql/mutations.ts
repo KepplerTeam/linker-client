@@ -338,13 +338,9 @@ export const SET_REVIEW = gql`
       product {
         _id
       }
-      enterprise {
-        _id
-      }
+      enterprise
       productComment
       productRating
-      enterpriseComment
-      enterpriseRating
     }
   }
 `;

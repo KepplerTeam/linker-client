@@ -1,18 +1,21 @@
 import React from 'react';
-import { useMutation } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
 import { motion } from 'framer-motion';
-import { Product } from '../../models';
+import { Product, Review } from '../../models';
 import ReviewCard from '../review/ReviewCard';
 import { useUser } from '../../hooks/useUser';
 import {
   UPDATE_SHOPPING_CART,
   UPDATE_FAVORITES,
+  SET_REVIEW,
 } from '../../graphql/mutations';
+import { GET_REVIEWS } from '../../graphql/queries';
 import useNotify from '../../hooks/useNotify';
 import HeartIcon from '../icons/HeartIcon';
 import StarsRating from '../review/StarsRating';
 import { Input } from '../inputs';
+import { StarIcon } from '../icons';
 
 interface ProductOverviewProps {
   product?: Product;
@@ -35,6 +38,14 @@ export default function ProductOverview({
   const [reviewComment, setReviewComment] = React.useState('');
   const [rating, setRating] = React.useState(null);
   const [hover, setHover] = React.useState(null);
+  const [setReview] = useMutation(SET_REVIEW);
+
+  const { data: reviewsData, loading: loadingReviewsData } = useQuery<{
+    reviews: Review[];
+  }>(GET_REVIEWS, {
+    variables: { filter: { product: product?._id }, limit: 4, sort: "_ID_DESC" },
+    fetchPolicy: 'network-only',
+  });
 
   /** addToCart
    * @abstract Permite al usuario anadir productos a su carrito de compras
@@ -61,6 +72,35 @@ export default function ProductOverview({
       }
     } catch (err) {
       notify(err.message, 'err', err);
+    }
+  };
+
+  const onSubmitReview = async () => {
+    try {
+      if (rating !== null && reviewComment !== null) {
+        const { data: reviewData } = await setReview({
+          variables: {
+            data: {
+              createReviewInfoInput: {
+                client: user?._id,
+                product: product._id,
+                enterprise: product?.enterprise?._id,
+                productComment: reviewComment,
+                productRating: rating,
+              },
+            },
+          },
+        });
+        if (reviewData?.setReview) {
+          notify('Ha calificado el producto correctamente!', 'success');
+        } else {
+          notify('Error calificando el producto', 'danger');
+        }
+      } else {
+        notify('Debe completar la informacion', 'danger');
+      }
+    } catch (err) {
+      notify(err.message, 'danger', err);
     }
   };
 
@@ -118,7 +158,7 @@ export default function ProductOverview({
     try {
       // currentFavorites es un arreglo que contiene el id de los productos existentes en favoritos
       const currentFavorites = user?.favorites?.products?.map((p) => p._id);
-      // newFavorites es el carrito actualizado, contiene el id de los productos anteriores pero sin el producto eliminado
+      // newFavorites es pel carrito actualizado, contiene el id de los productos anteriores pero sin el producto eliminado
       const newFavorites = findAndRemove(currentFavorites, product?._id);
       const { data: updateData } = await updateFavorites({
         variables: {
@@ -365,27 +405,38 @@ export default function ProductOverview({
                   value=""
                   type="button"
                   className="w-full h-11 bg-primary-100 text-white rounded-2xl px-4 py-2 my-12"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onSubmitReview();
+                  }}
                 >
                   <span>Enviar review</span>
                 </motion.button>
               </div>
             ) : null}
-            <ReviewCard
-              name="Madelina"
-              rating={3}
-              comment="
-			  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas, recusandae?
-			  "
-            />
-          </div>
-          <div className="pt-4">
-            <ReviewCard
-              name="Javier"
-              rating={4}
-              comment="
-			  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas, recusandae?
-			  "
-            />
+            {loadingReviewsData ? (
+              <div>
+                <h2>loading...</h2>
+              </div>
+            ) : (
+              <div>
+                <div className="flex space-x-1">
+                  <h2>
+                    Calificacion: {Math.round(product?.rating * 100) / 100}
+                  </h2>
+                  <StarIcon className="w-5 text-yellow-300 fill-current" />
+                </div>
+                {reviewsData?.reviews.map((review) => (
+                  <div key={review?._id} className="my-4">
+                    <ReviewCard
+                      name={review?.client.username}
+                      rating={review?.productRating}
+                      comment={review?.productComment}
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>
