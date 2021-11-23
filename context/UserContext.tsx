@@ -3,7 +3,6 @@ import { useQuery, useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
 import { CURRENT_USER, GET_CURRENT_USER_MOBILE } from '../graphql/queries';
 import { User } from '../models';
-import { useUser } from '../hooks/useUser';
 
 export type TUserContext = {
   user?: User;
@@ -26,19 +25,19 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
   //   fetchPolicy: 'network-only',
   // });
 
-  const [user, setUser] = useUser();
+  const [user, setUser] = React.useState<User>();
 
-  const { data, loading } = useQuery<{currentUser: User}>(CURRENT_USER)
+  const { data, loading } = useQuery<{ currentUser: User }>(CURRENT_USER);
 
   React.useEffect(() => {
-    if(!loading && data.currentUser) {
-      setUser(data?.currentUser)
+    if (!loading && data.currentUser) {
+      setUser(data?.currentUser);
     }
-  })
+  }, [data, loading]);
 
   // React.useEffect(() => {
   //   console.log(localStorage.getItem("token"))
-    
+
   //   if (!loading && data && typeof window !== "undefined") {
   //     if (data?.currentUserMobile) {
   //       setUser(data?.currentUserMobile);

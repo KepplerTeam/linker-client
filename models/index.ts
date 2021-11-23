@@ -54,10 +54,11 @@ export interface Product extends GraphQLModel {
   rating?: number;
   quantity?: number;
   units?: number;
-  // review?: Array<BuyerReview>;
+  review?: Array<Review>;
   enterprise?: Enterprise;
   uploadedDate?: Date;
   visibility?: number;
+  // createdAt?: Date;
   // questions?: Array<Question>;
 }
 
@@ -89,4 +90,12 @@ export interface Transaction extends GraphQLModel {
   clientId: User;
   transactionId: string;
   status: number;
+}
+
+export interface Review extends GraphQLModel {
+  client?: User;
+  enterprise?: Enterprise;
+  product?: Product;
+  productComment?: string;
+  productRating?: number;
 }

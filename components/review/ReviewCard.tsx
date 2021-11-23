@@ -1,3 +1,5 @@
+import dayjs from 'dayjs';
+import localizedFormat from 'dayjs/plugin/localizedFormat';
 import React from 'react';
 
 interface ReviewCardProps {
@@ -11,6 +13,7 @@ export default function ReviewCard({
   comment = '',
   rating = 0,
 }: ReviewCardProps) {
+  dayjs.extend(localizedFormat);
   return (
     <div className="w-full h-auto">
       <div className="grid grid-cols-4">
@@ -25,12 +28,7 @@ export default function ReviewCard({
           <div className="flex flex-row justify-between">
             <div>
               <h2>{name}</h2>
-              Rating: {rating}
-            </div>
-            <div>
-              <h2 className="text-sm font-extralight text-gray-700">
-                1 month ago
-              </h2>
+              <h2>Rating: {Math.round(rating * 100) / 100}</h2>
             </div>
           </div>
           <h2>{comment}</h2>

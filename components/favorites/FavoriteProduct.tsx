@@ -79,7 +79,9 @@ export default function FavoriteProduct({ product }: FavoriteProductProps) {
           <button type="button" className="ml-auto">
             <HeartIcon
               className="w-6 h-6 text-red-500 hover:text-red-700 active:text-gray-300"
-              onClick={() => { removeProduct(product?._id); }}
+              onClick={() => {
+                removeProduct(product?._id);
+              }}
             />
           </button>
         </div>

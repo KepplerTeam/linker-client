@@ -10,7 +10,13 @@ export default function RegisterEnterprise() {
   return (
     <div>
       <Nav open={open} setOpen={setOpen} />
-      <NewEnterpriseForm user={user} />
+      {!user || user?.role !== 2 ? (
+        <div className="min-h-screen">
+          <h2>No tienes permiso para ver esta página.</h2>
+        </div>
+      ) : (
+        <NewEnterpriseForm user={user} />
+      )}
       <Footer />
     </div>
   );

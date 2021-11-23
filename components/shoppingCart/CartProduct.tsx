@@ -77,7 +77,9 @@ export default function CartProduct({
       <div className="ml-3 flex flex-col items-start h-full w-full">
         <h4 className="text-lg font-bold mb-2">{product?.name}</h4>
         <div className="flex flex-row items-center justify-between w-full">
-          <h5 className="text-md text-primary-700 font-bold">${product?.price}</h5>
+          <h5 className="text-md text-primary-700 font-bold">
+            ${product?.price}
+          </h5>
           {hasTrashIcon ? (
             <button type="button" className="ml-auto">
               <TrashIcon

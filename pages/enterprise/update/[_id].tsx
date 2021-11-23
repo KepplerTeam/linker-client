@@ -28,11 +28,17 @@ export default function UpdateEnterprisePage() {
       ) : (
         <div>
           <Nav open={open} setOpen={setOpen} />
-          <NewEnterpriseForm
-            isUpdate
-            enterprise={data?.enterprise}
-            user={user}
-          />
+          {!user || user?._id !== data?.enterprise?.owner?._id ? (
+            <div className="min-h-screen">
+              <h2>No tienes permiso para ver esta página.</h2>
+            </div>
+          ) : (
+            <NewEnterpriseForm
+              isUpdate
+              enterprise={data?.enterprise}
+              user={user}
+            />
+          )}
           <Footer />
         </div>
       )}
