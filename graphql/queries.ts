@@ -40,6 +40,9 @@ export const GET_PRODUCTS = gql`
       price
       images
       rating
+      review {
+        _id
+      }
     }
   }
 `;

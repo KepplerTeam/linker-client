@@ -113,8 +113,9 @@ export default function SignupForm() {
               if (dataCreateUser?.signUp) {
                 notify('Cuenta creada con exito!', 'success');
                 await router.push('/feed');
+              } else {
+                return notify('No se ha podido crear el usuario', 'danger');
               }
-              return notify('No se ha podido crear el usuario', 'danger');
             }
             return notify('Informacion de la empresa incompleta', 'danger');
           }

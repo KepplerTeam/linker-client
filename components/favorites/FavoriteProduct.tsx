@@ -1,4 +1,5 @@
 import { useMutation } from '@apollo/client';
+import { useRouter } from 'next/router';
 import React from 'react';
 import { UPDATE_FAVORITES } from '../../graphql/mutations';
 import useNotify from '../../hooks/useNotify';
@@ -13,6 +14,7 @@ interface FavoriteProductProps {
 export default function FavoriteProduct({ product }: FavoriteProductProps) {
   const [user] = useUser();
   const notify = useNotify();
+  const router = useRouter();
   const [updateFavorites] = useMutation(UPDATE_FAVORITES);
 
   // Estado para validar en el useEffect cuando cambia la data y recargar el componente
@@ -65,13 +67,31 @@ export default function FavoriteProduct({ product }: FavoriteProductProps) {
   };
   return (
     <div className="card bg-gray-50 flex flex-row mb-6 items-center justify-between">
-      <img
-        className="h-32 w-32 p-3 rounded-3xl"
-        src={product?.images[0]}
-        alt={product?.name}
-      />
+      <button
+        type="button"
+        onClick={(e) => {
+          e.preventDefault();
+          router.push(`/product/${product?._id}`);
+        }}
+      >
+        <div>
+          <img
+            className="h-32 w-32 p-3 rounded-3xl"
+            src={product?.images[0]}
+            alt={product?.name}
+          />
+        </div>
+      </button>
       <div className="ml-3 flex flex-col items-start h-full w-full">
-        <h4 className="text-lg font-bold mb-2">{product?.name}</h4>
+        <button
+          type="button"
+          onClick={(e) => {
+            e.preventDefault();
+            router.push(`product/${product?._id}`);
+          }}
+        >
+          <h4 className="text-lg font-bold mb-2">{product?.name}</h4>
+        </button>
         <div className="flex flex-row items-center justify-between w-full">
           <h5 className="text-md text-primary-700 font-bold">
             ${product?.price}

@@ -7,6 +7,8 @@ interface FeaturedProductProps {
   name: string;
   price: number;
   _id: string;
+  rating: number;
+  reviews: number;
 }
 
 export default function FeaturedProduct({
@@ -14,6 +16,8 @@ export default function FeaturedProduct({
   name = 'TMA-2 HD Wireless',
   price = 350,
   _id = '1',
+  rating,
+  reviews,
 }: FeaturedProductProps) {
   const router = useRouter();
   return (
@@ -32,10 +36,10 @@ export default function FeaturedProduct({
           <div className="flex flex-row mt-2">
             <div className="flex">
               <StarIcon className="w-4 h-4 text-yellow-300 fill-current mr-2" />
-              <div className="text-sm mr-11">4.2</div>
+              <div className="text-sm mr-11">{rating}</div>
             </div>
             <div className="">
-              <p className="text-sm">86 Reviews</p>
+              <p className="text-sm">{reviews} Reviews</p>
             </div>
           </div>
         </div>

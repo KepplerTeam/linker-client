@@ -116,10 +116,10 @@ export default function CheckoutPageComponent() {
         };
         const billDivision = handleBillDivision();
         newUniqueBill(billDivision);
+        await notify('Felicidades por su compra!', 'success');
       } else {
         notify('Balance insuficiente para realizar la compra', 'danger');
       }
-      notify('Felicidades por su compra!', 'success');
     } catch (error) {
       notify(error.message, 'danger', error);
     }
