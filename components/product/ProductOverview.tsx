@@ -16,6 +16,8 @@ import HeartIcon from '../icons/HeartIcon';
 import StarsRating from '../review/StarsRating';
 import { Input } from '../inputs';
 import { StarIcon } from '../icons';
+import { Tab } from '@headlessui/react';
+import Loading from '../../components/common/Loading';
 
 interface ProductOverviewProps {
   product?: Product;
@@ -197,175 +199,149 @@ export default function ProductOverview({
   };
 
   return (
-    <div className="w-full min-h-screen">
-      <div className="p-6">
-        <div>
-          <h2 className="mb-1 font-semibold text-primary-100">
-            USD{product.price}
+    <div className="min-h-screen p-5 mx-4 my-5 rounded-2xl bg-gray-100 shadow-2xl">
+      <div className="flex flex-col">
+        <h2 className="text-2xl mt-2 mb-4 text-center font-bold">
+          {product.name}
+        </h2>
+        <div className="flex flex-row mx-4 justify-between">
+          <h2 className="mt-2 font-semibold text-primary-100">
+            USD&nbsp;{product.price}
           </h2>
-          <div className="flex flex-row justify-between">
-            <h2 className="text-2xl font-bold">{product.name}</h2>
-            {!isFavorite ? (
-              <button
-                type="button"
-                className=""
-                onClick={(e) => {
-                  e.persist();
-                  e.preventDefault();
-                  addToFavorites();
-                  isNotFavorite();
-                }}
-              >
-                <HeartIcon className="w-6 h-6 text-gray-300 hover:text-gray-500 active:text-red-500" />
-              </button>
-            ) : (
-              <button
-                type="button"
-                className=""
-                onClick={(e) => {
-                  e.persist();
-                  e.preventDefault();
-                  removeFromFavorites();
-                  isNotFavorite();
-                }}
-              >
-                <HeartIcon className="w-6 h-6 text-red-500 hover:text-red-700 active:text-gray-300" />
-              </button>
-            )}
-          </div>
-        </div>
-        <div>
-          <div className="flex flex-row justify-around overflow-x-scroll scrollbar-hide space-x-5 my-4">
-            <motion.button
-              whileHover={{
-                scale: 1.005,
-                boxShadow: '0px 0px 4px rgb(51,51,51, 0.5)',
-              }}
-              value=""
+          {!isFavorite ? (
+            <button
               type="button"
-              onClick={(e) => {
-                e.preventDefault();
-                setActive(0);
-              }}
-            >
-              <span
-                className={`${
-                  active === 0 ? 'border-b-2 border-primary-100' : ''
-                }`}
-              >
-                Resumen
-              </span>
-            </motion.button>
-            <motion.button
-              whileHover={{
-                scale: 1.005,
-                boxShadow: '0px 0px 4px rgb(51,51,51, 0.5)',
-              }}
-              value=""
-              type="button"
-              onClick={(e) => {
-                e.preventDefault();
-                setActive(1);
-              }}
-            >
-              <span
-                className={`${
-                  active === 1 ? 'border-b-2 border-primary-100' : ''
-                }`}
-              >
-                Especificaciones
-              </span>
-            </motion.button>
-          </div>
-        </div>
-        {active === 0 ? (
-          <div className="">
-            <div className="w-full pb-12 flex flex-row overflow-scroll scrollbar-hide space-x-7">
-              {product.images.map((image, idx) => (
-                <div key={idx}>
-                  <img
-                    src={image}
-                    alt={product.name}
-                    className="w-full object-contain rounded-lg shadow-md"
-                    key={product?._id}
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-        ) : (
-          <div>
-            <div className="py-2">
-              <h2 className="text-xl font-bold my-2">Vendedor</h2>
-              <button
-                type="button"
-                onClick={() =>
-                  router.push(`/enterprise/${product.enterprise._id}`)
-                }
-              >
-                <h2 className="text-primary-100">{product.enterprise.name}</h2>
-              </button>
-            </div>
-            <div className="py-2">
-              <h2 className="text-xl font-bold my-2">Descripcion</h2>
-              <h2>{product.description}</h2>
-            </div>
-            <div className="py-2">
-              <h2 className="text-xl font-bold my-2">
-                Presentacion del producto
-              </h2>
-              <h2>
-                {product.units === 0
-                  ? 'El producto listado se vende por Unidades'
-                  : ''}
-              </h2>
-              <h2>
-                {product.units === 1
-                  ? 'El producto listado se vende por Kilogramos'
-                  : ''}
-              </h2>
-              <h2>
-                {product.units === 2
-                  ? 'El producto listado se vende por Litros'
-                  : ''}
-              </h2>
-            </div>
-            <div className="py-2">
-              <h2 className="text-xl font-bold my-2">Serial</h2>
-              <h2>{product.serial}</h2>
-            </div>
-          </div>
-        )}
-        <div>
-          {user?.role === 1 && !isReview ? (
-            <motion.button
-              whileHover={{
-                scale: 1.005,
-                boxShadow: '0px 0px 4px rgb(51,51,51, 0.5)',
-              }}
-              value=""
-              type="button"
-              className="w-full h-11 bg-primary-100 text-white rounded-2xl px-4 py-2 my-12"
+              className=""
               onClick={(e) => {
                 e.persist();
                 e.preventDefault();
-                addToCart();
+                addToFavorites();
+                isNotFavorite();
               }}
             >
-              <span>Anadir al Carrito</span>
-            </motion.button>
-          ) : null}
-          {user?.role === 2 &&
-          user?._id === product?.enterprise?.owner?._id &&
-          !isReview ? (
-            <motion.button
-              whileHover={{
-                scale: 1.005,
-                boxShadow: '0px 0px 4px rgb(51,51,51, 0.5)',
-              }}
-              value=""
+              <HeartIcon className="w-6 h-6 text-gray-300 hover:text-gray-500 active:text-red-500" />
+            </button>
+          ) : (
+            <button
               type="button"
-              className="w-full h-11 bg-primary-100 text-white rounded-2xl px-4 py-2 my-12"
+              className=""
+              onClick={(e) => {
+                e.persist();
+                e.preventDefault();
+                removeFromFavorites();
+                isNotFavorite();
+              }}
+            >
+              <HeartIcon className="w-6 h-6 text-red-500 hover:text-red-700 active:text-gray-300" />
+            </button>
+          )}
+        </div>
+      </div>
+      <div className="w-full max-w mt-5 pb-4">
+        <Tab.Group>
+          <Tab.List className="flex bg-gray-50 justify-center py-3 w-full shadow-inner rounded-xl">
+            <Tab
+              className={({ selected }) =>
+                selected
+                  ? 'bg-primary-100 text-white font-bold px-5 py-3 rounded-xl shadow-md hover:shadow-lg'
+                  : 'hover:bg-gray-100 font-bold px-5 py-3 rounded-xl hover:shadow-lg'
+              }
+            >
+              Resumen
+            </Tab>
+            <Tab
+              className={({ selected }) =>
+                selected
+                  ? 'bg-primary-100 text-white font-bold px-5 py-3 rounded-xl shadow-md hover:shadow-lg'
+                  : 'hover:bg-gray-100 font-bold px-5 py-3 rounded-xl hover:shadow-lg'
+              }
+            >
+              Especificaciones
+            </Tab>
+          </Tab.List>
+          <Tab.Panels>
+            <Tab.Panel className="mt-8">
+              <div className="">
+                <div className="w-full pb-4 flex flex-row overflow-scroll scrollbar-hide space-x-7">
+                  {product.images.map((image, idx) => (
+                    <div key={idx}>
+                      <img
+                        src={image}
+                        alt={product.name}
+                        className="w-full object-contain rounded-lg shadow-md"
+                        key={product?._id}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </Tab.Panel>
+            <Tab.Panel className="py-4 px-3">
+              <div className="">
+                <h2 className="text-xl font-bold my-2">Vendedor:</h2>
+                <button
+                  className="text-primary-100 hover:underline"
+                  type="button"
+                  onClick={() =>
+                    router.push(`/enterprise/${product.enterprise._id}`)
+                  }
+                >
+                  <h2 className="text-primary-100">
+                    {product.enterprise.name}
+                  </h2>
+                </button>
+              </div>
+              <div className="py-2">
+                <h2 className="text-xl font-bold my-2">Descripción:</h2>
+                <h2>{product.description}</h2>
+              </div>
+              <div className="py-2">
+                <h2 className="text-xl font-bold my-2">Presentación:</h2>
+                <h2>
+                  {product.units === 0
+                    ? 'El producto listado se vende por Unidades'
+                    : ''}
+                </h2>
+                <h2>
+                  {product.units === 1
+                    ? 'El producto listado se vende por Kilogramos'
+                    : ''}
+                </h2>
+                <h2>
+                  {product.units === 2
+                    ? 'El producto listado se vende por Litros'
+                    : ''}
+                </h2>
+              </div>
+              <div className="py-2">
+                <h2 className="text-xl font-bold my-2">Serial:</h2>
+                <h2>{product.serial}</h2>
+              </div>
+            </Tab.Panel>
+          </Tab.Panels>
+        </Tab.Group>
+      </div>
+      <div>
+        {user?.role === 1 && !isReview ? (
+          <button
+            type="button"
+            className="bg-gray-50 shadow-lg font-medium text-black ring-primary-100 ring-2 hover:ring-0 my-3  px-8 py-2 rounded-lg hover:text-white hover:bg-primary-100"
+            onClick={(e) => {
+              e.persist();
+              e.preventDefault();
+              addToCart();
+            }}
+          >
+            <span>Anadir al Carrito</span>
+          </button>
+        ) : null}
+        {user?.role === 2 &&
+        user?._id === product?.enterprise?.owner?._id &&
+        !isReview ? (
+          <div className="w-full mb-4 text-center">
+            <button
+              type="button"
+              className="bg-gray-50 shadow-lg font-medium text-black ring-primary-100 ring-2 hover:ring-0 my-3  px-8 py-2 rounded-lg hover:text-white hover:bg-primary-100"
               onClick={(e) => {
                 e.persist();
                 e.preventDefault();
@@ -373,75 +349,76 @@ export default function ProductOverview({
               }}
             >
               <span>Editar Producto</span>
-            </motion.button>
-          ) : null}
+            </button>
+          </div>
+        ) : null}
 
-          <div className="pt-4">
-            {isReview ? (
-              <div>
-                <div className="mb-3">
-                  <h2 className="mb-1">Que te parecio el producto?</h2>
-                  <StarsRating
-                    setRating={setRating}
-                    setHover={setHover}
-                    rating={rating}
-                    hover={hover}
-                  />
-                </div>
-                <div>
-                  <h2>Comentario</h2>
-                  <Input
-                    type="comment"
-                    id="comment"
-                    name="comment"
-                    placeholder=""
-                    className="w-3/4 h-8 my-1 text-sm "
-                    value={reviewComment}
-                    setValue={setReviewComment}
-                    label=""
-                  />
-                </div>
-                <motion.button
-                  whileHover={{
-                    scale: 1.005,
-                    boxShadow: '0px 0px 4px rgb(51,51,51, 0.5)',
-                  }}
-                  value=""
-                  type="button"
-                  className="w-full h-11 bg-primary-100 text-white rounded-2xl px-4 py-2 my-12"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    onSubmitReview();
-                  }}
-                >
-                  <span>Enviar review</span>
-                </motion.button>
+        <div className="mt-6 pt-4 px-3">
+          {isReview ? (
+            <div>
+              <div className="mb-3">
+                <h2 className="mb-1">¿Qué te pareció el producto?</h2>
+                <StarsRating
+                  setRating={setRating}
+                  setHover={setHover}
+                  rating={rating}
+                  hover={hover}
+                />
               </div>
-            ) : null}
-            {loadingReviewsData ? (
               <div>
-                <h2>loading...</h2>
+                <h2>Comentario</h2>
+                <Input
+                  type="comment"
+                  id="comment"
+                  name="comment"
+                  placeholder=""
+                  className="w-3/4 h-8 my-1 text-sm "
+                  value={reviewComment}
+                  setValue={setReviewComment}
+                  label=""
+                />
               </div>
-            ) : (
-              <div>
-                <div className="flex space-x-1">
-                  <h2>
-                    Calificacion: {Math.round(product?.rating * 100) / 100}
-                  </h2>
+              <motion.button
+                whileHover={{
+                  scale: 1.005,
+                  boxShadow: '0px 0px 4px rgb(51,51,51, 0.5)',
+                }}
+                value=""
+                type="button"
+                className="w-full h-11 bg-primary-100 text-white rounded-2xl px-4 py-2 my-12"
+                onClick={(e) => {
+                  e.preventDefault();
+                  onSubmitReview();
+                }}
+              >
+                <span>Enviar review</span>
+              </motion.button>
+            </div>
+          ) : null}
+          {loadingReviewsData ? (
+            <div>
+              <Loading />
+            </div>
+          ) : (
+            <div>
+              <div className="flex space-x-1">
+                <h2 className="text-xl font-bold">Calificación:&nbsp; </h2>
+                <div className="flex flex-row items-center">
+                  <h2>{Math.round(product?.rating * 100) / 100}&nbsp;</h2>
                   <StarIcon className="w-5 text-yellow-300 fill-current" />
                 </div>
-                {reviewsData?.reviews.map((review) => (
-                  <div key={review?._id} className="my-4">
-                    <ReviewCard
-                      name={review?.client.username}
-                      rating={review?.productRating}
-                      comment={review?.productComment}
-                    />
-                  </div>
-                ))}
               </div>
-            )}
-          </div>
+              {reviewsData?.reviews.map((review) => (
+                <div key={review?._id} className="my-4">
+                  <ReviewCard
+                    name={review?.client.username}
+                    rating={review?.productRating}
+                    comment={review?.productComment}
+                  />
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>

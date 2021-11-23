@@ -18,7 +18,7 @@ export default function OrderDetailsPage() {
   });
   const [open, setOpen] = React.useState(false);
   return (
-    <div>
+    <div className="w-screen h-full p-0 bg-gray-200">
       {!loadingOrderData && orderData ? (
         <>
           <Nav open={open} setOpen={setOpen} />
@@ -26,7 +26,7 @@ export default function OrderDetailsPage() {
           <Footer />
         </>
       ) : (
-        <div className="w-screen h-full p-0 bg-gray-200">
+        <div>
           <Nav open={open} setOpen={setOpen} />
           <Loading />
           <Footer />

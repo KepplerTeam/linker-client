@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/client';
 import React from 'react';
 import Footer from '../../components/common/Footer';
+import Loading from '../../components/common/Loading';
 import Nav from '../../components/Navbar/Nav';
 import ProfilePageComponent from '../../components/profile/ProfilePageComponent';
 import { GET_ENTERPRISES } from '../../graphql/queries';
@@ -20,7 +21,7 @@ export default function ProfilePage() {
       <Nav open={open} setOpen={setOpen} />
       {loading ? (
         <div>
-          <h2>loading...</h2>
+          <Loading />
         </div>
       ) : (
         <ProfilePageComponent user={user} enterprise={data?.enterprises} />

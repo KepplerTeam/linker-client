@@ -17,7 +17,7 @@ export default function OrdersResume({
   dayjs.extend(localizedFormat);
   return (
     <>
-      <div className="bg-gray-50 shadow-lg hover:shadow-2xl rounded-xl p-6 mx-3 mb-4 flex flex-col w-80 min-w-max">
+      <div className="bg-gray-50 shadow-lg hover:shadow-xl rounded-xl p-6 mx-3 mb-4 flex flex-col w-80 min-w-max">
         <div className="w-full h-auto">
           {isSeller ? (
             <>
@@ -36,7 +36,7 @@ export default function OrdersResume({
           <h2 className="font-semibold mt-4">Fecha: </h2>
           <h2 className="text-base">{dayjs(bill?.createdAt).format('ll')}</h2>
 
-          <div className="w-full mt-1">
+          <div className="w-full mt-4">
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="font-semibold">Monto: </h2>
