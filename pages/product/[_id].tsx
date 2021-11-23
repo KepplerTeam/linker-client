@@ -19,13 +19,9 @@ export default function ProductProfilePage() {
   const [open, setOpen] = React.useState(false);
 
   return (
-    <div>
+    <div className="w-full min-h-screen bg-gray-200">
       <Nav open={open} setOpen={setOpen} />
-      {(loading && (
-        <div className="w-screen h-full p-0 bg-gray-200">
-          <Loading />
-        </div>
-      )) || <ProductOverview product={data?.product} />}
+      {(loading && <Loading />) || <ProductOverview product={data?.product} />}
       <Footer />
     </div>
   );

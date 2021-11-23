@@ -66,7 +66,7 @@ export default function EnterpriseProfile({
                   <div>
                     {enterprise?.category === 0 ? (
                       <span className="font-normal">
-                        Construccion y metales
+                        Construcción y metales
                       </span>
                     ) : null}
                     {enterprise?.category === 1 ? (
@@ -77,15 +77,15 @@ export default function EnterpriseProfile({
                     ) : null}
                     {enterprise?.category === 3 ? (
                       <span className="font-normal">
-                        Plasticos y reutilizables
+                        Plásticos y reutilizables
                       </span>
                     ) : null}
                     {enterprise?.category === 4 ? (
-                      <span className="font-normal">Carton y desechables</span>
+                      <span className="font-normal">Cartón y desechables</span>
                     ) : null}
                     {enterprise?.category === 5 ? (
                       <span className="font-normal">
-                        Tecnologia y computacion
+                        Tecnología y computación
                       </span>
                     ) : null}
                   </div>
@@ -98,7 +98,7 @@ export default function EnterpriseProfile({
                         e.preventDefault();
                         router.push(`/enterprise/update/${enterprise?._id}`);
                       }}
-                      className="bg-gray-50 shadow-lg font-medium text-black ring-primary-100 ring-2 hover:ring-0 mt-12 px-8 py-2 rounded-lg hover:text-white hover:bg-primary-100 "
+                      className="bg-gray-50 shadow-lg font-medium text-black ring-primary-100 ring-2 hover:ring-0 mt-12 px-8 py-2 rounded-lg hover:text-white hover:bg-primary-100"
                     >
                       Actualizar
                     </button>
