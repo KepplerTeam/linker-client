@@ -42,7 +42,7 @@ export default function LoginForm() {
         await router.push('/feed');
       }
     } catch (err) {
-      notify('Ha ocurrido un error', 'warning');
+      notify('Usuario o contraseña Incorrecta', 'danger');
     }
   };
 
