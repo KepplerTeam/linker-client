@@ -43,7 +43,11 @@ export default function ProductOverview({
   const { data: reviewsData, loading: loadingReviewsData } = useQuery<{
     reviews: Review[];
   }>(GET_REVIEWS, {
-    variables: { filter: { product: product?._id }, limit: 4, sort: "_ID_DESC" },
+    variables: {
+      filter: { product: product?._id },
+      limit: 4,
+      sort: '_ID_DESC',
+    },
     fetchPolicy: 'network-only',
   });
 

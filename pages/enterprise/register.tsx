@@ -15,7 +15,7 @@ export default function RegisterEnterprise() {
           <h2>No tienes permiso para ver esta página.</h2>
         </div>
       ) : (
-      <NewEnterpriseForm user={user} />
+        <NewEnterpriseForm user={user} />
       )}
       <Footer />
     </div>
