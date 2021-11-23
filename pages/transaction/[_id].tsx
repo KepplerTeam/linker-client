@@ -4,6 +4,7 @@ import React from 'react';
 import RecargasDetails from '../../components/recargas/RecargasDetails';
 import { GET_TRANSACTION } from '../../graphql/queries';
 import { Transaction } from '../../models';
+import Loading from '../../components/common/Loading';
 
 export default function TransactionDetailsPage() {
   const router = useRouter();
@@ -17,8 +18,8 @@ export default function TransactionDetailsPage() {
   return (
     <>
       {loading ? (
-        <div>
-          <h2>loading...</h2>
+        <div className="w-screen h-full p-0 bg-gray-200">
+          <Loading />
         </div>
       ) : (
         <div>

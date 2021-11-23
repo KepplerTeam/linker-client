@@ -6,6 +6,7 @@ import Nav from '../../components/Navbar/Nav';
 import OrderDetails from '../../components/orderDetails/OrderDetails';
 import { GET_BILL } from '../../graphql/queries';
 import { Bill } from '../../models';
+import Loading from '../../components/common/Loading';
 
 export default function OrderDetailsPage() {
   const router = useRouter();
@@ -25,8 +26,10 @@ export default function OrderDetailsPage() {
           <Footer />
         </>
       ) : (
-        <div>
-          <h2>loading...</h2>
+        <div className="w-screen h-full p-0 bg-gray-200">
+          <Nav open={open} setOpen={setOpen} />
+          <Loading />
+          <Footer />
         </div>
       )}
     </div>

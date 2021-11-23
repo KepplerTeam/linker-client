@@ -6,6 +6,7 @@ import Nav from '../../components/Navbar/Nav';
 import ProductOverview from '../../components/product/ProductOverview';
 import { GET_PRODUCT } from '../../graphql/queries';
 import { Product } from '../../models';
+import Loading from '../../components/common/Loading';
 
 export default function StockProductDetailsPage() {
   const router = useRouter();
@@ -17,8 +18,10 @@ export default function StockProductDetailsPage() {
   return (
     <>
       {(loading && (
-        <div className="h-screen w-full justify-center my-auto">
-          <h2>Loading...</h2>
+        <div className="w-screen h-full p-0 bg-gray-200">
+          <Nav open={open} setOpen={setOpen} />
+          <Loading />
+          <Footer />
         </div>
       )) || (
         <div>
