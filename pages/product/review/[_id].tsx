@@ -6,7 +6,7 @@ import { GET_PRODUCT } from '../../../graphql/queries';
 import { useUser } from '../../../hooks/useUser';
 import { Product } from '../../../models';
 import Nav from '../../../components/Navbar/Nav';
-import Loading  from '../../../components/common/Loading';
+import Loading from '../../../components/common/Loading';
 import Footer from '../../../components/common/Footer';
 
 export default function ReviewProductPage() {
