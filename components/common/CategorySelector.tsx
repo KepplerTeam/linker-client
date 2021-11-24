@@ -11,7 +11,7 @@ export default function CategorySelector({
   setCategory,
 }: CategorySelectorProps) {
   return (
-    <div className="flex flex-row justify-between overflow-x-scroll scrollbar-hide space-x-5 my-4 h-8">
+    <div className="flex flex-row justify-between overflow-x-scroll scrollbar-hide space-x-5 my-4 h-12 mr-4">
       <button
         className=""
         type="button"

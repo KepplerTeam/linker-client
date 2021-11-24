@@ -37,7 +37,7 @@ export default function OrderDetails({ bill }: OrderDetailsProps) {
           </div>
         ) : (
           <>
-            <div className="py-5 border-t-2 shadow-inner">
+            <div className="py-5 border-t-2 shadow-inner mb-32">
               {bill.products.map((product) => (
                 <div className="p-5 m-6 rounded-2xl bg-gray-100 shadow-lg hover:shadow-2xl ">
                   <div>
@@ -52,19 +52,18 @@ export default function OrderDetails({ bill }: OrderDetailsProps) {
                 </div>
               ))}
             </div>
-            <div className="pt-4 pb-10 mt-36 px-8 border-t-2 shadow-inner bg-gray-100">
+            <div className="pt-4 pb-12 px-8 border-t-2 shadow-inner bg-gray-100 fixed left-0 right-0 bottom-0">
               <div className="flex flex-row items-center py-2">
                 <h2 className="text-lg font-bold my-2">TOTAL:&nbsp;</h2>
                 <h2>${bill.totalPrice}</h2>
               </div>
               <div className="flex flex-row items-center pb-2">
-                <h2 className="text-lg font-bold my-2">
-                  FECHA:&nbsp;
-                </h2>
+                <h2 className="text-lg font-bold my-2">FECHA:&nbsp;</h2>
                 <h2>{dayjs(bill?.createdAt).format('ll')}</h2>
               </div>
               <div className="flex justify-center items-center mt-4">
                 <button
+                  type="button"
                   className="bg-primary-100 hover:bg-primary-600 shadow-md hover:shadow-3xl rounded-xl px-6 py-2 text-white font-bold"
                   onClick={() => router.push(`/review/${bill._id}`)}
                 >

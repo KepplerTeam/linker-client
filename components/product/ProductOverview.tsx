@@ -2,6 +2,7 @@ import React from 'react';
 import { useMutation, useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
 import { motion } from 'framer-motion';
+import { Tab } from '@headlessui/react';
 import { Product, Review } from '../../models';
 import ReviewCard from '../review/ReviewCard';
 import { useUser } from '../../hooks/useUser';
@@ -10,14 +11,13 @@ import {
   UPDATE_FAVORITES,
   SET_REVIEW,
 } from '../../graphql/mutations';
+import Loading from '../common/Loading';
 import { GET_REVIEWS } from '../../graphql/queries';
 import useNotify from '../../hooks/useNotify';
 import HeartIcon from '../icons/HeartIcon';
 import StarsRating from '../review/StarsRating';
 import { Input } from '../inputs';
 import { StarIcon } from '../icons';
-import { Tab } from '@headlessui/react';
-import Loading from '../../components/common/Loading';
 
 interface ProductOverviewProps {
   product?: Product;
@@ -99,6 +99,7 @@ export default function ProductOverview({
         });
         if (reviewData?.setReview) {
           notify('Ha calificado el producto correctamente!', 'success');
+          await router.push('profile');
         } else {
           notify('Error calificando el producto', 'danger');
         }
@@ -118,10 +119,8 @@ export default function ProductOverview({
     try {
       // Extrae la informacion de favoritos del usuario y agrega en un array los id de cada producto
       setFavoritesData(user?.favorites?.products.map((a) => a._id));
-      console.log('llegue 1');
       // Agrega a la lista creada anteriormente el id del producto que se desea anadir al carrito.
       favoritesData.push(product?._id);
-      console.log(favoritesData);
       const { data: updateData } = await updateFavorites({
         variables: {
           filter: { _id: user?.favorites._id },
@@ -133,11 +132,9 @@ export default function ProductOverview({
       if (updateData?.updateFavorites) {
         notify('Producto anadido a favoritos exitosamente', 'success');
       } else {
-        console.log('me rompi aqui');
         notify('Ha ocurrido un error al anadir el producto a favoritos', 'err');
       }
     } catch (err) {
-      console.log('me rompi abajo');
       notify(err.message, 'err', err);
     }
   };
@@ -323,17 +320,19 @@ export default function ProductOverview({
       </div>
       <div>
         {user?.role === 1 && !isReview ? (
-          <button
-            type="button"
-            className="bg-gray-50 shadow-lg font-medium text-black ring-primary-100 ring-2 hover:ring-0 my-3  px-8 py-2 rounded-lg hover:text-white hover:bg-primary-100"
-            onClick={(e) => {
-              e.persist();
-              e.preventDefault();
-              addToCart();
-            }}
-          >
-            <span>Anadir al Carrito</span>
-          </button>
+          <div>
+            <button
+              type="button"
+              className="bg-gray-50 shadow-lg font-medium text-black ring-primary-100 ring-2 hover:ring-0 my-3  px-8 py-2 rounded-lg hover:text-white hover:bg-primary-100 w-full"
+              onClick={(e) => {
+                e.persist();
+                e.preventDefault();
+                addToCart();
+              }}
+            >
+              <span>Anadir al Carrito</span>
+            </button>
+          </div>
         ) : null}
         {user?.role === 2 &&
         user?._id === product?.enterprise?.owner?._id &&

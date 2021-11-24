@@ -21,7 +21,7 @@ export default function FeaturedProduct({
 }: FeaturedProductProps) {
   const router = useRouter();
   return (
-    <div className="">
+    <div>
       <button
         type="button"
         onClick={(e) => {
@@ -36,7 +36,9 @@ export default function FeaturedProduct({
           <div className="flex flex-row mt-2">
             <div className="flex">
               <StarIcon className="w-4 h-4 text-yellow-300 fill-current mr-2" />
-              <div className="text-sm mr-11">{rating}</div>
+              <div className="text-sm mr-11">
+                {Math.round(rating * 100) / 100}
+              </div>
             </div>
             <div className="">
               <p className="text-sm">{reviews} Reviews</p>

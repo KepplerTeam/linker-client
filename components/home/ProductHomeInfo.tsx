@@ -26,7 +26,6 @@ export default function ProductHomeInfo({
   const notify = useNotify();
   const [updateFavorites] = useMutation(UPDATE_FAVORITES);
   const [isFavorite, setIsFavorite] = React.useState(false);
-  const [favorites] = React.useState([]);
   const [favoritesData, setFavoritesData] = React.useState([]);
 
   /** addToFavorites
@@ -37,7 +36,6 @@ export default function ProductHomeInfo({
     try {
       // Extrae la informacion de favoritos del usuario y agrega en un array los id de cada producto
       setFavoritesData(user?.favorites?.products?.map((a) => a._id));
-      console.log('llegue 1');
       // Agrega a la lista creada anteriormente el id del producto que se desea anadir al carrito.
       favoritesData.push(product?._id);
       console.log(favoritesData);
@@ -52,14 +50,12 @@ export default function ProductHomeInfo({
       if (updateData?.updateFavorites) {
         notify('Producto anadido a favoritos exitosamente', 'success');
       } else {
-        console.log('me rompi aqui');
         notify(
           'Ha ocurrido un error al anadir el producto a favoritos',
           'danger'
         );
       }
     } catch (err) {
-      console.log('me rompi abajo');
       notify(err.message, 'danger', err);
     }
   };
@@ -76,7 +72,7 @@ export default function ProductHomeInfo({
 
   React.useEffect(() => {
     isNotFavorite();
-  }, [favorites]);
+  }, [favoritesData]);
 
   /** removeFromFavorites
    * @abstract Permite al usuario eliminar productos de los favoritos

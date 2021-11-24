@@ -29,9 +29,6 @@ export default function CardHome({
         </div>
         <div className="flex justify-between mb-2 pr-4">
           <h3 className="text-lg font-semibold pb-2">Productos Destacados</h3>
-          <a className="font-light text-black pb-2" href="#">
-            Ver Todos
-          </a>
         </div>
         <div className="">
           <FeaturedProductFeed products={featuredProducts} />

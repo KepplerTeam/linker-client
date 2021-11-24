@@ -1,20 +1,16 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
-import { useRouter } from 'next/router';
 import Nav from '../components/Navbar/Nav';
 import Search from '../components/home/Search';
 import CardHome from '../components/home/CardHome';
 import Footer from '../components/common/Footer';
 import { GET_PRODUCTS } from '../graphql/queries';
 import { Product } from '../models';
-import { useUser } from '../hooks/useUser';
 import Loading from '../components/common/Loading';
 
 export default function Home() {
   const [category, setCategory] = React.useState<number>(0);
-  const [user] = useUser();
   const [open, setOpen] = React.useState(false);
-  const router = useRouter();
 
   const { data, loading } = useQuery<{
     products: Product[];
@@ -31,12 +27,6 @@ export default function Home() {
       variables: { filter: {} },
       fetchPolicy: 'network-only',
     });
-
-  // React.useEffect(() => {
-  //   if (!user) {
-  //     router.push('/');
-  //   }
-  // }, []);
 
   return (
     <>

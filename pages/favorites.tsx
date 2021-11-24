@@ -10,7 +10,7 @@ export default function FavoritesPage() {
 
   return (
     <>
-      <div className="w-screen h-screen p-0 bg-gray-200">
+      <div className="w-screen min-h-screen p-0 bg-gray-200">
         <div>
           <Nav open={open} setOpen={setOpen} />
           <div className="bg-gray-100 flex justify-center">
