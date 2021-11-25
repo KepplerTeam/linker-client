@@ -52,7 +52,9 @@ export default function OrderDetails({ bill }: OrderDetailsProps) {
                       <button
                         type="button"
                         className="bg-gray-50 shadow-lg font-semibold text-primary-100 ring-primary-100 ring-2 hover:ring-0 px-8 py-2 rounded-lg hover:text-white hover:bg-primary-100"
-                        onClick={() => router.push(`/product/${product._id}`)}
+                        onClick={() =>
+                          router.push(`/product/review/${product._id}`)
+                        }
                       >
                         Valorar Compra
                       </button>
