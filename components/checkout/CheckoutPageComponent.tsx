@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useMutation } from '@apollo/client';
+import { useRouter } from 'next/router';
 import CheckoutInfo from './CheckoutInfo';
 import useNotify from '../../hooks/useNotify';
 import {
@@ -9,7 +10,6 @@ import {
   UPDATE_USER,
 } from '../../graphql/mutations';
 import { useUser } from '../../hooks/useUser';
-import { useRouter } from 'next/router';
 
 export default function CheckoutPageComponent() {
   const [user] = useUser();
@@ -139,6 +139,7 @@ export default function CheckoutPageComponent() {
       <CheckoutInfo totalPrice={totalPrice} />
       <div className="flex w-full mb-28 justify-center mt-24 fixed bottom-0">
         <button
+          type="button"
           className="mt-8 px-10 py-3 bg-primary-100 hover:bg-primary-600 text-white font-bold shadow-lg rounded-lg"
           onClick={() => onSubmit()}
         >

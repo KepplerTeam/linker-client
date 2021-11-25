@@ -63,6 +63,7 @@ export default function RecargaPageComponent() {
       </div>
       <div className="flex justify-center mt-4">
         <button
+          type="button"
           className="mt-8 px-10 py-3 bg-primary-100 hover:bg-primary-600 text-white font-bold shadow-lg rounded-lg"
           onClick={(e) => onSubmit(e)}
         >

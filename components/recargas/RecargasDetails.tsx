@@ -111,12 +111,14 @@ export default function RecargasDetails({ transaction }: RecargasDetailsProps) {
           </div>
           <div className="bg-gray-200 flex flex-row justify-center fixed bottom-28 w-full space-x-3">
             <button
+              type="button"
               className="mt-8 px-10 py-3 bg-primary-100 hover:bg-primary-600 text-white font-bold shadow-lg rounded-lg"
               onClick={() => onApprove()}
             >
               Aprobar
             </button>
             <button
+              type="button"
               className="mt-8 px-10 py-3 bg-red-400 hover:bg-red-600 text-white font-bold shadow-lg rounded-lg"
               onClick={() => onReject()}
             >

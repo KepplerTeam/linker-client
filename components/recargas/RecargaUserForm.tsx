@@ -31,7 +31,9 @@ export default function RecargaUserForm({
         />
       </div>
       <div className="mt-10">
-        <h2 className="text-lg font-bold mb-4">Comprobante de transferencia:</h2>
+        <h2 className="text-lg font-bold mb-4">
+          Comprobante de transferencia:
+        </h2>
         <DocumentForm
           documents={documents}
           updateURLs={setDocuments}

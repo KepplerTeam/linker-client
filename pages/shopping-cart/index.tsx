@@ -15,6 +15,15 @@ export default function ShoppingCartPage() {
     (sum, { price }) => sum + price,
     0
   );
+  const [disabled, setDisabled] = React.useState(false);
+
+  React.useEffect(() => {
+    if (user?.shoppingCart?.products?.length < 1) {
+      setDisabled(true);
+    } else {
+      setDisabled(false);
+    }
+  }, []);
 
   return (
     <>
@@ -46,9 +55,14 @@ export default function ShoppingCartPage() {
             </div>
             <div className="px-16 pb-6">
               <button
-                className="flex flex-row items-center justify-between bg-primary-100 hover:bg-primary-600 py-3 px-8 rounded-2xl font-bold text-white w-11/12 mx-auto"
+                className={`flex flex-row items-center justify-between  py-3 px-8 rounded-2xl font-bold text-white w-11/12 mx-auto ${
+                  disabled
+                    ? 'bg-gray-200 text-gray-300'
+                    : 'bg-primary-100 hover:bg-primary-600'
+                }`}
                 type="button"
                 onClick={() => router.push('/checkout')}
+                disabled={disabled}
               >
                 Proceder a pago
                 <RightArrowIcon className="font-bold h-8 w-8" />
