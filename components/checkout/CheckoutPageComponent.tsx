@@ -139,6 +139,7 @@ export default function CheckoutPageComponent() {
       <CheckoutInfo totalPrice={totalPrice} />
       <div className="flex w-full mb-28 justify-center mt-24 fixed bottom-0">
         <button
+          type="button"
           className="mt-8 px-10 py-3 bg-primary-100 hover:bg-primary-600 text-white font-bold shadow-lg rounded-lg"
           onClick={() => onSubmit()}
         >
