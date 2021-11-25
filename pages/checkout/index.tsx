@@ -6,10 +6,9 @@ import Nav from '../../components/Navbar/Nav';
 export default function CheckoutPage() {
   const [open, setOpen] = React.useState(false);
   return (
-    <div>
+    <div className="bg-gray-200">
       <Nav open={open} setOpen={setOpen} />
       <CheckoutPageComponent />
-      <Footer />
     </div>
   );
 }

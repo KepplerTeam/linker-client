@@ -76,36 +76,52 @@ export default function RecargasDetails({ transaction }: RecargasDetailsProps) {
     }
   };
   return (
-    <div className="p-4">
+    <div className="">
       {user?.role !== 0 ? (
         <div>
           <h2>No tiene permisos para acceder a esta pagina</h2>
         </div>
       ) : (
         <>
-          <div>
-            <h2>Cliente: {transaction?.clientId?.username}</h2>
-            <h2>Monto a recargar: {transaction?.amount}</h2>
-            <h2>monto actual: {transaction.clientId.balance}</h2>
-            <h2>Comprobante de Transaccion</h2>
-            <img
-              src={transaction?.transactionId}
-              alt="imagen del comprobante"
-            />
+          <div className="p-5 text-lg rounded-xl bg-gray-50 shadow-md hover:shadow-xl m-8">
+            <div className="flex flex-row my-4">
+              <h2 className="font-semibold">Cliente:&nbsp;</h2>
+              <h2>{transaction?.clientId?.username}</h2>
+            </div>
+            <div className="flex flex-row my-4">
+              <h2 className="font-semibold">Monto a recargar:&nbsp;</h2>
+              <h2>{transaction?.amount}</h2>
+            </div>
+            <div className="flex flex-row my-4">
+              <h2 className="font-semibold">Monto actual:&nbsp;</h2>
+              <h2>{transaction.clientId.balance}</h2>
+            </div>
+            <div className="flex flex-col my-4">
+              <h2 className="font-semibold">
+                Comprobante de Transacción:&nbsp;
+              </h2>
+              <div className="flex justify-center">
+                <img
+                  className="h-32 w-32 m-6"
+                  src={transaction?.transactionId}
+                  alt="imagen del comprobante"
+                />
+              </div>
+            </div>
           </div>
-          <div className="flex flex-row space-x-3 mt-6">
-            <motion.button
-              className="bg-primary-100 rounded-full px-2 py-1 w-full text-white font-bold"
+          <div className="bg-gray-200 flex flex-row justify-center fixed bottom-28 w-full space-x-3">
+            <button
+              className="mt-8 px-10 py-3 bg-primary-100 hover:bg-primary-600 text-white font-bold shadow-lg rounded-lg"
               onClick={() => onApprove()}
             >
               Aprobar
-            </motion.button>
-            <motion.button
-              className="bg-primary-100 rounded-full px-2 py-1 w-full text-white font-bold"
+            </button>
+            <button
+              className="mt-8 px-10 py-3 bg-red-400 hover:bg-red-600 text-white font-bold shadow-lg rounded-lg"
               onClick={() => onReject()}
             >
               Rechazar
-            </motion.button>
+            </button>
           </div>
         </>
       )}

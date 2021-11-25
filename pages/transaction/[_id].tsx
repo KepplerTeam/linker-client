@@ -5,9 +5,11 @@ import RecargasDetails from '../../components/recargas/RecargasDetails';
 import { GET_TRANSACTION } from '../../graphql/queries';
 import { Transaction } from '../../models';
 import Loading from '../../components/common/Loading';
+import Nav from '../../components/Navbar/Nav';
 
 export default function TransactionDetailsPage() {
   const router = useRouter();
+  const [open, setOpen] = React.useState(false);
   const { data, loading } = useQuery<{ transaction: Transaction }>(
     GET_TRANSACTION,
     {
@@ -22,8 +24,11 @@ export default function TransactionDetailsPage() {
           <Loading />
         </div>
       ) : (
-        <div>
-          <RecargasDetails transaction={data.transaction} />
+        <div className="h-screen w-full bg-gray-200">
+          <Nav open={open} setOpen={setOpen} />
+          <div className="">
+            <RecargasDetails transaction={data.transaction} />
+          </div>
         </div>
       )}
     </>

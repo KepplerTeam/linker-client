@@ -49,23 +49,25 @@ export default function RecargaPageComponent() {
   };
 
   return (
-    <div className="p-4 min-h-screen">
+    <div className="py-4 min-h-screen">
       <div>
-        <h2 className="font-bold text-lg">Formulario de Recarga de Wallet</h2>
-        <RecargaUserForm
-          amount={amount}
-          setAmount={setAmount}
-          documents={documents}
-          setDocuments={setDocuments}
-        />
+        <h2 className="px-4 pt-2 font-bold text-xl">Recarga la Billetera</h2>
+        <div className="border-t-2 mt-5 shadow-inner">
+          <RecargaUserForm
+            amount={amount}
+            setAmount={setAmount}
+            documents={documents}
+            setDocuments={setDocuments}
+          />
+        </div>
       </div>
-      <div className="mt-4">
-        <motion.button
-          className="bg-primary-100 rounded-full px-3 py-2 w-full text-white font-bold"
+      <div className="flex justify-center mt-4">
+        <button
+          className="mt-8 px-10 py-3 bg-primary-100 hover:bg-primary-600 text-white font-bold shadow-lg rounded-lg"
           onClick={(e) => onSubmit(e)}
         >
           Solicitar
-        </motion.button>
+        </button>
       </div>
     </div>
   );

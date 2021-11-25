@@ -55,7 +55,7 @@ export default function RecargasPreview({
           {!dontShow ? (
             <div className="flex justify-center">
               <motion.button
-                className="bg-primary-100 hover:bg-primary-600 rounded-lg text-white font-bold mt-5 py-2 px-8 shadow-md"
+                className="bg-gray-50 shadow-lg font-semibold text-primary-100 ring-primary-100 ring-2 hover:ring-0 mt-8 px-8 py-2 rounded-lg hover:text-white hover:bg-primary-100"
                 onClick={() => router.push(`/transaction/${transaction?._id}`)}
               >
                 Ver detalles

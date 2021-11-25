@@ -17,7 +17,7 @@ export default function RecargaUserForm({
   setDocuments,
 }: RecargaUserFormProps) {
   return (
-    <div className="p-4">
+    <div className="p-10">
       <div className="my-2">
         <Input
           type="number"
@@ -27,11 +27,11 @@ export default function RecargaUserForm({
           className="w-3/4 h-8 mt-4 text-sm "
           value={amount}
           setValue={setAmount}
-          label="Monto a recargar"
+          label="Monto a recargar:"
         />
       </div>
-      <div className="mt-6">
-        <h2 className="text-lg font-bold mb-4">Comprobante de transferencia</h2>
+      <div className="mt-10">
+        <h2 className="text-lg font-bold mb-4">Comprobante de transferencia:</h2>
         <DocumentForm
           documents={documents}
           updateURLs={setDocuments}

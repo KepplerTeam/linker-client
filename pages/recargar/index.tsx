@@ -6,7 +6,7 @@ import RecargaPageComponent from '../../components/recargas/RecargaPageComponent
 export default function RecargasPage() {
   const [open, setOpen] = React.useState(false);
   return (
-    <div>
+    <div className="bg-gray-200">
       <Nav open={open} setOpen={setOpen} />
       <RecargaPageComponent />
       <Footer />

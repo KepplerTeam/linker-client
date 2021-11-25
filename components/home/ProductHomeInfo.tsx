@@ -163,7 +163,7 @@ export default function ProductHomeInfo({
             }}
           >
             <div className="flex flex-row w-full">
-              <div className="ml-28 my-6 w-1/2">
+              <div className="ml-20 my-6 w-1/2">
                 <img src={images} alt={name} className="w-full h-auto" />
               </div>
             </div>

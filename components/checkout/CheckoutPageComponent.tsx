@@ -135,15 +135,15 @@ export default function CheckoutPageComponent() {
   );
 
   return (
-    <div className="min-h-screen p-4">
+    <div className="min-h-screen">
       <CheckoutInfo totalPrice={totalPrice} />
-      <div className="mt-24">
-        <motion.button
-          className="bg-primary-100 rounded-full px-3 py-2 w-full text-white font-bold"
+      <div className="flex w-full mb-28 justify-center mt-24 fixed bottom-0">
+        <button
+          className="mt-8 px-10 py-3 bg-primary-100 hover:bg-primary-600 text-white font-bold shadow-lg rounded-lg"
           onClick={() => onSubmit()}
         >
-          Confirmar 
-        </motion.button>
+          Confirmar
+        </button>
       </div>
     </div>
   );

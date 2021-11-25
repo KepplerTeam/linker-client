@@ -21,9 +21,9 @@ function _Input({
 }: InputProps) {
   return (
     <label className="block w-full" htmlFor={name}>
-      <span className="text-primary-500 font-semibold">{label}</span>
+      <span className="text-black text-lg font-semibold">{label}</span>
       <input
-        className={`mt-1 block text-neutral-800 border-0 border-b ${className}`}
+        className={`w-full rounded-2xl focus:ring-1 focus:border-primary-100 focus:ring-primary-100 ${className}`}
         name={name}
         onChange={(e) => {
           e.preventDefault();

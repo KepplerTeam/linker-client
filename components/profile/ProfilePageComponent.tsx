@@ -44,13 +44,16 @@ export default function ProfilePageComponent({
             />
           </div>
           <div>
-            <div className="flex flex-row">
+            <div className="flex flex-row items-center">
               <h2 className="mt-3">
                 {user?.firstName} {user?.lastName}
               </h2>
-              <button type="button" className="ml-auto mt-3 h-auto">
+              <button
+                type="button"
+                className="ml-3 mt-3 h-auto p-1 rounded-full hover:bg-gray-50 hover:shadow-lg"
+              >
                 <EditIcon
-                  className="w-4"
+                  className="w-5"
                   onClick={() => {
                     router.push('/profile/edit');
                   }}
@@ -60,50 +63,52 @@ export default function ProfilePageComponent({
             <h2 className="font-thin text-sm">{user?.email}</h2>
           </div>
         </div>
-        <div className="flex flex-row items-center justify-between mx-6 mb-12 bottom-1 p-5 rounded-xl bg-gray-50 shadow-lg hover:shadow-2xl">
-          <div className="px-2">
+        {user?.role === 0 ? null : (
+          <div className="flex flex-row items-center justify-between mx-6 mb-12 bottom-1 p-5 rounded-xl bg-gray-50 shadow-lg hover:shadow-2xl">
+            <div className="px-2">
+              {user?.role === 1 ? (
+                <div className="flex flex-col items-center font-black text-xl text-black">
+                  <h2>USD</h2>
+                  <h2>{Math.round(user?.balance * 100) / 100}</h2>
+                </div>
+              ) : null}
+              {user?.role === 2 ? (
+                <div className="flex flex-col items-center font-black text-xl text-black">
+                  <h2>USD</h2>
+                  <h2>{Math.round(providerBalance * 100) / 100}</h2>
+                </div>
+              ) : null}
+            </div>
             {user?.role === 1 ? (
-              <div className="flex flex-col items-center font-black text-xl text-black">
-                <h2>USD</h2>
-                <h2>{Math.round(user?.balance * 100) / 100}</h2>
+              <div className="px-5 flex flex-row">
+                <button
+                  onClick={() => router.push('/recargar')}
+                  type="button"
+                  className="font-bold px-4 py-2 bg-primary-100 hover:bg-primary-600 shadow-md hover:shadow-xl rounded-lg text-white flex flex-row items-center"
+                >
+                  <div className="">
+                    <CashIcon className="w-5" />
+                  </div>
+                  <span>Recargar Billetera</span>
+                </button>
               </div>
             ) : null}
             {user?.role === 2 ? (
-              <div className="flex flex-col items-center font-black text-xl text-black">
-                <h2>USD</h2>
-                <h2>{Math.round(providerBalance * 100) / 100}</h2>
+              <div className="px-5 flex flex-row">
+                <button
+                  onClick={() => router.push('/profile')}
+                  type="button"
+                  className="font-bold px-4 py-2 bg-primary-100 hover:bg-primary-600 shadow-md hover:shadow-xl rounded-lg text-white flex flex-row items-center"
+                >
+                  <div className="">
+                    <CashIcon className="w-5" />
+                  </div>
+                  <span>Solicitar Retiro</span>
+                </button>
               </div>
             ) : null}
           </div>
-          {user?.role === 1 ? (
-            <div className="px-5 flex flex-row">
-              <button
-                onClick={() => router.push('/recargar')}
-                type="button"
-                className="font-bold px-4 py-2 bg-primary-100 hover:bg-primary-600 shadow-md hover:shadow-xl rounded-lg text-white flex flex-row items-center"
-              >
-                <div className="">
-                  <CashIcon className="w-5" />
-                </div>
-                <span>Recargar Billetera</span>
-              </button>
-            </div>
-          ) : null}
-          {user?.role === 2 ? (
-            <div className="px-5 flex flex-row">
-              <button
-                onClick={() => router.push('/profile')}
-                type="button"
-                className="font-bold px-4 py-2 bg-primary-100 hover:bg-primary-600 shadow-md hover:shadow-xl rounded-lg text-white flex flex-row items-center"
-              >
-                <div className="">
-                  <CashIcon className="w-5" />
-                </div>
-                <span>Solicitar Retiro</span>
-              </button>
-            </div>
-          ) : null}
-        </div>
+        )}
         {/* Entrepreneur */}
         {user?.role === 1 ? <EntrepreneurData /> : null}
         {/* Provider */}
