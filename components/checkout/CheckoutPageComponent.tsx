@@ -18,6 +18,15 @@ export default function CheckoutPageComponent() {
   const [updateShoppingCart] = useMutation(UPDATE_SHOPPING_CART);
   const [createBill] = useMutation(CREATE_BILL);
   const [updateUser] = useMutation(UPDATE_USER);
+  const [disabled, setDisabled] = React.useState(false);
+
+  React.useEffect(() => {
+    if (user?.shoppingCart?.products.length < 1) {
+      setDisabled(true);
+    } else {
+      setDisabled(false);
+    }
+  }, []);
 
   /**
    * @abstract Se encarga del proceso de compra del usuario: primero se crea la factura, si esto se logra entonces descontamos el monto del balance del usuario, posteriormente vaciamos el carro de compras
@@ -140,7 +149,12 @@ export default function CheckoutPageComponent() {
       <div className="flex w-full mb-28 justify-center mt-24 fixed bottom-0">
         <button
           type="button"
-          className="mt-8 px-10 py-3 bg-primary-100 hover:bg-primary-600 text-white font-bold shadow-lg rounded-lg"
+          className={`mt-8 px-10 py-3  font-bold shadow-lg rounded-lg ${
+            disabled
+              ? 'bg-gray-200 text-gray-300'
+              : 'bg-primary-100 hover:bg-primary-600 text-white'
+          }`}
+          disabled={disabled}
           onClick={() => onSubmit()}
         >
           Confirmar

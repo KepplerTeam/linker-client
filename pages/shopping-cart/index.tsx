@@ -11,6 +11,7 @@ export default function ShoppingCartPage() {
   const [user] = useUser();
   const router = useRouter();
   const [open, setOpen] = React.useState(false);
+  const [cart] = React.useState(user?.shoppingCart?.products);
   const totalPrice = user?.shoppingCart?.products?.reduce(
     (sum, { price }) => sum + price,
     0
