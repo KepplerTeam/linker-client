@@ -56,6 +56,20 @@ export default function SignupForm() {
           if (!validateString(name) || !validateString(lastname)) {
             return notify('Por favor, verifique sus datos', 'danger');
           }
+        
+          //Verifica fecha de nacimiento 
+          var today = new Date();
+          var birthDate = new Date(dob);
+          var age = today.getFullYear() - birthDate.getFullYear();
+          if(age <= 15) {
+            return notify('Fecha de nacimiento no valida, verifique sus datos', 'danger');
+          }
+
+          //Verifica cedula
+          if(ssn.length < 5 || ssn.length > 10){
+            return notify('Cedula no valida, verifique sus datos', 'danger');  
+          }
+          
           // Role 1 es emprendedor (comprador)
           if (role === '1') {
             const { data } = await createUser({
@@ -78,7 +92,8 @@ export default function SignupForm() {
             });
             if (data?.signUp) {
               notify('Usuario creado exitosamente', 'success');
-              await router.push('/feed');
+              notify('Recarga tu billetera en tu perfil', 'warning');
+              return await router.push('/feed');
             }
             return notify('No se ha podido crear el usuario', 'danger');
           }
@@ -112,7 +127,8 @@ export default function SignupForm() {
               });
               if (dataCreateUser?.signUp) {
                 notify('Cuenta creada con exito!', 'success');
-                await router.push('/feed');
+                notify('Agrega tu primer producto desde tu perfil !', 'warning');
+                return await router.push('/feed');
               } else {
                 return notify('No se ha podido crear el usuario', 'danger');
               }

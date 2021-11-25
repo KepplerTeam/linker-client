@@ -98,8 +98,8 @@ export default function ProductOverview({
           },
         });
         if (reviewData?.setReview) {
-          notify('Ha calificado el producto correctamente!', 'success');
-          await router.push('profile');
+          notify('Tus comentarios ayudan a mejorar nuestra comunidad!', 'success');
+          await router.push('/feed');
         } else {
           notify('Error calificando el producto', 'danger');
         }
