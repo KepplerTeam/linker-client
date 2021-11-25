@@ -77,7 +77,7 @@ export default function LoginForm() {
                   type="button"
                   className="text-primary-100 hover:underline font-bold text-sm mb-6 mt-2 ml-1"
                 >
-                  Olvidé mi contrasena
+                  Olvidé mi contraseña
                 </button>
                 <div className="text-sm">
                   <h2 className="text-base ml-1">¿No tienes una cuenta? </h2>
@@ -89,7 +89,7 @@ export default function LoginForm() {
                       router.push('/signup');
                     }}
                   >
-                    Registrate!
+                    Registrate
                   </button>
                 </div>
                 <div className="flex justify-center">

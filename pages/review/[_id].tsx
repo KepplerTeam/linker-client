@@ -36,6 +36,7 @@ export default function ReviewPage() {
                 {orderData.bill.products.map((product) => (
                   <div>
                     <h2>{product.name}</h2>
+                    <p>Recibiste el producto ? Cuentanos en la siguiente pagina tu experiencia con el proveedor y el producto! </p>
                     <motion.button
                       whileHover={{
                         scale: 1.005,
@@ -48,7 +49,7 @@ export default function ReviewPage() {
                       type="button"
                       className="h-11  text-white rounded-2xl px-4 py-2text-white bg-primary-100 hover:cursor-pointer"
                     >
-                      <span>Rate Product</span>
+                      <span>Vamos</span>
                     </motion.button>
                   </div>
                 ))}

@@ -9,9 +9,11 @@ import {
   UPDATE_USER,
 } from '../../graphql/mutations';
 import { useUser } from '../../hooks/useUser';
+import { useRouter } from 'next/router';
 
 export default function CheckoutPageComponent() {
   const [user] = useUser();
+  const router = useRouter();
   const notify = useNotify();
   const [updateShoppingCart] = useMutation(UPDATE_SHOPPING_CART);
   const [createBill] = useMutation(CREATE_BILL);
@@ -101,7 +103,7 @@ export default function CheckoutPageComponent() {
                   },
                 });
                 if (shoppingCartData.updateShoppingCart) {
-                  console.log('nooooise');
+                  console.log('buena esa crack');
                   uniqueEnterpriseProducts = [];
                 } else {
                   notify('error', 'danger');
@@ -117,8 +119,10 @@ export default function CheckoutPageComponent() {
         const billDivision = handleBillDivision();
         newUniqueBill(billDivision);
         await notify('Felicidades por su compra!', 'success');
+        router.push('/feed');
       } else {
-        notify('Balance insuficiente para realizar la compra', 'danger');
+        notify('Balance insuficiente para realizar la compra,', 'danger');
+        notify('Recargue su wallet en su perfil', 'warning');
       }
     } catch (error) {
       notify(error.message, 'danger', error);
@@ -138,7 +142,7 @@ export default function CheckoutPageComponent() {
           className="bg-primary-100 rounded-full px-3 py-2 w-full text-white font-bold"
           onClick={() => onSubmit()}
         >
-          Confirmar
+          Confirmar 
         </motion.button>
       </div>
     </div>
