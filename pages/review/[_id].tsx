@@ -36,7 +36,10 @@ export default function ReviewPage() {
                 {orderData.bill.products.map((product) => (
                   <div>
                     <h2>{product.name}</h2>
-                    <p>Recibiste el producto ? Cuentanos en la siguiente pagina tu experiencia con el proveedor y el producto! </p>
+                    <p>
+                      Recibiste el producto ? Cuentanos en la siguiente pagina
+                      tu experiencia con el proveedor y el producto!{' '}
+                    </p>
                     <motion.button
                       whileHover={{
                         scale: 1.005,

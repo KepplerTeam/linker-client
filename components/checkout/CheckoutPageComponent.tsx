@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useMutation } from '@apollo/client';
+import { useRouter } from 'next/router';
 import CheckoutInfo from './CheckoutInfo';
 import useNotify from '../../hooks/useNotify';
 import {
@@ -9,7 +10,6 @@ import {
   UPDATE_USER,
 } from '../../graphql/mutations';
 import { useUser } from '../../hooks/useUser';
-import { useRouter } from 'next/router';
 
 export default function CheckoutPageComponent() {
   const [user] = useUser();

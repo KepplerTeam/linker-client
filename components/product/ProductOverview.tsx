@@ -98,7 +98,10 @@ export default function ProductOverview({
           },
         });
         if (reviewData?.setReview) {
-          notify('Tus comentarios ayudan a mejorar nuestra comunidad!', 'success');
+          notify(
+            'Tus comentarios ayudan a mejorar nuestra comunidad!',
+            'success'
+          );
           await router.push('/feed');
         } else {
           notify('Error calificando el producto', 'danger');
