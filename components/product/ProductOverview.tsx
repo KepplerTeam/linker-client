@@ -340,7 +340,7 @@ export default function ProductOverview({
           <div className="w-full mb-4 text-center">
             <button
               type="button"
-              className="bg-gray-50 shadow-lg font-medium text-black ring-primary-100 ring-2 hover:ring-0 my-3  px-8 py-2 rounded-lg hover:text-white hover:bg-primary-100"
+              className="bg-gray-50 shadow-lg font-semibold text-primary-100 ring-primary-100 ring-2 hover:ring-0 px-8 py-2 rounded-lg hover:text-white hover:bg-primary-100"
               onClick={(e) => {
                 e.persist();
                 e.preventDefault();

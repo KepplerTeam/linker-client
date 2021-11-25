@@ -39,36 +39,38 @@ export default function OrderDetails({ bill }: OrderDetailsProps) {
           <>
             <div className="py-5 border-t-2 shadow-inner mb-32">
               {bill.products.map((product) => (
-                <div className="p-5 m-6 rounded-2xl bg-gray-100 shadow-lg hover:shadow-2xl ">
+                <div className="px-5 py-7 m-6 rounded-2xl bg-gray-100 shadow-lg hover:shadow-2xl ">
                   <div>
-                    <h2 className="text-xl font-bold">{product.name}</h2>
-                    <div className="flex flex-row items-center py-2">
-                      <h2 className="text-lg font-bold my-2">
-                        Precio del producto:&nbsp;
-                      </h2>
+                    <h2 className="text-xl font-bold text-center">
+                      {product.name}
+                    </h2>
+                    <div className="flex flex-row items-center ml-6 pt-2 pb-1">
+                      <h2 className="text-lg font-bold my-2">Precio:&nbsp;</h2>
                       <h2>${product.price}</h2>
+                    </div>
+                    <div className="flex justify-center items-center mt-4">
+                      <button
+                        type="button"
+                        className="bg-gray-50 shadow-lg font-semibold text-primary-100 ring-primary-100 ring-2 hover:ring-0 px-8 py-2 rounded-lg hover:text-white hover:bg-primary-100"
+                        onClick={() => router.push(`/product/${product._id}`)}
+                      >
+                        Valorar Compra
+                      </button>
                     </div>
                   </div>
                 </div>
               ))}
             </div>
-            <div className="pt-4 pb-12 px-8 border-t-2 shadow-inner bg-gray-100 fixed left-0 right-0 bottom-0">
+            <div className="pt-4 pb-8 px-8 border-t-2 shadow-2xl bg-gray-100 fixed left-0 right-0 bottom-0">
               <div className="flex flex-row items-center py-2">
-                <h2 className="text-lg font-bold my-2">TOTAL:&nbsp;</h2>
-                <h2>${bill.totalPrice}</h2>
+                <h2 className="text-xl font-bold my-2">TOTAL:&nbsp;</h2>
+                <h2 className="text-lg font-medium">${bill.totalPrice}</h2>
               </div>
               <div className="flex flex-row items-center pb-2">
-                <h2 className="text-lg font-bold my-2">FECHA:&nbsp;</h2>
-                <h2>{dayjs(bill?.createdAt).format('ll')}</h2>
-              </div>
-              <div className="flex justify-center items-center mt-4">
-                <button
-                  type="button"
-                  className="bg-primary-100 hover:bg-primary-600 shadow-md hover:shadow-3xl rounded-xl px-6 py-2 text-white font-bold"
-                  onClick={() => router.push(`/review/${bill._id}`)}
-                >
-                  Valorar Compra
-                </button>
+                <h2 className="text-xl font-bold my-2">FECHA:&nbsp;</h2>
+                <h2 className="text-lg font-medium">
+                  {dayjs(bill?.createdAt).format('ll')}
+                </h2>
               </div>
             </div>
           </>
